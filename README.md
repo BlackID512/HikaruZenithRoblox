@@ -1,4 +1,5 @@
-# Infinite Yield
+# Hikaru Zenith
+## Fork of `Infinite Yield`
 
 <a href="https://discord.gg/78ZuWSq"><img src="https://files.catbox.moe/klbeou.png" alt="discord" width="48"></a> The best command line script for roblox.
 
@@ -14,6 +15,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/
 
 ### Creator: [Edge](https://github.com/EdgeIY)
 ### Developers: [Moon](https://github.com/LorekeeperZinnia), [Zwolf](https://github.com/luatsuki), [Hunter](https://github.com/tooslzy), [Toon](https://github.com/Toon-arch), [Peyton](https://github.com/peyton2465), [ATP](https://github.com/ionizedparticle)
+### Forked by: [Hikaru Studio Team](https://s.id/HikaruStudio).
 
 ## Usage
 You can learn how to use all the features of this script in [the wiki](https://github.com/EdgeIY/infiniteyield/wiki)!
