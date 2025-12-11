@@ -94,9 +94,26 @@ SocialService = Services.SocialService
 IYMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlayerGui = cloneref(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"))
 PlaceId, JobId = game.PlaceId, game.JobId
+-- ORIGINAL CODE SEGMENT (for reference)
+-- xpcall(function()
+--     IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
+-- end, function()
+--     IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+-- end)
+
+-- MODIFIED CODE SEGMENT
 xpcall(function()
-    IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
+    -- First, try to identify desktop platforms directly
+    IsOnMobile = not table.find({
+        Enum.Platform.Windows,
+        Enum.Platform.OSX,
+        Enum.Platform.UWP,
+        Enum.Platform.Linux,
+        Enum.Platform.XBoxOne
+    }, UserInputService:GetPlatform())
 end, function()
+    -- Fallback: A user is considered "on mobile" if they have touch input
+    -- but lack a physical keyboard. If they have a keyboard, treat as desktop-like.
     IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
@@ -12904,13 +12921,13 @@ if IsOnMobile then
 	QuickCapture.Name = randomString()
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
-	QuickCapture.BackgroundTransparency = 0.80
+	QuickCapture.BackgroundTransparency = 1.0
 	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 32, 0, 33)
 	QuickCapture.Font = Enum.Font.SourceSansBold
 	QuickCapture.Text = "💠"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 20
+	QuickCapture.TextSize = 25
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
