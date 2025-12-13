@@ -95,6 +95,7 @@ IYMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlayerGui = cloneref(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"))
 PlaceId, JobId = game.PlaceId, game.JobId
 -- ORIGINAL CODE SEGMENT (for reference)
+-- Mobile Detection v1
 -- xpcall(function()
 --     IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
 -- end, function()
@@ -102,6 +103,7 @@ PlaceId, JobId = game.PlaceId, game.JobId
 -- end)
 
 -- MODIFIED CODE SEGMENT
+-- Mobile Detection v2
 xpcall(function()
     -- First, try to identify desktop platforms directly
     IsOnMobile = not table.find({
@@ -116,6 +118,38 @@ end, function()
     -- but lack a physical keyboard. If they have a keyboard, treat as desktop-like.
     IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
+
+-- Physical keyboard detection with real-time updates
+-- HasPhysicalKeyboard = UserInputService.KeyboardEnabled
+-- QuickCaptureButton = nil  -- Store reference for enabling/disabling
+
+-- Function to update QuickCapture based on keyboard state
+-- function updateQuickCaptureVisibility()
+--     if HasPhysicalKeyboard then
+        -- Create or show QuickCapture button
+--         if not QuickCaptureButton then
+--             createQuickCaptureButton()
+--         else
+--             QuickCaptureButton.Visible = true
+--             QuickCaptureButton.Active = true
+--         end
+--     else
+        -- Hide or disable QuickCapture button
+--         if QuickCaptureButton then
+--             QuickCaptureButton.Visible = false
+--             QuickCaptureButton.Active = false
+--         end
+--     end
+-- end
+
+-- Listen for keyboard connection changes (if supported)
+-- if UserInputService:GetPropertyChangedSignal then
+--     UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
+--         HasPhysicalKeyboard = UserInputService.KeyboardEnabled
+--         updateQuickCaptureVisibility()
+--     end)
+-- end
+
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 -- xylex & europa
@@ -163,7 +197,7 @@ if makefolder and isfolder and writefile and isfile then
     end)
 end
 
-currentVersion = "0.2.1"
+currentVersion = "0.2.2"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -5779,7 +5813,8 @@ function ESP(plr, logic)
 					if COREGUI:FindFirstChild(plr.Name..'_ESP') then
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
-							TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..') ❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' 🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
@@ -5932,7 +5967,8 @@ function Locate(plr)
 					if COREGUI:FindFirstChild(plr.Name..'_LC') then
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
-							TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
+							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..') ❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' 🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
