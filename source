@@ -1,5 +1,5 @@
 if IY_LOADED and not _G.IY_DEBUG == true then
-    -- error("Infinite Yield is already running!", 0)
+    -- error("Hikaru Zenith is already running!", 0)
     return
 end
 
@@ -2981,8 +2981,8 @@ useFactorySettings = function()
     guiScale = defaultGuiScale
     KeepInfYield = true
     espTransparency = 0.3
-    logsEnabled = false
-    jLogsEnabled = false
+    logsEnabled = true
+    jLogsEnabled = true
     logsWebhook = nil
     aliases = {}
     binds = {}
@@ -4017,7 +4017,8 @@ ChatLog = function(player)
     player.Chatted:Connect(function(message)
         if logsEnabled == true then
             CreateLabel(player.Name, message)
-            sendChatWebhook(player, "`"..message.."`")
+			webhookChatFormat = "`"..message.."`"
+            sendChatWebhook(player, webhookChatFormat)
         end
     end)
 end
@@ -4026,8 +4027,14 @@ JoinLog = function(plr)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# Joined the server")
+		notifyMessage = plr.DisplayName.." ("..plr.Name..")"
+		notify('Server Join',notifyMessage)
 	end
 end
+
+-- LeaveLog = function(plr)
+-- 	if jLogsEnabled == true then
+-- 	notify('User','You can press the prefix key to access the command bar')
 
 CleanFileName = function(name)
     return tostring(name):gsub("[*\\?:<>|]+", ""):sub(1, 175)
