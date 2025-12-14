@@ -1996,6 +1996,20 @@ selectJoin.TextColor3 = Color3.new(1, 1, 1)
 table.insert(shade3,selectJoin)
 table.insert(text1,selectJoin)
 
+selectLeave.Name = "selectLeave"
+selectLeave.Parent = background
+selectLeave.BackgroundColor3 = Color3.new(0.305882, 0.305882, 0.309804)
+selectLeave.BorderSizePixel = 0
+selectLeave.Position = UDim2.new(0, 169, 0, 5)
+selectLeave.Size = UDim2.new(0, 164, 0, 20)
+selectLeave.ZIndex = 10
+selectLeave.Font = Enum.Font.SourceSans
+selectLeave.FontSize = Enum.FontSize.Size14
+selectLeave.Text = "Join Logs"
+selectLeave.TextColor3 = Color3.new(1, 1, 1)
+table.insert(shade3,selectLeave)
+table.insert(text1,selectLeave)
+
 function create(data)
 	local insts = {}
 	for i,v in pairs(data) do insts[v[1]] = Instance.new(v[2]) end
@@ -2956,10 +2970,11 @@ defaultsettings = {
 	prefix = ';';
 	StayOpen = false;
 	guiScale = defaultGuiScale;
-	espTransparency = 0.3;
+	espTransparency = 0.9;
 	keepIY = true;
-	logsEnabled = false;
-	jLogsEnabled = false;
+	logsEnabled = true;
+	jLogsEnabled = true;
+	lLogsEnabled = true;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2980,9 +2995,10 @@ useFactorySettings = function()
     StayOpen = false
     guiScale = defaultGuiScale
     KeepInfYield = true
-    espTransparency = 0.3
+    espTransparency = 0.9
     logsEnabled = true
     jLogsEnabled = true
+    lLogsEnabled = true
     logsWebhook = nil
     aliases = {}
     binds = {}
@@ -3406,6 +3422,28 @@ function CreateJoinLabel(plr,ID)
 	local splitDates = string.split(date,"-")
 	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
 end
+
+function CreateLeaveLabel(plr, userId, reason)
+	-- This should match your existing CreateJoinLabel structure
+	-- Example implementation:
+	local timestamp = os.date("%H:%M:%S")
+	local labelText = string.format("[%s] %s (%d) left - %s", 
+		timestamp, 
+		plr.Name, 
+		userId, 
+		reason or "disconnected"
+	)
+	
+	-- Assuming you have a scrolling frame for logs like joinLogsScroll
+	if leaveLogsScroll then
+		local label = Instance.new("TextLabel")
+		label.Text = labelText
+		label.TextColor3 = Color3.fromRGB(255, 100, 100) -- Red for leaves
+		-- ... rest of your label creation code
+		label.Parent = leaveLogsScroll
+	end
+end
+
 
 IYMouse.KeyDown:Connect(function(Key)
 	if (Key==prefix) then
@@ -3938,6 +3976,13 @@ Clear_2.MouseButton1Down:Connect(function()
 	scroll_3.CanvasSize = UDim2.new(0, 0, 0, 10)
 end)
 
+Clear_3.MouseButton1Down:Connect(function()
+	for _, child in pairs(scroll_3:GetChildren()) do
+		child:Destroy()
+	end
+	scroll_3.CanvasSize = UDim2.new(0, 0, 0, 10)
+end)
+
 Toggle.MouseButton1Down:Connect(function()
 	if logsEnabled then
 		logsEnabled = false
@@ -3962,30 +4007,65 @@ Toggle_2.MouseButton1Down:Connect(function()
 	end
 end)
 
+Toggle_3.MouseButton1Down:Connect(function()
+	if lLogsEnabled then
+		lLogsEnabled = false
+		Toggle_3.Text = 'Disabled'
+		updatesaves()
+	else
+		lLogsEnabled = true
+		Toggle_3.Text = 'Enabled'
+		updatesaves()
+	end
+end)
+
 selectChat.MouseButton1Down:Connect(function()
-	join.Visible = false
 	chat.Visible = true
+	leave.Visible = false
+	join.Visible = false
 	table.remove(shade3,table.find(shade3,selectChat))
 	table.remove(shade2,table.find(shade2,selectJoin))
+	table.remove(shade2,table.find(shade2,selectLeave))
 	table.insert(shade2,selectChat)
 	table.insert(shade3,selectJoin)
+	table.insert(shade3,selectLeave)
 	selectJoin.BackgroundColor3 = currentShade3
+	selectLeave.BackgroundColor3 = currentShade2
 	selectChat.BackgroundColor3 = currentShade2
 end)
 
 selectJoin.MouseButton1Down:Connect(function()
 	chat.Visible = false
-	join.Visible = true	
+	join.Visible = true
+	Leave.Visible = false
 	table.remove(shade3,table.find(shade3,selectJoin))
+	table.remove(shade3,table.find(shade3,selectLeave))
 	table.remove(shade2,table.find(shade2,selectChat))
 	table.insert(shade2,selectJoin)
+	table.insert(shade2,selectLeave)
 	table.insert(shade3,selectChat)
 	selectChat.BackgroundColor3 = currentShade3
 	selectJoin.BackgroundColor3 = currentShade2
+	selectLeave.BackgroundColor3 = currentShade2
+end)
+
+selectLeave.MouseButton1Down:Connect(function()
+	chat.Visible = false
+	join.Visible = false
+	leave.Visible = true
+	table.remove(shade3,table.find(shade3,selectLeave))
+	table.remove(shade2,table.find(shade2,selectChat))
+	table.remove(shade3,table.find(shade3,selectJoin))
+	table.insert(shade2,selectJoin)
+	table.insert(shade2,selectLeave)
+	table.insert(shade3,selectChat)
+	selectChat.BackgroundColor3 = currentShade3
+	selectJoin.BackgroundColor3 = currentShade2
+	selectLeave.BackgroundColor3 = currentShade2
 end)
 
 if not writefileExploit() then
-    notify("Saves", "Your exploit does not support read/write file. Your settings will not save.")
+	notify("Saves", "Your exploit does not support read/write file. Your settings will not save.")
 end
 
 avatarcache = {}
@@ -4035,6 +4115,38 @@ JoinLog = function(plr)
 	end
 end
 
+LeaveLog = function(plr)
+    if lLogsEnabled == true then
+        -- Get player info before they leave
+        local playerName = plr.Name
+        local displayName = plr.DisplayName or playerName
+        local userId = plr.UserId
+        
+        -- Optional: Determine leave reason
+        local leaveReason = "disconnected"
+        local character = plr.Character
+        if character then
+            local humanoid = character:FindFirstChildOfClass("Humanoid")
+            if humanoid and humanoid.Health <= 0 then
+                leaveReason = "died"
+            end
+        end
+        
+        -- Create leave label (similar to your CreateJoinLabel)
+        CreateLeaveLabel(plr, userId, leaveReason)
+        
+        -- Send to webhook (matching your join webhook style)
+        sendChatWebhook(plr, "# Left the server - " .. leaveReason)
+        
+        -- Notification (matching your join notification style)
+        notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
+        notify('🔴 Server Leave', notifyMessage)
+        
+        -- Optional: Log to console
+        print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
+    end
+end
+
 -- LeaveLog = function(plr)
 -- 	if jLogsEnabled == true then
 -- 	notify('User','You can press the prefix key to access the command bar')
@@ -4079,6 +4191,7 @@ if isLegacyChat then
 end
 
 Players.PlayerRemoving:Connect(function(player)
+	-- Your existing cleanup code
 	if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(player.Name..'_LC') then
 		for i,v in pairs(COREGUI:GetChildren()) do
 			if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
@@ -4096,6 +4209,8 @@ Players.PlayerRemoving:Connect(function(player)
 		notify('Spectate','View turned off (player left)')
 	end
 	eventEditor.FireEvent("OnLeave", player.Name)
+	-- ADD THIS LINE: Call the LeaveLog function
+	LeaveLog(player)
 end)
 
 Exit.MouseButton1Down:Connect(function()
@@ -4606,6 +4721,7 @@ CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'logs', DESC = 'Opens the logs GUI'}
 CMDs[#CMDs + 1] = {NAME = 'chatlogs / clogs', DESC = 'Log what people say or whisper'}
 CMDs[#CMDs + 1] = {NAME = 'joinlogs / jlogs', DESC = 'Log when people join'}
+CMDs[#CMDs + 1] = {NAME = 'leavelogs / llogs', DESC = 'Log when people leave'}
 CMDs[#CMDs + 1] = {NAME = 'chatlogswebhook / logswebhook [url]', DESC = 'Set a discord webhook for chatlogs to go to (provide no url to disable this)'}
 CMDs[#CMDs + 1] = {NAME = 'antichatlogs / antichatlogger', DESC = 'Prevents Roblox from banning you for your silly chat messages (game needs the legacy chat)'}
 CMDs[#CMDs + 1] = {NAME = 'chat / say [text]', DESC = 'Makes you chat a string (possible mute bypass)'}
@@ -11639,6 +11755,7 @@ end)
 addcmd("logs", {}, function(args, speaker)
     logsEnabled = true
     jLogsEnabled = true
+    lLogsEnabled = true
     Toggle.Text = "Enabled"
     Toggle_2.Text = "Enabled"
     logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
@@ -11646,13 +11763,17 @@ end)
 
 addcmd("chatlogs", {"clogs"}, function(args, speaker)
     logsEnabled = true
-    join.Visible = false
     chat.Visible = true
+    join.Visible = false
+    leave.Visible = false
     table.remove(shade3, table.find(shade3, selectChat))
     table.remove(shade2, table.find(shade2, selectJoin))
+    table.remove(shade2, table.find(shade2, selectLeave))
     table.insert(shade2, selectChat)
     table.insert(shade3, selectJoin)
+    table.insert(shade3, selectLeave)
     selectJoin.BackgroundColor3 = currentShade3
+    selectLeave.BackgroundColor3 = currentShade2
     selectChat.BackgroundColor3 = currentShade2
     Toggle.Text = "Enabled"
     logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
@@ -11660,15 +11781,39 @@ end)
 
 addcmd("joinlogs", {"jlogs"}, function(args, speaker)
     jLogsEnabled = true
+	lLogsEnabled = true
     chat.Visible = false
     join.Visible = true	
+    leave.Visible = true	
     table.remove(shade3, table.find(shade3, selectJoin))
+    table.remove(shade2, table.find(shade2, selectLeave))
     table.remove(shade2, table.find(shade2, selectChat))
     table.insert(shade2, selectJoin)
+    table.insert(shade3, selectLeave)
     table.insert(shade3, selectChat)
     selectChat.BackgroundColor3 = currentShade3
     selectJoin.BackgroundColor3 = currentShade2
+    selectLeave.BackgroundColor3 = currentShade2
     Toggle_2.Text = "Enabled"
+    logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
+end)
+
+addcmd("leavelogs", {"llogs"}, function(args, speaker)
+    jLogsEnabled = true
+	lLogsEnabled = true
+    chat.Visible = false
+    join.Visible = false
+    leave.Visible = true
+    table.remove(shade3, table.find(shade3, selectLeave))
+    table.remove(shade3, table.find(shade3, selectJoin))
+    table.remove(shade2, table.find(shade2, selectChat))
+    table.insert(shade3, selectLeave)
+    table.insert(shade2, selectJoin)
+    table.insert(shade3, selectChat)
+    selectLeave.BackgroundColor3 = currentShade3
+    selectChat.BackgroundColor3 = currentShade2
+    selectJoin.BackgroundColor3 = currentShade2
+    Toggle_3.Text = "Enabled"
     logs:TweenPosition(UDim2.new(0, 0, 1, -265), "InOut", "Quart", 0.3, true, nil)
 end)
 
