@@ -3262,12 +3262,14 @@ function notify(text,text2,length)
 				pinNotification:Disconnect()
 				notificationPinned = true
 				Title_2.BackgroundTransparency = 1
-				wait(0.5)
+				-- wait(0.5)
+				wait(0.25)
 				Title_2.BackgroundTransparency = 0
 			end)
 		end)
 		Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, 0), "InOut", "Quart", 0.5, true, nil)
-		wait(0.6)
+		-- wait(0.6)
+		wait(0.3)
 		local closepressed = false
 		if text2 then
 			Title_2.Text = text
@@ -3285,7 +3287,8 @@ function notify(text,text2,length)
 		if length and isNumber(length) then
 			wait(length)
 		else
-			wait(10)
+			-- wait(10)
+			wait(3)
 		end
 		if LnotifyCount == notifyCount then
 			if closepressed == false and notificationPinned == false then
@@ -4028,7 +4031,7 @@ JoinLog = function(plr)
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# Joined the server")
 		notifyMessage = plr.DisplayName.." ("..plr.Name..")"
-		notify('Server Join',notifyMessage)
+		notify('🟢 Server Join',notifyMessage)
 	end
 end
 
