@@ -5825,7 +5825,7 @@ function ESP(plr, logic)
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
-							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..') ❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' 🔷'..pos
+							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
@@ -5979,7 +5979,7 @@ function Locate(plr)
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
-							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..') ❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' 🔷'..pos
+							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
