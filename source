@@ -3999,7 +3999,7 @@ function sendChatWebhook(player, message)
       avatarcache[id] = avatar
     end
     local log = HttpService:JSONEncode({
-      content = "`"..message.."`",
+      content = message,
       avatar_url = avatar,
       username = formatUsername(player),
       allowed_mentions = {parse = {}}
@@ -4017,7 +4017,7 @@ ChatLog = function(player)
     player.Chatted:Connect(function(message)
         if logsEnabled == true then
             CreateLabel(player.Name, message)
-            sendChatWebhook(player, message)
+            sendChatWebhook(player, "`"..message.."`")
         end
     end)
 end
@@ -4025,6 +4025,7 @@ end
 JoinLog = function(plr)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
+		sendChatWebhook(plr,"# Joined the server")
 	end
 end
 
