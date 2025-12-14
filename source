@@ -4032,7 +4032,7 @@ JoinLog = function(plr)
 		sendChatWebhook(plr,"# 🟢 Joined the server")
 		currentPlayers = Players:GetPlayers()
 		maxPlayers = Players.MaxPlayers()
-		notifyTitle = '🟢 Server Join ('..currentPlayers..'/'..maxPlayers..')'
+		notifyTitle = "🟢 Server Join ("..currentPlayers.."/"..maxPlayers..")"
 		notifyMessage = plr.DisplayName.." ("..plr.Name..")"
 		notify(notifyTitle, notifyMessage)
 	end
@@ -4065,7 +4065,7 @@ LeaveLog = function(plr)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
 	currentPlayers = Players:GetPlayers()
 	maxPlayers = Players.MaxPlayers()
-	notifyTitle = '🔴 Server Leave ('..currentPlayers..'/'..maxPlayers..')'
+	notifyTitle = "🔴 Server Leave ("..currentPlayers.."/"..maxPlayers..")"
 	notifyMessage = plr.DisplayName.." ("..plr.Name..")\nReason: "..leaveReason
 	notify(notifyTitle, notifyMessage)
 	
