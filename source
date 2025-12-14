@@ -3999,7 +3999,7 @@ function sendChatWebhook(player, message)
       avatarcache[id] = avatar
     end
     local log = HttpService:JSONEncode({
-      content = message,
+      content = "`"..message.."`",
       avatar_url = avatar,
       username = formatUsername(player),
       allowed_mentions = {parse = {}}
