@@ -4034,7 +4034,7 @@ JoinLog = function(plr)
 		maxPlayers = Players.MaxPlayers()
 		notifyTitle = '🟢 Server Join ('..currentPlayers..'/'..maxPlayers..')'
 		notifyMessage = plr.DisplayName.." ("..plr.Name..")"
-		notify(notifyTitle,notifyMessage)
+		notify(notifyTitle, notifyMessage)
 	end
 end
 
@@ -4067,7 +4067,7 @@ LeaveLog = function(plr)
 	maxPlayers = Players.MaxPlayers()
 	notifyTitle = '🔴 Server Leave ('..currentPlayers..'/'..maxPlayers..')'
 	notifyMessage = plr.DisplayName.." ("..plr.Name..")\nReason: "..leaveReason
-	notify(notifyTitle,notifyMessage)
+	notify(notifyTitle, notifyMessage)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
