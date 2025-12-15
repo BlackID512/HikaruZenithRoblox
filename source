@@ -4034,7 +4034,7 @@ JoinLog = function(plr)
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# 🟢 Joined the server")
 		notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		notify(notifyTitle, notifyMessage)
+		notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
 	end
 end
 
@@ -4067,7 +4067,7 @@ LeaveLog = function(plr)
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
 	notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	notify(notifyTitle, notifyMessage)
+	notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
