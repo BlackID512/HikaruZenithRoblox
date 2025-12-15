@@ -4027,22 +4027,24 @@ ChatLog = function(player)
 end
 
 JoinLog = function(plr)
-	currentPlayers = Players:GetPlayers()
-	maxPlayers = Players.MaxPlayers()
+	local currentPlayers = Players:GetPlayers()
+	-- maxPlayers = Players.MaxPlayers()
 	local notifyTitle = "🟢 Server Join"
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# 🟢 Joined the server")
-		notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
+		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
+		notifyMessage = "Players: "..currentPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
+		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
+		notify(notifyTitle, notifyMessage)
 	end
 end
 
 LeaveLog = function(plr)
     -- if lLogsEnabled == true then
         -- Get player info before they leave
-	currentPlayers = Players:GetPlayers()
-	maxPlayers = Players.MaxPlayers()
+	local currentPlayers = Players:GetPlayers()
+	-- maxPlayers = Players.MaxPlayers()
 	local notifyTitle = "🔴 Server Leave"
 	local playerName = plr.Name
 	local displayName = plr.DisplayName or playerName
@@ -4066,8 +4068,10 @@ LeaveLog = function(plr)
 	
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
-	notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
+	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
+	notifyMessage = "Players: "..currentPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
+	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
+	notify(notifyTitle, notifyMessage)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
