@@ -4027,14 +4027,14 @@ ChatLog = function(player)
 end
 
 JoinLog = function(plr)
-	local currentPlayers = Players:GetPlayers()
+	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = "🟢 Server Join"
+	notifyTitle = '🟢 Server Join'
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# 🟢 Joined the server")
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		notifyMessage = "Players: "..currentPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
+		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
 		notify(notifyTitle, notifyMessage)
 	end
@@ -4043,9 +4043,9 @@ end
 LeaveLog = function(plr)
     -- if lLogsEnabled == true then
         -- Get player info before they leave
-	local currentPlayers = Players:GetPlayers()
+	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = "🔴 Server Leave"
+	notifyTitle = '🔴 Server Leave'
 	local playerName = plr.Name
 	local displayName = plr.DisplayName or playerName
 	local userId = plr.UserId
@@ -4069,7 +4069,7 @@ LeaveLog = function(plr)
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
 	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	notifyMessage = "Players: "..currentPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
+	notifyMessage = 'Players: '..currentPlayers..'\n'..displayName..' ('..playerName..')\nReason: '..leaveReason
 	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
 	notify(notifyTitle, notifyMessage)
 	
