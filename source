@@ -4029,7 +4029,7 @@ end
 JoinLog = function(plr)
 	local currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	local notifyTitle = "🟢 Server Join"
+	notifyTitle = "🟢 Server Join"
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		sendChatWebhook(plr,"# 🟢 Joined the server")
@@ -4045,7 +4045,7 @@ LeaveLog = function(plr)
         -- Get player info before they leave
 	local currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	local notifyTitle = "🔴 Server Leave"
+	notifyTitle = "🔴 Server Leave"
 	local playerName = plr.Name
 	local displayName = plr.DisplayName or playerName
 	local userId = plr.UserId
