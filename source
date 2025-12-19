@@ -4036,7 +4036,7 @@ JoinLog = function(plr)
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
 		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
-		notify(notifyTitle, notifyMessage)
+		notify(notifyTitle.Text, notifyMessage.Text)
 	end
 end
 
@@ -4071,7 +4071,7 @@ LeaveLog = function(plr)
 	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
 	notifyMessage = 'Players: '..currentPlayers..'\n'..displayName..' ('..playerName..')\nReason: '..leaveReason
 	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
-	notify(notifyTitle, notifyMessage)
+	notify(notifyTitle.Text, notifyMessage.Text)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
