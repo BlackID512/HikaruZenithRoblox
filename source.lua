@@ -197,7 +197,7 @@ if makefolder and isfolder and writefile and isfile then
     end)
 end
 
-currentVersion = "0.2.2"
+currentVersion = "0.2.3a"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -6572,7 +6572,7 @@ local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if KeepInfYield and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/source'))()")
+		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/source.lua'))()")
 	end
 end)
 
