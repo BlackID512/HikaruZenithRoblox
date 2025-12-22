@@ -3993,6 +3993,7 @@ function sendChatWebhook(player, message)
   if httprequest and vtype(logsWebhook, "string") then
     local id = player.UserId
     local avatar = avatarcache[id]
+	local webhookUsername = string.format("Hikaru Zenith")
     if not avatar then
       local d = HttpService:JSONDecode(httprequest({
         -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
@@ -4006,7 +4007,7 @@ function sendChatWebhook(player, message)
     local log = HttpService:JSONEncode({
       content = message,
       avatar_url = avatar,
-      username = 'Hikaru Zenith',
+      username = webhookUsername,
       -- username = formatUsername(player),
       allowed_mentions = {parse = {}}
     })
