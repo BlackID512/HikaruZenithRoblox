@@ -2958,8 +2958,8 @@ defaultsettings = {
 	guiScale = defaultGuiScale;
 	espTransparency = 0.9;
 	keepIY = true;
-	logsEnabled = false;
-	jLogsEnabled = false;
+	logsEnabled = true;
+	jLogsEnabled = true;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2981,8 +2981,8 @@ useFactorySettings = function()
     guiScale = defaultGuiScale
     KeepInfYield = true
     espTransparency = 0.9
-    logsEnabled = false
-    jLogsEnabled = false
+    logsEnabled = true
+    jLogsEnabled = true
     logsWebhook = nil
     aliases = {}
     binds = {}
@@ -3993,11 +3993,9 @@ function sendChatWebhook(player, message)
   if httprequest and vtype(logsWebhook, "string") then
     local id = player.UserId
     local avatar = avatarcache[id]
-	local webhookUsername = string.format("Hikaru Zenith")
     if not avatar then
       local d = HttpService:JSONDecode(httprequest({
-        -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
-        Url = "https://files.catbox.moe/j8uzn3.png",
+        Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
         Method = "GET"
       }).Body)["data"]
       -- avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
@@ -4007,8 +4005,7 @@ function sendChatWebhook(player, message)
     local log = HttpService:JSONEncode({
       content = message,
       avatar_url = avatar,
-      username = webhookUsername,
-      -- username = formatUsername(player),
+      username = formatUsername(player),
       allowed_mentions = {parse = {}}
     })
     httprequest({
@@ -4023,39 +4020,36 @@ end
 ChatLog = function(player)
     player.Chatted:Connect(function(message)
         if logsEnabled == true then
-            local user = formatUsername(player)
             CreateLabel(player.Name, message)
 			webhookChatFormat = message
-            sendChatWebhook(player, user..': `'..webhookChatFormat..'`')
+            sendChatWebhook(player, '`'..webhookChatFormat..'`')
         end
     end)
 end
 
 JoinLog = function(plr)
+	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	local notifyTitle = '🟢 Server Join'
-	local playersCount = Players:GetPlayers()
+	notifyTitle = '🟢 Server Join'
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
-		local user = formatUsername(plr)
-		sendChatWebhook(plr,"# 🟢 `"..user.."` Joined the server")
+		sendChatWebhook(plr,"# 🟢 Joined the server")
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		local notifyMessage = 'Players: '..playersCount..'\n'..user
+		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
-		notify(notifyTitle,notifyMessage)
+		notify(notifyTitle.Text, notifyMessage.Text)
 	end
 end
 
 LeaveLog = function(plr)
     -- if lLogsEnabled == true then
         -- Get player info before they leave
+	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	local notifyTitle = '🔴 Server Leave'
-	local user = formatUsername(plr)
+	notifyTitle = '🔴 Server Leave'
 	local playerName = plr.Name
 	local displayName = plr.DisplayName or playerName
 	local userId = plr.UserId
-	local playersCount = Players:GetPlayers()
 	
 	-- Optional: Determine leave reason
 	local leaveReason = "disconnected"
@@ -4071,14 +4065,14 @@ LeaveLog = function(plr)
 	-- CreateLeaveLabel(plr, userId, leaveReason)
 	
 	-- Send to webhook (matching your join webhook style)
-	sendChatWebhook(plr, "# 🔴 `"..user.."` Left the server {"..leaveReason.."}")
+	sendChatWebhook(plr, "# 🔴 Left the server ["..leaveReason.."]")
 	
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
 	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	local notifyMessage = 'Players: '..playersCount..'\n'..user..'\nReason: '..leaveReason
+	notifyMessage = 'Players: '..currentPlayers..'\n'..displayName..' ('..playerName..')\nReason: '..leaveReason
 	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
-	notify(notifyTitle,notifyMessage)
+	notify(notifyTitle.Text, notifyMessage.Text)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
