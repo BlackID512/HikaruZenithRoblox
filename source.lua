@@ -3998,11 +3998,11 @@ function sendChatWebhook(player, message)
 	local webhookName = string.format("%s", hz)
 	local webhookContent = user..' `'..message..'`'
     if not avatar then
-      local d = HttpService:JSONDecode(httprequest({
+      -- local d = HttpService:JSONDecode(httprequest({
         -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
-        Url = "https://files.catbox.moe/j8uzn3.png",
-        Method = "GET"
-      }).Body)["data"]
+        -- Url = "https://files.catbox.moe/j8uzn3.png",
+        -- Method = "GET"
+      -- }).Body)["data"]
       -- avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
       avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/j8uzn3.png"
       avatarcache[id] = avatar
