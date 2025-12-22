@@ -2958,8 +2958,8 @@ defaultsettings = {
 	guiScale = defaultGuiScale;
 	espTransparency = 0.9;
 	keepIY = true;
-	logsEnabled = true;
-	jLogsEnabled = true;
+	logsEnabled = false;
+	jLogsEnabled = false;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2981,8 +2981,8 @@ useFactorySettings = function()
     guiScale = defaultGuiScale
     KeepInfYield = true
     espTransparency = 0.9
-    logsEnabled = true
-    jLogsEnabled = true
+    logsEnabled = false
+    jLogsEnabled = false
     logsWebhook = nil
     aliases = {}
     binds = {}
@@ -3995,16 +3995,49 @@ function sendChatWebhook(player, message)
     local avatar = avatarcache[id]
     if not avatar then
       local d = HttpService:JSONDecode(httprequest({
-        Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
+        -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
+        Url = "https://files.catbox.moe/j8uzn3.png",
         Method = "GET"
       }).Body)["data"]
-      avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
+      -- avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
+      avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/j8uzn3.png"
+      avatarcache[id] = avatar
+    end
+    local log = HttpService:JSONEncode({
+      content = formatUsername(player).." `"..message.."`",
+      avatar_url = avatar,
+      username = "Hikaru Zenith",
+      -- username = formatUsername(player),
+      allowed_mentions = {parse = {}}
+    })
+    httprequest({
+      Url = logsWebhook,
+      Method = "POST",
+      Headers = {["Content-Type"] = "application/json"},
+      Body = log
+    })
+  end
+end
+
+function sendLogsWebhook(player, message)
+  if httprequest and vtype(logsWebhook, "string") then
+    local id = player.UserId
+    local avatar = avatarcache[id]
+    if not avatar then
+      local d = HttpService:JSONDecode(httprequest({
+        -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
+        Url = "https://files.catbox.moe/j8uzn3.png",
+        Method = "GET"
+      }).Body)["data"]
+      -- avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
+      avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/j8uzn3.png"
       avatarcache[id] = avatar
     end
     local log = HttpService:JSONEncode({
       content = message,
       avatar_url = avatar,
-      username = formatUsername(player),
+      username = "Hikaru Zenith",
+      -- username = formatUsername(player),
       allowed_mentions = {parse = {}}
     })
     httprequest({
@@ -4020,35 +4053,37 @@ ChatLog = function(player)
     player.Chatted:Connect(function(message)
         if logsEnabled == true then
             CreateLabel(player.Name, message)
-			webhookChatFormat = "`"..message.."`"
+			webhookChatFormat = message
             sendChatWebhook(player, webhookChatFormat)
         end
     end)
 end
 
 JoinLog = function(plr)
-	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = '🟢 Server Join'
+	local notifyTitle = '🟢 Server Join'
+	local playersCount = Players:GetPlayers()
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
-		sendChatWebhook(plr,"# 🟢 Joined the server")
+		local user = formatUsername(plr)
+		sendLogsWebhook(plr,"# 🟢 `"..user.."` Joined the server")
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
+		local notifyMessage = 'Players: '..playersCount..'\n'..plr.DisplayName..' ('..plr.Name..')'
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
-		notify(notifyTitle.Text, notifyMessage.Text)
+		notify(notifyTitle,notifyMessage)
 	end
 end
 
 LeaveLog = function(plr)
     -- if lLogsEnabled == true then
         -- Get player info before they leave
-	currentPlayers = Players:GetPlayers()
 	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = '🔴 Server Leave'
+	local notifyTitle = '🔴 Server Leave'
+	local user = formatUsername(plr)
 	local playerName = plr.Name
 	local displayName = plr.DisplayName or playerName
 	local userId = plr.UserId
+	local playersCount = Players:GetPlayers()
 	
 	-- Optional: Determine leave reason
 	local leaveReason = "disconnected"
@@ -4064,14 +4099,14 @@ LeaveLog = function(plr)
 	-- CreateLeaveLabel(plr, userId, leaveReason)
 	
 	-- Send to webhook (matching your join webhook style)
-	sendChatWebhook(plr, "# 🔴 Left the server ["..leaveReason.."]")
+	sendLogsWebhook(plr, "# 🔴 `"..user.."` Left the server {"..leaveReason.."}")
 	
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
 	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	notifyMessage = 'Players: '..currentPlayers..'\n'..displayName..' ('..playerName..')\nReason: '..leaveReason
+	local notifyMessage = 'Players: '..playersCount..'\n'..user..'\nReason: '..leaveReason
 	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
-	notify(notifyTitle.Text, notifyMessage.Text)
+	notify(notifyTitle,notifyMessage)
 	
 	-- Optional: Log to console
 	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
