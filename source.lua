@@ -3993,6 +3993,10 @@ function sendChatWebhook(player, message)
   if httprequest and vtype(logsWebhook, "string") then
     local id = player.UserId
     local avatar = avatarcache[id]
+	local hz = "Hikaru Zenith"
+	local user = formatUsername(player)
+	local webhookName = string.format("%s", hz)
+	local webhookContent = user..' `'..message..'`'
     if not avatar then
       local d = HttpService:JSONDecode(httprequest({
         Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
@@ -4003,9 +4007,11 @@ function sendChatWebhook(player, message)
       avatarcache[id] = avatar
     end
     local log = HttpService:JSONEncode({
-      content = message,
+      -- content = message,
+      content = webhookContent,
       avatar_url = avatar,
-      username = formatUsername(player),
+      -- username = formatUsername(player),
+      username = webhookName,
       allowed_mentions = {parse = {}}
     })
     httprequest({
@@ -4022,7 +4028,7 @@ ChatLog = function(player)
         if logsEnabled == true then
             CreateLabel(player.Name, message)
 			webhookChatFormat = message
-            sendChatWebhook(player, '`'..webhookChatFormat..'`')
+            sendChatWebhook(player, webhookChatFormat)
         end
     end)
 end
@@ -4033,7 +4039,7 @@ JoinLog = function(plr)
 	notifyTitle = '🟢 Server Join'
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
-		sendChatWebhook(plr,"# 🟢 Joined the server")
+		sendChatWebhook(plr,"🟢 Joined the server 🟢")
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
 		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
@@ -4065,7 +4071,7 @@ LeaveLog = function(plr)
 	-- CreateLeaveLabel(plr, userId, leaveReason)
 	
 	-- Send to webhook (matching your join webhook style)
-	sendChatWebhook(plr, "# 🔴 Left the server ["..leaveReason.."]")
+	sendChatWebhook(plr, "🔴 Left the server ["..leaveReason.."] 🔴")
 	
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
@@ -5669,7 +5675,7 @@ end
 
 function formatUsername(player)
     if player.DisplayName ~= player.Name then
-        return string.format("%s (%s)", player.Name, player.DisplayName)
+        return string.format("%s (%s)", player.DisplayName, player.Name)
     end
     return player.Name
 end
