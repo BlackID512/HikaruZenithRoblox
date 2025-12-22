@@ -4004,39 +4004,9 @@ function sendChatWebhook(player, message)
       avatarcache[id] = avatar
     end
     local log = HttpService:JSONEncode({
-      content = formatUsername(player).." `"..message.."`",
-      avatar_url = avatar,
-      username = "Hikaru Zenith",
-      -- username = formatUsername(player),
-      allowed_mentions = {parse = {}}
-    })
-    httprequest({
-      Url = logsWebhook,
-      Method = "POST",
-      Headers = {["Content-Type"] = "application/json"},
-      Body = log
-    })
-  end
-end
-
-function sendLogsWebhook(player, message)
-  if httprequest and vtype(logsWebhook, "string") then
-    local id = player.UserId
-    local avatar = avatarcache[id]
-    if not avatar then
-      local d = HttpService:JSONDecode(httprequest({
-        -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
-        Url = "https://files.catbox.moe/j8uzn3.png",
-        Method = "GET"
-      }).Body)["data"]
-      -- avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/i968v2.jpg"
-      avatar = d and d[1].state == "Completed" and d[1].imageUrl or "https://files.catbox.moe/j8uzn3.png"
-      avatarcache[id] = avatar
-    end
-    local log = HttpService:JSONEncode({
       content = message,
       avatar_url = avatar,
-      username = "Hikaru Zenith",
+      username = 'Hikaru Zenith',
       -- username = formatUsername(player),
       allowed_mentions = {parse = {}}
     })
@@ -4052,9 +4022,10 @@ end
 ChatLog = function(player)
     player.Chatted:Connect(function(message)
         if logsEnabled == true then
+            local user = formatUsername(player)
             CreateLabel(player.Name, message)
 			webhookChatFormat = message
-            sendChatWebhook(player, webhookChatFormat)
+            sendChatWebhook(player, user..': `'..webhookChatFormat..'`')
         end
     end)
 end
@@ -4066,9 +4037,9 @@ JoinLog = function(plr)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		local user = formatUsername(plr)
-		sendLogsWebhook(plr,"# 🟢 `"..user.."` Joined the server")
+		sendChatWebhook(plr,"# 🟢 `"..user.."` Joined the server")
 		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		local notifyMessage = 'Players: '..playersCount..'\n'..plr.DisplayName..' ('..plr.Name..')'
+		local notifyMessage = 'Players: '..playersCount..'\n'..user
 		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
 		notify(notifyTitle,notifyMessage)
 	end
@@ -4099,7 +4070,7 @@ LeaveLog = function(plr)
 	-- CreateLeaveLabel(plr, userId, leaveReason)
 	
 	-- Send to webhook (matching your join webhook style)
-	sendLogsWebhook(plr, "# 🔴 `"..user.."` Left the server {"..leaveReason.."}")
+	sendChatWebhook(plr, "# 🔴 `"..user.."` Left the server {"..leaveReason.."}")
 	
 	-- Notification (matching your join notification style)
 	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
