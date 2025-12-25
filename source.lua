@@ -421,7 +421,8 @@ do
 		["12 25"] = "🎄"
 	})[os.date("%m %d")]
 	if emoji then
-		Title.Text = ("%s %s %s"):format(emoji, Title.Text, emoji)
+		-- Title.Text = ("%s %s %s"):format(emoji, Title.Text, emoji)
+		Title.Text = ("%s %s"):format(emoji, Title.Text)
 	end
 end
 
