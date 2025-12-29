@@ -8985,7 +8985,7 @@ addcmd('un2022materials',{'unuse2022materials'},function(args, speaker)
 	end
 end)
 
-addcmd('goto',{'to'},function(args, speaker)
+addcmd('goto',{'to','gt','tp','teleport'},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players)do
 		if Players[v].Character ~= nil then
