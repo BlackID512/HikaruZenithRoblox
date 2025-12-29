@@ -3979,11 +3979,12 @@ end
 ChatLog = function(player)
     player.Chatted:Connect(function(message)
 		local user = formatUsername(player)
+		local chat = string.format("%s", message)
         if logsEnabled == true then
             -- CreateLabel(player.Name, message)
             CreateLabel(user, message)
             -- sendChatWebhook(player, message)
-			local webhookMessageText = "`"..user.."`: `"..message.."`"
+			local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
 			local webhookMessage = string.format("%s", webhookMessageText)
             sendChatWebhook(player, webhookMessage)
         end
@@ -4024,8 +4025,8 @@ LeaveLog = function(plr)
 		end
 	end
 	if jLogsEnabled == true then
-		-- local webhookMessageText = "## 🟢 Left the server 🟢 Player(s): "..#currentPlayers.."\n"..user
-		local webhookMessageText = "## 🟢 Left the server 🟢\n`"..user.."`"
+		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..#currentPlayers.."\n"..user
+		local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
