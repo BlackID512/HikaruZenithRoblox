@@ -1,9 +1,9 @@
-if IY_LOADED and not _G.IY_DEBUG == true then
+if HZ_LOADED and not _G.HZ_DEBUG == true then
     -- error("Hikaru Zenith is already running!", 0)
     return
 end
 
-pcall(function() getgenv().IY_LOADED = true end)
+pcall(function() getgenv().HZ_LOADED = true end)
 if not game:IsLoaded() then game.Loaded:Wait() end
 
 function missing(t, f, fallback)
@@ -91,81 +91,30 @@ CaptureService = Services.CaptureService
 VoiceChatService = Services.VoiceChatService
 SocialService = Services.SocialService
 
-IYMouse = cloneref(Players.LocalPlayer:GetMouse())
+HZMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlayerGui = cloneref(Players.LocalPlayer:FindFirstChildWhichIsA("PlayerGui"))
 PlaceId, JobId = game.PlaceId, game.JobId
--- ORIGINAL CODE SEGMENT (for reference)
--- Mobile Detection v1
--- xpcall(function()
---     IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
--- end, function()
---     IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
--- end)
-
--- MODIFIED CODE SEGMENT
--- Mobile Detection v2
 xpcall(function()
-    -- First, try to identify desktop platforms directly
-    IsOnMobile = not table.find({
-        Enum.Platform.Windows,
-        Enum.Platform.OSX,
-        Enum.Platform.UWP,
-        Enum.Platform.Linux,
-        Enum.Platform.XBoxOne
-    }, UserInputService:GetPlatform())
+    IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
 end, function()
-    -- Fallback: A user is considered "on mobile" if they have touch input
-    -- but lack a physical keyboard. If they have a keyboard, treat as desktop-like.
     IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
-
--- Physical keyboard detection with real-time updates
--- HasPhysicalKeyboard = UserInputService.KeyboardEnabled
--- QuickCaptureButton = nil  -- Store reference for enabling/disabling
-
--- Function to update QuickCapture based on keyboard state
--- function updateQuickCaptureVisibility()
---     if HasPhysicalKeyboard then
-        -- Create or show QuickCapture button
---         if not QuickCaptureButton then
---             createQuickCaptureButton()
---         else
---             QuickCaptureButton.Visible = true
---             QuickCaptureButton.Active = true
---         end
---     else
-        -- Hide or disable QuickCapture button
---         if QuickCaptureButton then
---             QuickCaptureButton.Visible = false
---             QuickCaptureButton.Active = false
---         end
---     end
--- end
-
--- Listen for keyboard connection changes (if supported)
--- if UserInputService:GetPropertyChangedSignal then
---     UserInputService:GetPropertyChangedSignal("KeyboardEnabled"):Connect(function()
---         HasPhysicalKeyboard = UserInputService.KeyboardEnabled
---         updateQuickCaptureVisibility()
---     end)
--- end
-
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 -- xylex & europa
-local iyassets = {
-    ["infiniteyield/assets/bindsandplugins.png"] = "rbxassetid://5147695474",
-    ["infiniteyield/assets/close.png"] = "rbxassetid://5054663650",
-    ["infiniteyield/assets/editaliases.png"] = "rbxassetid://5147488658",
-    ["infiniteyield/assets/editkeybinds.png"] = "rbxassetid://129697930",
-    ["infiniteyield/assets/edittheme.png"] = "rbxassetid://4911962991",
-    ["infiniteyield/assets/editwaypoints.png"] = "rbxassetid://5147488592",
-    ["infiniteyield/assets/imgstudiopluginlogo.png"] = "rbxassetid://4113050383",
-    ["infiniteyield/assets/logo.png"] = "rbxassetid://1352543873",
-    ["infiniteyield/assets/minimize.png"] = "rbxassetid://2406617031",
-    ["infiniteyield/assets/pin.png"] = "rbxassetid://6234691350",
-    ["infiniteyield/assets/reference.png"] = "rbxassetid://3523243755",
-    ["infiniteyield/assets/settings.png"] = "rbxassetid://1204397029"
+local hzassets = {
+    ["hikaruzenith/assets/bindsandplugins.png"] = "rbxassetid://5147695474",
+    ["hikaruzenith/assets/close.png"] = "rbxassetid://5054663650",
+    ["hikaruzenith/assets/editaliases.png"] = "rbxassetid://5147488658",
+    ["hikaruzenith/assets/editkeybinds.png"] = "rbxassetid://129697930",
+    ["hikaruzenith/assets/edittheme.png"] = "rbxassetid://4911962991",
+    ["hikaruzenith/assets/editwaypoints.png"] = "rbxassetid://5147488592",
+    ["hikaruzenith/assets/imgstudiopluginlogo.png"] = "rbxassetid://4113050383",
+    ["hikaruzenith/assets/logo.png"] = "rbxassetid://1352543873",
+    ["hikaruzenith/assets/minimize.png"] = "rbxassetid://2406617031",
+    ["hikaruzenith/assets/pin.png"] = "rbxassetid://6234691350",
+    ["hikaruzenith/assets/reference.png"] = "rbxassetid://3523243755",
+    ["hikaruzenith/assets/settings.png"] = "rbxassetid://1204397029"
 }
 
 local function getcustomasset(asset)
@@ -177,23 +126,24 @@ local function getcustomasset(asset)
             return result
         end
     end
-    return iyassets[asset]
+    return hzassets[asset]
 end
 
 if makefolder and isfolder and writefile and isfile then
     pcall(function() -- good executor trust
-        local assets = "https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/"
-        for _, folder in {"infiniteyield", "infiniteyield/assets"} do
+        -- local assets = "https://raw.githubusercontent.com/infyiff/backup/refs/heads/main/"
+        local assets = "https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/refs/heads/main/"
+        for _, folder in {"hikaruzenith", "hikaruzenith/assets"} do
             if not isfolder(folder) then
                 makefolder(folder)
             end
         end
-        for path in iyassets do
+        for path in hzassets do
             if not isfile(path) then
-                writefile(path, game:HttpGet((path:gsub("infiniteyield/", assets))))
+                writefile(path, game:HttpGet((path:gsub("hikaruzenith/", assets))))
             end
         end
-        if IsOnMobile then writefile("infiniteyield/assets/.nomedia") end
+        if IsOnMobile then writefile("hikaruzenith/assets/.nomedia") end
     end)
 end
 
@@ -409,17 +359,17 @@ do
 			local F = (2*(Year%4)+4*(Year%7)+6*E+D)%7
 			local G = (22+E+F)
 			if E == 29 and F == 6 then
-				return "04 19"
+				return "19 04"
 			elseif E == 28 and F == 6 then
-				return "04 18"
+				return "18 04"
 			elseif 31 < G then
-				return ("04 %02d"):format(G-31)
+				return ("%02d 04"):format(G-31)
 			end
-			return ("03 %02d"):format(G)
+			return ("%02d 03"):format(G)
 		end)(tonumber(os.date"%Y"))] = "🥚",
-		["10 31"] = "🎃",
-		["12 25"] = "🎄"
-	})[os.date("%m %d")]
+		["31 10"] = "🎃",
+		["25 12"] = "🎄"
+	})[os.date("%d %m")]
 	if emoji then
 		-- Title.Text = ("%s %s %s"):format(emoji, Title.Text, emoji)
 		Title.Text = ("%s %s"):format(emoji, Title.Text)
@@ -478,7 +428,7 @@ SettingsButton.Parent = Holder
 SettingsButton.BackgroundTransparency = 1
 SettingsButton.Position = UDim2.new(0, 230, 0, 0)
 SettingsButton.Size = UDim2.new(0, 20, 0, 20)
-SettingsButton.Image = getcustomasset("infiniteyield/assets/settings.png")
+SettingsButton.Image = getcustomasset("hikaruzenith/assets/settings.png")
 SettingsButton.ZIndex = 10
 
 ReferenceButton = Instance.new("ImageButton")
@@ -487,7 +437,7 @@ ReferenceButton.Parent = Holder
 ReferenceButton.BackgroundTransparency = 1
 ReferenceButton.Position = UDim2.new(0, 212, 0, 2)
 ReferenceButton.Size = UDim2.new(0, 16, 0, 16)
-ReferenceButton.Image = getcustomasset("infiniteyield/assets/reference.png")
+ReferenceButton.Image = getcustomasset("hikaruzenith/assets/reference.png")
 ReferenceButton.ZIndex = 10
 
 Settings.Name = "Settings"
@@ -584,19 +534,19 @@ function makeSettingsButton(name,iconID,off)
 	return button
 end
 
-ColorsButton = makeSettingsButton("Edit Theme",getcustomasset("infiniteyield/assets/edittheme.png"))
+ColorsButton = makeSettingsButton("Edit Theme",getcustomasset("hikaruzenith/assets/edittheme.png"))
 ColorsButton.Position = UDim2.new(0, 5, 0, 55)
 ColorsButton.Size = UDim2.new(1, -10, 0, 25)
 ColorsButton.Name = "Colors"
 ColorsButton.Parent = SettingsHolder
 
-Keybinds = makeSettingsButton("Edit Keybinds",getcustomasset("infiniteyield/assets/editkeybinds.png"))
+Keybinds = makeSettingsButton("Edit Keybinds",getcustomasset("hikaruzenith/assets/editkeybinds.png"))
 Keybinds.Position = UDim2.new(0, 5, 0, 85)
 Keybinds.Size = UDim2.new(1, -10, 0, 25)
 Keybinds.Name = "Keybinds"
 Keybinds.Parent = SettingsHolder
 
-Aliases = makeSettingsButton("Edit Aliases",getcustomasset("infiniteyield/assets/editaliases.png"))
+Aliases = makeSettingsButton("Edit Aliases",getcustomasset("hikaruzenith/assets/editaliases.png"))
 Aliases.Position = UDim2.new(0, 5, 0, 115)
 Aliases.Size = UDim2.new(1, -10, 0, 25)
 Aliases.Name = "Aliases"
@@ -640,19 +590,19 @@ On.Text = ""
 On.TextColor3 = Color3.new(0, 0, 0)
 On.ZIndex = 10
 
-Positions = makeSettingsButton("Edit/Goto Waypoints",getcustomasset("infiniteyield/assets/editwaypoints.png"))
+Positions = makeSettingsButton("Edit/Goto Waypoints",getcustomasset("hikaruzenith/assets/editwaypoints.png"))
 Positions.Position = UDim2.new(0, 5, 0, 145)
 Positions.Size = UDim2.new(1, -10, 0, 25)
 Positions.Name = "Waypoints"
 Positions.Parent = SettingsHolder
 
-EventBind = makeSettingsButton("Edit Event Binds",getcustomasset("infiniteyield/assets/bindsandplugins.png"),759)
+EventBind = makeSettingsButton("Edit Event Binds",getcustomasset("hikaruzenith/assets/bindsandplugins.png"),759)
 EventBind.Position = UDim2.new(0, 5, 0, 205)
 EventBind.Size = UDim2.new(1, -10, 0, 25)
 EventBind.Name = "EventBinds"
 EventBind.Parent = SettingsHolder
 
-Plugins = makeSettingsButton("Manage Plugins",getcustomasset("infiniteyield/assets/bindsandplugins.png"),743)
+Plugins = makeSettingsButton("Manage Plugins",getcustomasset("hikaruzenith/assets/bindsandplugins.png"),743)
 Plugins.Position = UDim2.new(0, 5, 0, 175)
 Plugins.Size = UDim2.new(1, -10, 0, 25)
 Plugins.Name = "Plugins"
@@ -721,7 +671,7 @@ CloseImage.BackgroundColor3 = Color3.new(1, 1, 1)
 CloseImage.BackgroundTransparency = 1
 CloseImage.Position = UDim2.new(0, 5, 0, 5)
 CloseImage.Size = UDim2.new(0, 10, 0, 10)
-CloseImage.Image = getcustomasset("infiniteyield/assets/close.png")
+CloseImage.Image = getcustomasset("hikaruzenith/assets/close.png")
 CloseImage.ZIndex = 10
 
 PinButton.Name = "PinButton"
@@ -737,7 +687,7 @@ PinImage.BackgroundTransparency = 1
 PinImage.Position = UDim2.new(0, 3, 0, 3)
 PinImage.Size = UDim2.new(0, 14, 0, 14)
 PinImage.ZIndex = 10
-PinImage.Image = getcustomasset("infiniteyield/assets/pin.png")
+PinImage.Image = getcustomasset("hikaruzenith/assets/pin.png")
 
 Tooltip.Name = randomString()
 Tooltip.Parent = ScaledHolder
@@ -795,7 +745,7 @@ Logo.BackgroundTransparency = 1
 Logo.BorderSizePixel = 0
 Logo.Position = UDim2.new(0, 125, 0, 127)
 Logo.Size = UDim2.new(0, 10, 0, 10)
-Logo.Image = getcustomasset("infiniteyield/assets/logo.png")
+Logo.Image = getcustomasset("hikaruzenith/assets/logo.png")
 Logo.ImageTransparency = 0
 Logo.ZIndex = 10
 
@@ -1184,7 +1134,7 @@ ExitImage_2.BackgroundTransparency = 1
 ExitImage_2.Position = UDim2.new(0, 5, 0, 5)
 ExitImage_2.Size = UDim2.new(0, 10, 0, 10)
 ExitImage_2.ZIndex = 10
-ExitImage_2.Image = getcustomasset("infiniteyield/assets/close.png")
+ExitImage_2.Image = getcustomasset("hikaruzenith/assets/close.png")
 
 PositionsFrame.Name = "PositionsFrame"
 PositionsFrame.Parent = Settings
@@ -1524,7 +1474,7 @@ Img.Parent = background_3
 Img.BackgroundTransparency = 1
 Img.Position = UDim2.new(0, 242, 0, 3)
 Img.Size = UDim2.new(0, 100, 0, 95)
-Img.Image = getcustomasset("infiniteyield/assets/imgstudiopluginlogo.png")
+Img.Image = getcustomasset("hikaruzenith/assets/imgstudiopluginlogo.png")
 Img.ZIndex = 10
 
 AddPlugin.Name = "AddPlugin"
@@ -1563,7 +1513,7 @@ About.Position = UDim2.new(0, 17, 0, 10)
 About.Size = UDim2.new(0, 187, 0, 49)
 About.Font = Enum.Font.SourceSans
 About.TextSize = 14
-About.Text = "Plugins are .iy files and should be located in the 'workspace' folder of your exploit."
+About.Text = "Plugins are .hz files and should be located in the 'workspace' folder of your exploit."
 About.TextColor3 = Color3.fromRGB(255, 255, 255)
 About.TextWrapped = true
 About.TextYAlignment = Enum.TextYAlignment.Top
@@ -1618,7 +1568,7 @@ ExitImage_3.BackgroundColor3 = Color3.new(1, 1, 1)
 ExitImage_3.BackgroundTransparency = 1
 ExitImage_3.Position = UDim2.new(0, 5, 0, 5)
 ExitImage_3.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_3.Image = getcustomasset("infiniteyield/assets/close.png")
+ExitImage_3.Image = getcustomasset("hikaruzenith/assets/close.png")
 ExitImage_3.ZIndex = 10
 
 AliasHint.Name = "AliasHint"
@@ -1644,7 +1594,7 @@ PluginsHint.Position = UDim2.new(0, 25, 0, 40)
 PluginsHint.Size = UDim2.new(0, 200, 0, 50)
 PluginsHint.Font = Enum.Font.SourceSansItalic
 PluginsHint.TextSize = 16
-PluginsHint.Text = "Download plugins from the IY Discord (discord.gg/78ZuWSq)"
+PluginsHint.Text = "Download plugins from the Discord (discord.gg/78ZuWSq)"
 PluginsHint.TextColor3 = Color3.new(1, 1, 1)
 PluginsHint.TextStrokeColor3 = Color3.new(1, 1, 1)
 PluginsHint.TextWrapped = true
@@ -1776,7 +1726,7 @@ ExitImage_5.BackgroundColor3 = Color3.new(1, 1, 1)
 ExitImage_5.BackgroundTransparency = 1
 ExitImage_5.Position = UDim2.new(0, 5, 0, 5)
 ExitImage_5.Size = UDim2.new(0, 10, 0, 10)
-ExitImage_5.Image = getcustomasset("infiniteyield/assets/close.png")
+ExitImage_5.Image = getcustomasset("hikaruzenith/assets/close.png")
 ExitImage_5.ZIndex = 10
 
 logs.Name = randomString()
@@ -1809,7 +1759,7 @@ ImageLabel.BackgroundColor3 = Color3.new(1, 1, 1)
 ImageLabel.BackgroundTransparency = 1
 ImageLabel.Position = UDim2.new(0, 3, 0, 3)
 ImageLabel.Size = UDim2.new(0, 14, 0, 14)
-ImageLabel.Image = getcustomasset("infiniteyield/assets/minimize.png")
+ImageLabel.Image = getcustomasset("hikaruzenith/assets/minimize.png")
 ImageLabel.ZIndex = 10
 
 PopupText.Name = "PopupText"
@@ -1837,7 +1787,7 @@ ImageLabel_2.BackgroundColor3 = Color3.new(1, 1, 1)
 ImageLabel_2.BackgroundTransparency = 1
 ImageLabel_2.Position = UDim2.new(0, 5, 0, 5)
 ImageLabel_2.Size = UDim2.new(0, 10, 0, 10)
-ImageLabel_2.Image = getcustomasset("infiniteyield/assets/close.png")
+ImageLabel_2.Image = getcustomasset("hikaruzenith/assets/close.png")
 ImageLabel_2.ZIndex = 10
 
 background.Name = "background"
@@ -2323,7 +2273,7 @@ eventEditor = (function()
 		{2,"Frame",{BackgroundColor3=currentShade2,BorderSizePixel=0,Name="TopBar",Parent={1},Size=UDim2.new(1,0,0,20),ZIndex=10,}},
 		{3,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Title",Parent={2},Position=UDim2.new(0,0,0,0),Size=UDim2.new(1,0,0.95,0),Text="Event Editor",TextColor3=Color3.new(1,1,1),TextSize=14,TextXAlignment=Enum.TextXAlignment.Center,ZIndex=10,}},
 		{4,"TextButton",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Close",Parent={2},Position=UDim2.new(1,-20,0,0),Size=UDim2.new(0,20,0,20),Text="",TextColor3=Color3.new(1,1,1),TextSize=14,ZIndex=10,}},
-		{5,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("infiniteyield/assets/close.png"),Parent={4},Position=UDim2.new(0,5,0,5),Size=UDim2.new(0,10,0,10),ZIndex=10,}},
+		{5,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("hikaruzenith/assets/close.png"),Parent={4},Position=UDim2.new(0,5,0,5),Size=UDim2.new(0,10,0,10),ZIndex=10,}},
 		{6,"Frame",{BackgroundColor3=currentShade1,BorderSizePixel=0,Name="Content",Parent={1},Position=UDim2.new(0,0,0,20),Size=UDim2.new(1,0,0,202),ZIndex=10,}},
 		{7,"ScrollingFrame",{BackgroundColor3=Color3.new(0.14117647707462,0.14117647707462,0.14509804546833),BackgroundTransparency=1,BorderColor3=Color3.new(0.15686275064945,0.15686275064945,0.15686275064945),BorderSizePixel=0,BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png",CanvasSize=UDim2.new(0,0,0,100),Name="List",Parent={6},Position=UDim2.new(0,5,0,5),ScrollBarImageColor3=Color3.new(0.30588236451149,0.30588236451149,0.3098039329052),ScrollBarThickness=8,Size=UDim2.new(1,-10,1,-10),TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png",ZIndex=10,}},
 		{8,"Frame",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Name="Holder",Parent={7},Size=UDim2.new(1,0,1,0),ZIndex=10,}},
@@ -2379,7 +2329,7 @@ eventEditor = (function()
 		{50,"TextBox",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,ClearTextOnFocus=false,Font=3,Parent={49},PlaceholderColor3=Color3.new(1,1,1),Position=UDim2.new(0,5,0,0),Size=UDim2.new(1,-45,0,20),Text="a\\b\\c\\d",TextColor3=currentText1,TextSize=14,TextXAlignment=0,ZIndex=10,}},
 		{51,"TextButton",{BackgroundColor3=currentShade1,BorderSizePixel=0,Font=3,Name="Delete",Parent={49},Position=UDim2.new(1,-20,0,0),Size=UDim2.new(0,20,0,20),Text="X",TextColor3=Color3.new(1,1,1),TextSize=18,ZIndex=10,}},
 		{52,"TextButton",{BackgroundColor3=currentShade1,BorderSizePixel=0,Font=3,Name="Settings",Parent={49},Position=UDim2.new(1,-40,0,0),Size=UDim2.new(0,20,0,20),Text="",TextColor3=Color3.new(1,1,1),TextSize=18,ZIndex=10,}},
-		{53,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("infiniteyield/assets/settings.png"),Parent={52},Position=UDim2.new(0,2,0,2),Size=UDim2.new(0,16,0,16),ZIndex=10,}},
+		{53,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("hikaruzenith/assets/settings.png"),Parent={52},Position=UDim2.new(0,2,0,2),Size=UDim2.new(0,16,0,16),ZIndex=10,}},
 	})
 	main.Name = randomString()
 	local mainFrame = main:WaitForChild("Content")
@@ -2797,7 +2747,7 @@ reference = (function()
 		{2,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="TopBar",Parent={1},Size=UDim2.new(1,0,0,20),ZIndex=10,}},
 		{3,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Title",Parent={2},Size=UDim2.new(1,0,0.94999998807907,0),Text="Reference",TextColor3=Color3.new(1,1,1),TextSize=14,ZIndex=10,}},
 		{4,"TextButton",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Close",Parent={2},Position=UDim2.new(1,-20,0,0),Size=UDim2.new(0,20,0,20),Text="",TextColor3=Color3.new(1,1,1),TextSize=14,ZIndex=10,}},
-		{5,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("infiniteyield/assets/close.png"),Parent={4},Position=UDim2.new(0,5,0,5),Size=UDim2.new(0,10,0,10),ZIndex=10,}},
+		{5,"ImageLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Image=getcustomasset("hikaruzenith/assets/close.png"),Parent={4},Position=UDim2.new(0,5,0,5),Size=UDim2.new(0,10,0,10),ZIndex=10,}},
 		{6,"Frame",{BackgroundColor3=Color3.new(0.14117647707462,0.14117647707462,0.14509804546833),BorderSizePixel=0,Name="Content",Parent={1},Position=UDim2.new(0,0,0,20),Size=UDim2.new(1,0,0,300),ZIndex=10,}},
 		{7,"ScrollingFrame",{BackgroundColor3=Color3.new(0.14117647707462,0.14117647707462,0.14509804546833),BackgroundTransparency=1,BorderColor3=Color3.new(0.15686275064945,0.15686275064945,0.15686275064945),BorderSizePixel=0,BottomImage="rbxasset://textures/ui/Scroll/scroll-middle.png",CanvasSize=UDim2.new(0,0,0,1313),Name="List",Parent={6},ScrollBarImageColor3=Color3.new(0.30588236451149,0.30588236451149,0.3098039329052),ScrollBarThickness=8,Size=UDim2.new(1,0,1,0),TopImage="rbxasset://textures/ui/Scroll/scroll-middle.png",VerticalScrollBarInset=2,ZIndex=10,}},
 		{8,"UIListLayout",{Parent={7},SortOrder=2,}},
@@ -2906,9 +2856,9 @@ reference = (function()
 		{111,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={105},Position=UDim2.new(0,8,0,148),Size=UDim2.new(1,-8,0,16),Text="Setting up 'goto $1' on the OnChatted event will teleport you to any player that chats.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,TextYAlignment=0,ZIndex=10,}},
 		{112,"Frame",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Name="Section",Parent={7},Size=UDim2.new(1,0,0,105),ZIndex=10,}},
 		{113,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=4,Name="Header",Parent={112},Position=UDim2.new(0,8,0,5),Size=UDim2.new(1,-8,0,20),Text="Get Further Help",TextColor3=Color3.new(1,1,1),TextSize=20,TextXAlignment=0,ZIndex=10,}},
-		{114,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={112},Position=UDim2.new(0,8,0,30),Size=UDim2.new(1,-8,0,32),Text="You can join the Discord server to get support with IY,  and read up on more documentation such as the Plugin API.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,ZIndex=10,}},
+		{114,"TextLabel",{BackgroundColor3=Color3.new(1,1,1),BackgroundTransparency=1,Font=3,Name="Text",Parent={112},Position=UDim2.new(0,8,0,30),Size=UDim2.new(1,-8,0,32),Text="You can join the Discord server to get support,  and read up on more documentation such as the Plugin API.",TextColor3=Color3.new(1,1,1),TextSize=14,TextWrapped=true,TextXAlignment=0,ZIndex=10,}},
 		{115,"Frame",{BackgroundColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),BorderSizePixel=0,Name="Line",Parent={112},Position=UDim2.new(0,10,1,-1),Size=UDim2.new(1,-20,0,1),Visible=false,ZIndex=10,}},
-		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://discord.gg/aJQjwtTsAT)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
+		{116,"TextButton",{BackgroundColor3=Color3.new(0.48627451062202,0.61960786581039,0.85098040103912),BorderColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),Font=4,Name="InviteButton",Parent={112},Position=UDim2.new(0,5,0,75),Size=UDim2.new(1,-10,0,25),Text="Copy Discord Invite Link (https://discord.gg/78ZuWSq)",TextColor3=Color3.new(0.1803921610117,0.1803921610117,0.1843137294054),TextSize=16,ZIndex=10,}},
 	})
 	for i,v in pairs(main.Content.List:GetDescendants()) do
 		if v:IsA("TextLabel") then
@@ -2926,7 +2876,7 @@ reference = (function()
 	local lastPress = nil
 	inviteButton.MouseButton1Click:Connect(function()
 		if everyClipboard then
-			toClipboard("https://discord.gg/aJQjwtTsAT")
+			toClipboard("https://discord.gg/78ZuWSq")
 			inviteButton.Text = "Copied"
 		else
 			inviteButton.Text = "No Clipboard Function, type out the link"
@@ -2935,7 +2885,7 @@ reference = (function()
 		lastPress = pressTime
 		wait(2)
 		if lastPress ~= pressTime then return end
-		inviteButton.Text = "Copy Discord Invite Link (https://discord.gg/aJQjwtTsAT)"
+		inviteButton.Text = "Copy Discord Invite Link (https://discord.gg/78ZuWSq)"
 	end)
 	dragGUI(main)
 	main.Parent = ScaledHolder
@@ -2958,9 +2908,9 @@ defaultsettings = {
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.9;
-	keepIY = true;
-	logsEnabled = true;
-	jLogsEnabled = true;
+	keepHZ = true;
+	logsEnabled = false;
+	jLogsEnabled = false;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2980,10 +2930,10 @@ useFactorySettings = function()
     prefix = ';'
     StayOpen = false
     guiScale = defaultGuiScale
-    KeepInfYield = true
+    KeepHiZen = true
     espTransparency = 0.9
-    logsEnabled = true
-    jLogsEnabled = true
+    logsEnabled = false
+    jLogsEnabled = false
     logsWebhook = nil
     aliases = {}
     binds = {}
@@ -3063,7 +3013,7 @@ createPopup = function(text)
     ExitImage.BackgroundTransparency = 1
     ExitImage.Position = UDim2.new(0, 5, 0, 5)
     ExitImage.Size = UDim2.new(0, 10, 0, 10)
-    ExitImage.Image = getcustomasset("infiniteyield/assets/close.png")
+    ExitImage.Image = getcustomasset("hikaruzenith/assets/close.png")
     ExitImage.ZIndex = 10
 
     Exit.MouseButton1Click:Connect(function()
@@ -3075,7 +3025,7 @@ local loadedEventData = nil
 local jsonAttempts = 0
 function saves()
     if writefileExploit() and readfileExploit() and jsonAttempts < 10 then
-        local readSuccess, out = readfile("IY_FE.iy", true)
+        local readSuccess, out = readfile("HZ_FE.hz", true)
         if readSuccess then
             if out ~= nil and tostring(out):gsub("%s", "") ~= "" then
                 local success, response = pcall(function()
@@ -3083,7 +3033,7 @@ function saves()
                     if vtype(json.prefix, "string") then prefix = json.prefix else prefix = ';' end
                     if vtype(json.StayOpen, "boolean") then StayOpen = json.StayOpen else StayOpen = false end
                     if vtype(json.guiScale, "number") then guiScale = json.guiScale else guiScale = defaultGuiScale end
-                    if vtype(json.keepIY, "boolean") then KeepInfYield = json.keepIY else KeepInfYield = true end
+                    if vtype(json.keepHZ, "boolean") then KeepHiZen = json.keepHZ else KeepHiZen = true end
                     if vtype(json.espTransparency, "number") then espTransparency = json.espTransparency else espTransparency = 0.3 end
                     if vtype(json.logsEnabled, "boolean") then logsEnabled = json.logsEnabled else logsEnabled = false end
                     if vtype(json.jLogsEnabled, "boolean") then jLogsEnabled = json.jLogsEnabled else jLogsEnabled = false end
@@ -3105,14 +3055,14 @@ function saves()
                     jsonAttempts = jsonAttempts + 1
                     warn("Save Json Error:", response)
                     warn("Overwriting Save File")
-                    writefile("IY_FE.iy", defaults, true)
+                    writefile("HZ_FE.hz", defaults, true)
                     wait()
                     saves()
                 end
             else
-                writefile("IY_FE.iy", defaults, true)
+                writefile("HZ_FE.hz", defaults, true)
                 wait()
-                local dReadSuccess, dOut = readfile("IY_FE.iy", true)
+                local dReadSuccess, dOut = readfile("HZ_FE.hz", true)
                 if dReadSuccess and dOut ~= nil and tostring(dOut):gsub("%s", "") ~= "" then
                     saves()
                 else
@@ -3122,9 +3072,9 @@ function saves()
                 end
             end
         else
-            writefile("IY_FE.iy", defaults, true)
+            writefile("HZ_FE.hz", defaults, true)
             wait()
-            local dReadSuccess, dOut = readfile("IY_FE.iy", true)
+            local dReadSuccess, dOut = readfile("HZ_FE.hz", true)
             if dReadSuccess and dOut ~= nil and tostring(dOut):gsub("%s", "") ~= "" then
                 saves()
             else
@@ -3153,7 +3103,7 @@ function updatesaves()
 			prefix = prefix;
 			StayOpen = StayOpen;
 			guiScale = guiScale;
-			keepIY = KeepInfYield;
+			keepHZ = KeepHiZen;
 			espTransparency = espTransparency;
 			logsEnabled = logsEnabled;
 			jLogsEnabled = jLogsEnabled;
@@ -3170,7 +3120,7 @@ function updatesaves()
 			currentScroll = {currentScroll.R,currentScroll.G,currentScroll.B};
 			eventBinds = eventEditor.SaveData()
 		}
-		writefileCooldown("IY_FE.iy", HttpService:JSONEncode(update))
+		writefileCooldown("HZ_FE.hz", HttpService:JSONEncode(update))
 	end
 end
 
@@ -3191,7 +3141,7 @@ if type(binds) ~= "table" then binds = {} end
 
 if type(PluginsTable) == "table" then
     for i = #PluginsTable, 1, -1 do
-        if string.sub(PluginsTable[i], -3) ~= ".iy" then
+        if string.sub(PluginsTable[i], -3) ~= ".hz" then
             table.remove(PluginsTable, i)
         end
     end
@@ -3270,7 +3220,7 @@ function notify(text,text2,length)
 		end)
 		Notification:TweenPosition(UDim2.new(1, Notification.Position.X.Offset, 1, 0), "InOut", "Quart", 0.5, true, nil)
 		-- wait(0.6)
-		wait(0.3)
+		wait(0.25)
 		local closepressed = false
 		if text2 then
 			Title_2.Text = text
@@ -3408,7 +3358,7 @@ function CreateJoinLabel(plr,ID)
 	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
 end
 
-IYMouse.KeyDown:Connect(function(Key)
+HZMouse.KeyDown:Connect(function(Key)
 	if (Key==prefix) then
 		RunService.RenderStepped:Wait()
 		Cmdbar:CaptureFocus()
@@ -3520,7 +3470,7 @@ ColorsButton.MouseButton1Click:Connect(function()
 				local greenInput = pickerFrame.Green.Input
 				local blueInput = pickerFrame.Blue.Input
 
-				local mouse = IYMouse
+				local mouse = HZMouse
 
 				local hue,sat,val = 0,0,1
 				local red,green,blue = 1,1,1
@@ -3995,9 +3945,10 @@ function sendChatWebhook(player, message)
     local id = player.UserId
     local avatar = avatarcache[id]
 	local hz = "Hikaru Zenith"
-	local user = formatUsername(player)
+	-- local user = formatUsername(player)
 	local webhookName = string.format("%s", hz)
-	local webhookContent = user..' `'..message..'`'
+	local webhookContent = message
+	-- local webhookContent = user..' `'..message..'`'
     if not avatar then
       -- local d = HttpService:JSONDecode(httprequest({
         -- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
@@ -4027,68 +3978,57 @@ end
 
 ChatLog = function(player)
     player.Chatted:Connect(function(message)
+		local user = formatUsername(player)
         if logsEnabled == true then
-            CreateLabel(player.Name, message)
-			webhookChatFormat = message
-            sendChatWebhook(player, webhookChatFormat)
+            -- CreateLabel(player.Name, message)
+            CreateLabel(user, message)
+            -- sendChatWebhook(player, message)
+			local webhookMessageText = "`"..user.."`: `"..message.."`"
+			local webhookMessage = string.format("%s", webhookMessageText)
+            sendChatWebhook(player, webhookMessage)
         end
     end)
 end
 
 JoinLog = function(plr)
-	currentPlayers = Players:GetPlayers()
-	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = '🟢 Server Join'
+	local user = formatUsername(plr)
+	local currentPlayers = Players:GetPlayers()
+	local notifyTitleText = "🟢 Server Join"
+	local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	local notifyTitle = string.format("%s", notifyTitleText)
+	local notifyDesc = string.format("%s", notifyDescText)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
-		sendChatWebhook(plr,"🟢 Joined the server 🟢")
-		-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")"
-		notifyMessage = 'Players: '..currentPlayers..'\n'..plr.DisplayName..' ('..plr.Name..')'
-		-- notify("🟢 Server Join", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..plr.DisplayName.." ("..plr.Name..")")
-		notify(notifyTitle.Text, notifyMessage.Text)
+		local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n"..user
+		local webhookMessage = string.format("%s", webhookMessageText)
+		sendChatWebhook(plr,webhookMessage)
+		notify(notifyTitle,notifyDesc)
 	end
 end
 
 LeaveLog = function(plr)
-    -- if lLogsEnabled == true then
-        -- Get player info before they leave
-	currentPlayers = Players:GetPlayers()
-	-- maxPlayers = Players.MaxPlayers()
-	notifyTitle = '🔴 Server Leave'
-	local playerName = plr.Name
-	local displayName = plr.DisplayName or playerName
-	local userId = plr.UserId
-	
+	local user = formatUsername(plr)
+	local currentPlayers = Players:GetPlayers()
+	local notifyTitleText = "🔴 Server Leave"
+	local notifyDescText = #currentPlayers.." Player(s)\n"..user
 	-- Optional: Determine leave reason
 	local leaveReason = "disconnected"
 	local character = plr.Character
+	local notifyTitle = string.format("%s", notifyTitleText)
+	local notifyDesc = string.format("%s", notifyDescText)
 	if character then
 		local humanoid = character:FindFirstChildOfClass("Humanoid")
 		if humanoid and humanoid.Health <= 0 then
 			leaveReason = "died"
 		end
 	end
-	
-	-- Create leave label (similar to your CreateJoinLabel)
-	-- CreateLeaveLabel(plr, userId, leaveReason)
-	
-	-- Send to webhook (matching your join webhook style)
-	sendChatWebhook(plr, "🔴 Left the server ["..leaveReason.."] 🔴")
-	
-	-- Notification (matching your join notification style)
-	-- notifyMessage = displayName .. " (" .. playerName .. ") " .. leaveReason
-	-- notifyMessage = "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason
-	notifyMessage = 'Players: '..currentPlayers..'\n'..displayName..' ('..playerName..')\nReason: '..leaveReason
-	-- notify("🔴 Server Leave", "Players: "..currentPlayers.."/"..maxPlayers.."\n"..displayName.." ("..playerName..")\nReason: "..leaveReason)
-	notify(notifyTitle.Text, notifyMessage.Text)
-	
-	-- Optional: Log to console
-	-- print("LEAVE: " .. playerName .. " (" .. userId .. ") - " .. leaveReason)
+	if jLogsEnabled == true then
+		local webhookMessageText = "## 🟢 Left the server 🟢 Player(s): "..#currentPlayers.."\n"..user
+		local webhookMessage = string.format("%s", webhookMessageText)
+		sendChatWebhook(plr,webhookMessage)
+		notify(notifyTitle,notifyDesc)
+	end
 end
-
--- LeaveLog = function(plr)
--- 	if jLogsEnabled == true then
--- 	notify('User','You can press the prefix key to access the command bar')
 
 CleanFileName = function(name)
     return tostring(name):gsub("[*\\?:<>|]+", ""):sub(1, 175)
@@ -4130,7 +4070,6 @@ if isLegacyChat then
 end
 
 Players.PlayerRemoving:Connect(function(player)
-	-- Your existing cleanup code
 	if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(player.Name..'_LC') then
 		for i,v in pairs(COREGUI:GetChildren()) do
 			if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
@@ -4148,7 +4087,6 @@ Players.PlayerRemoving:Connect(function(player)
 		notify('Spectate','View turned off (player left)')
 	end
 	eventEditor.FireEvent("OnLeave", player.Name)
-	-- ADD THIS LINE: Call the LeaveLog function
 	LeaveLog(player)
 end)
 
@@ -4235,20 +4173,20 @@ local ClickSelect = nil
 function selectPart()
 	ToPartFrame:TweenPosition(UDim2.new(0.5, -180, 0, 335), "InOut", "Quart", 0.5, true, nil)
 	local function HighlightPart()
-		if selected.Adornee ~= IYMouse.Target then
-			selectionBox.Adornee = IYMouse.Target
+		if selected.Adornee ~= HZMouse.Target then
+			selectionBox.Adornee = HZMouse.Target
 		else
 			selectionBox.Adornee = nil
 		end
 	end
-	ActivateHighlight = IYMouse.Move:Connect(HighlightPart)
+	ActivateHighlight = HZMouse.Move:Connect(HighlightPart)
 	local function SelectPart()
-		if IYMouse.Target ~= nil then
-			selected.Adornee = IYMouse.Target
-			Path.Text = getHierarchy(IYMouse.Target)
+		if HZMouse.Target ~= nil then
+			selected.Adornee = HZMouse.Target
+			Path.Text = getHierarchy(HZMouse.Target)
 		end
 	end
-	ClickSelect = IYMouse.Button1Down:Connect(SelectPart)
+	ClickSelect = HZMouse.Button1Down:Connect(SelectPart)
 end
 
 Part.MouseButton1Click:Connect(function()
@@ -4577,11 +4515,11 @@ CMDs[#CMDs + 1] = {NAME = 'hideguis', DESC = 'Hides any GUIs in PlayerGui'}
 CMDs[#CMDs + 1] = {NAME = 'unhideguis', DESC = 'Undoes hideguis'}
 CMDs[#CMDs + 1] = {NAME = 'guidelete', DESC = 'Enables backspace to delete GUI'}
 CMDs[#CMDs + 1] = {NAME = 'unguidelete / noguidelete', DESC = 'Disables guidelete'}
-CMDs[#CMDs + 1] = {NAME = 'hideiy', DESC = 'Hides the main IY GUI'}
-CMDs[#CMDs + 1] = {NAME = 'showiy / unhideiy', DESC = 'Shows IY again'}
-CMDs[#CMDs + 1] = {NAME = 'keepiy', DESC = 'Auto execute IY when you teleport through servers'}
-CMDs[#CMDs + 1] = {NAME = 'unkeepiy', DESC = 'Disable keepiy'}
-CMDs[#CMDs + 1] = {NAME = 'togglekeepiy', DESC = 'Toggles keepiy'}
+CMDs[#CMDs + 1] = {NAME = 'hidehz', DESC = 'Hides the main HZ GUI'}
+CMDs[#CMDs + 1] = {NAME = 'showhz / unhidehz', DESC = 'Shows HZ again'}
+CMDs[#CMDs + 1] = {NAME = 'keephz', DESC = 'Auto execute HZ when you teleport through servers'}
+CMDs[#CMDs + 1] = {NAME = 'unkeephz', DESC = 'Disable keephz'}
+CMDs[#CMDs + 1] = {NAME = 'togglekeephz', DESC = 'Toggles keephz'}
 CMDs[#CMDs + 1] = {NAME = 'savegame / saveplace', DESC = 'Uses saveinstance to save the game'}
 CMDs[#CMDs + 1] = {NAME = 'clearerror', DESC = 'Clears the annoying box and blur when a game kicks you'}
 CMDs[#CMDs + 1] = {NAME = 'clientantikick / antikick (CLIENT)', DESC = 'Prevents localscripts from kicking you'}
@@ -5001,7 +4939,7 @@ IndexContents("", true)
 
 function checkTT()
 	local t
-	local guisAtPosition = COREGUI:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
+	local guisAtPosition = COREGUI:GetGuiObjectsAtPosition(HZMouse.X, HZMouse.Y)
 
 	for _, gui in pairs(guisAtPosition) do
 		if gui.Parent == CMDsF then
@@ -5010,16 +4948,16 @@ function checkTT()
 	end
 
 	if t ~= nil and t:GetAttribute("Title") ~= nil then
-		local x = IYMouse.X
-		local y = IYMouse.Y
+		local x = HZMouse.X
+		local y = HZMouse.Y
 		local xP
 		local yP
-		if IYMouse.X > 200 then
+		if HZMouse.X > 200 then
 			xP = x - 201
 		else
 			xP = x + 21
 		end
-		if IYMouse.Y > (IYMouse.ViewSizeY-96) then
+		if HZMouse.Y > (HZMouse.ViewSizeY-96) then
 			yP = y - 97
 		else
 			yP = y
@@ -5241,7 +5179,7 @@ function execCmd(cmdStr,speaker,store)
 				if infTimes then
 					while lastBreakTime < cmdStartTime do
 						local success,err = pcall(cmd.FUNC,args, speaker)
-						if not success and _G.IY_DEBUG then
+						if not success and _G.HZ_DEBUG then
 							warn("Command Error:", cmdName, err)
 						end
 						wait(cmdDelay)
@@ -5252,7 +5190,7 @@ function execCmd(cmdStr,speaker,store)
 						local success,err = pcall(function()
 							cmd.FUNC(args, speaker)
 						end)
-						if not success and _G.IY_DEBUG then
+						if not success and _G.HZ_DEBUG then
 							warn("Command Error:", cmdName, err)
 						end
 						if cmdDelay ~= 0 then wait(cmdDelay) end
@@ -5343,7 +5281,7 @@ local WorldToScreen = function(Object)
 end
 
 local MousePositionToVector2 = function()
-	return Vector2.new(IYMouse.X, IYMouse.Y)
+	return Vector2.new(HZMouse.X, HZMouse.Y)
 end
 
 local GetClosestPlayerFromCursor = function()
@@ -6347,7 +6285,7 @@ local function clicktpFunc()
 		local hipHeight = humanoid and humanoid.HipHeight > 0 and (humanoid.HipHeight + 1)
 		local rootPart = getRoot(character)
 		local rootPartPosition = rootPart.Position
-		local hitPosition = IYMouse.Hit.Position
+		local hitPosition = HZMouse.Hit.Position
 		local newCFrame = CFrame.new(
 			hitPosition, 
 			Vector3.new(rootPartPosition.X, hitPosition.Y, rootPartPosition.Z)
@@ -6357,7 +6295,7 @@ local function clicktpFunc()
 	end)
 end
 
-IYMouse.Button1Down:Connect(function()
+HZMouse.Button1Down:Connect(function()
 	for i,v in pairs(binds) do
 		if v.COMMAND == 'clicktp' then
 			local input = v.KEY
@@ -6371,11 +6309,11 @@ IYMouse.Button1Down:Connect(function()
 		elseif v.COMMAND == 'clickdel' then
 			local input = v.KEY
 			if input == 'RightClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton2) then
-				pcall(function() IYMouse.Target:Destroy() end)
+				pcall(function() HZMouse.Target:Destroy() end)
 			elseif input == 'LeftClick' and UserInputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then
-				pcall(function() IYMouse.Target:Destroy() end)
+				pcall(function() HZMouse.Target:Destroy() end)
 			elseif UserInputService:IsKeyDown(Enum.KeyCode[input:sub(14)]) then
-				pcall(function() IYMouse.Target:Destroy() end)
+				pcall(function() HZMouse.Target:Destroy() end)
 			end
 		end
 	end
@@ -6384,17 +6322,17 @@ end)
 PluginsGUI = PluginEditor.background
 
 function addPlugin(name)
-	if name:lower() == 'plugin file name' or name:lower() == 'iy_fe.iy' or name == 'iy_fe' then
+	if name:lower() == 'plugin file name' or name:lower() == 'hz_fe.hz' or name == 'hz_fe' then
 		notify('Plugin Error','Please enter a valid plugin')
 	else
 		local file
 		local fileName
-		if name:sub(-3) == '.iy' then
+		if name:sub(-3) == '.hz' then
 			pcall(function() file = readfile(name) end)
 			fileName = name
 		else
-			pcall(function() file = readfile(name..'.iy') end)
-			fileName = name..'.iy'
+			pcall(function() file = readfile(name..'.hz') end)
+			fileName = name..'.hz'
 		end
 		if file then
 			if not FindInTable(PluginsTable, fileName) then
@@ -6412,8 +6350,8 @@ function addPlugin(name)
 end
 
 function deletePlugin(name)
-	local pName = name..'.iy'
-	if name:sub(-3) == '.iy' then
+	local pName = name..'.hz'
+	if name:sub(-3) == '.hz' then
 		pName = name
 	end
 	for i = #cmds,1,-1 do
@@ -6579,7 +6517,7 @@ end)
 
 local TeleportCheck = false
 Players.LocalPlayer.OnTeleport:Connect(function(State)
-	if KeepInfYield and (not TeleportCheck) and queueteleport then
+	if KeepHiZen and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
 		queueteleport("loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/source.lua'))()")
 	end
@@ -6628,10 +6566,10 @@ end)
 
 addcmd('discord', {'support', 'help'}, function(args, speaker)
 	if everyClipboard then
-		toClipboard('https://discord.com/invite/aJQjwtTsAT')
-		notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/aJQjwtTsAT')
+		toClipboard('https://discord.com/invite/dYHag43eeU')
+		notify('Discord Invite', 'Copied to clipboard!\ndiscord.gg/dYHag43eeU')
 	else
-		notify('Discord Invite', 'discord.gg/aJQjwtTsAT')
+		notify('Discord Invite', 'discord.gg/dYHag43eeU')
 	end
 	if httprequest then
 		httprequest({
@@ -6644,33 +6582,33 @@ addcmd('discord', {'support', 'help'}, function(args, speaker)
 			Body = HttpService:JSONEncode({
 				cmd = 'INVITE_BROWSER',
 				nonce = HttpService:GenerateGUID(false),
-				args = {code = 'aJQjwtTsAT'}
+				args = {code = 'dYHag43eeU'}
 			})
 		})
 	end
 end)
 
-addcmd('keepiy', {}, function(args, speaker)
+addcmd('keephz', {}, function(args, speaker)
 	if queueteleport then
-		KeepInfYield = true
+		KeepHiZen = true
 		updatesaves()
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 	end
 end)
 
-addcmd('unkeepiy', {}, function(args, speaker)
+addcmd('unkeephz', {}, function(args, speaker)
 	if queueteleport then
-		KeepInfYield = false
+		KeepHiZen = false
 		updatesaves()
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
 	end
 end)
 
-addcmd('togglekeepiy', {}, function(args, speaker)
+addcmd('togglekeephz', {}, function(args, speaker)
 	if queueteleport then
-		KeepInfYield = not KeepInfYield
+		KeepHiZen = not KeepHiZen
 		updatesaves()
 	else
 		notify('Incompatible Exploit','Your exploit does not support this command (missing queue_on_teleport)')
@@ -6745,7 +6683,7 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 		ExitImage.BackgroundTransparency = 1
 		ExitImage.Position = UDim2.new(0, 5, 0, 5)
 		ExitImage.Size = UDim2.new(0, 10, 0, 10)
-		ExitImage.Image = getcustomasset("infiniteyield/assets/close.png")
+		ExitImage.Image = getcustomasset("hikaruzenith/assets/close.png")
 		ExitImage.ZIndex = 10
 
 		background.Name = "background"
@@ -7100,7 +7038,7 @@ end)
 
 FLYING = false
 QEfly = true
-iyflyspeed = 1
+hzflyspeed = 1
 vehicleflyspeed = 1
 function sFLY(vfly)
 	local plr = Players.LocalPlayer
@@ -7166,17 +7104,17 @@ function sFLY(vfly)
 
 	flyKeyDown = UserInputService.InputBegan:Connect(function(input, processed)
 		if input.KeyCode == Enum.KeyCode.W then
-			CONTROL.F = (vfly and vehicleflyspeed or iyflyspeed)
+			CONTROL.F = (vfly and vehicleflyspeed or hzflyspeed)
 		elseif input.KeyCode == Enum.KeyCode.S then
-			CONTROL.B = - (vfly and vehicleflyspeed or iyflyspeed)
+			CONTROL.B = - (vfly and vehicleflyspeed or hzflyspeed)
 		elseif input.KeyCode == Enum.KeyCode.A then
-			CONTROL.L = - (vfly and vehicleflyspeed or iyflyspeed)
+			CONTROL.L = - (vfly and vehicleflyspeed or hzflyspeed)
 		elseif input.KeyCode == Enum.KeyCode.D then
-			CONTROL.R = (vfly and vehicleflyspeed or iyflyspeed)
+			CONTROL.R = (vfly and vehicleflyspeed or hzflyspeed)
 		elseif input.KeyCode == Enum.KeyCode.E and QEfly then
-			CONTROL.Q = (vfly and vehicleflyspeed or iyflyspeed)*2
+			CONTROL.Q = (vfly and vehicleflyspeed or hzflyspeed)*2
 		elseif input.KeyCode == Enum.KeyCode.Q and QEfly then
-			CONTROL.E = -(vfly and vehicleflyspeed or iyflyspeed)*2
+			CONTROL.E = -(vfly and vehicleflyspeed or hzflyspeed)*2
 		end
 		pcall(function() camera.CameraType = Enum.CameraType.Track end)
 	end)
@@ -7280,16 +7218,16 @@ local mobilefly = function(speaker, vfly)
 
 			local direction = controlModule:GetMoveVector()
 			if direction.X > 0 then
-				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or hzflyspeed) * 50))
 			end
 			if direction.X < 0 then
-				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+				VelocityHandler.Velocity = VelocityHandler.Velocity + camera.CFrame.RightVector * (direction.X * ((vfly and vehicleflyspeed or hzflyspeed) * 50))
 			end
 			if direction.Z > 0 then
-				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or hzflyspeed) * 50))
 			end
 			if direction.Z < 0 then
-				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or iyflyspeed) * 50))
+				VelocityHandler.Velocity = VelocityHandler.Velocity - camera.CFrame.LookVector * (direction.Z * ((vfly and vehicleflyspeed or hzflyspeed) * 50))
 			end
 		end
 	end)
@@ -7304,14 +7242,14 @@ addcmd('fly',{},function(args, speaker)
 		mobilefly(speaker)
 	end
 	if args[1] and isNumber(args[1]) then
-		iyflyspeed = args[1]
+		hzflyspeed = args[1]
 	end
 end)
 
 addcmd('flyspeed',{'flysp'},function(args, speaker)
 	local speed = args[1] or 1
 	if isNumber(speed) then
-		iyflyspeed = speed
+		hzflyspeed = speed
 	end
 end)
 
@@ -7420,22 +7358,22 @@ addcmd('float', {'platform'},function(args, speaker)
 			local FloatValue = -3.1
 			Float.CFrame = getRoot(pchar).CFrame * CFrame.new(0,FloatValue,0)
 			notify('Float','Float Enabled (Q = down & E = up)')
-			qUp = IYMouse.KeyUp:Connect(function(KEY)
+			qUp = HZMouse.KeyUp:Connect(function(KEY)
 				if KEY == 'q' then
 					FloatValue = FloatValue + 0.5
 				end
 			end)
-			eUp = IYMouse.KeyUp:Connect(function(KEY)
+			eUp = HZMouse.KeyUp:Connect(function(KEY)
 				if KEY == 'e' then
 					FloatValue = FloatValue - 1.5
 				end
 			end)
-			qDown = IYMouse.KeyDown:Connect(function(KEY)
+			qDown = HZMouse.KeyDown:Connect(function(KEY)
 				if KEY == 'q' then
 					FloatValue = FloatValue - 0.5
 				end
 			end)
-			eDown = IYMouse.KeyDown:Connect(function(KEY)
+			eDown = HZMouse.KeyDown:Connect(function(KEY)
 				if KEY == 'e' then
 					FloatValue = FloatValue + 1.5
 				end
@@ -7842,7 +7780,7 @@ end)
 
 function deleteGuisAtPos()
 	pcall(function()
-		local guisAtPosition = PlayerGui:GetGuiObjectsAtPosition(IYMouse.X, IYMouse.Y)
+		local guisAtPosition = PlayerGui:GetGuiObjectsAtPosition(HZMouse.X, HZMouse.Y)
 		for _, gui in pairs(guisAtPosition) do
 			if gui.Visible == true then
 				gui:Destroy()
@@ -7869,7 +7807,7 @@ addcmd('unguidelete',{'noguidelete'},function(args, speaker)
 end)
 
 local wasStayOpen = StayOpen
-addcmd('hideiy',{},function(args, speaker)
+addcmd('hidehz',{},function(args, speaker)
 	isHidden = true
 	wasStayOpen = StayOpen
 	if StayOpen == true then
@@ -7881,7 +7819,7 @@ addcmd('hideiy',{},function(args, speaker)
 	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Hikaru Zenith Hidden','You can press the prefix key to access the command bar') end
 end)
 
-addcmd('showiy',{'unhideiy'},function(args, speaker)
+addcmd('showhz',{'unhidehz'},function(args, speaker)
 	isHidden = false
 	minimizeNum = -20
 	if wasStayOpen then
@@ -8920,7 +8858,7 @@ addcmd('joindate',{'jd'},function(args, speaker)
 
 		local secondsOld = p.AccountAge * 24 * 60 * 60
 		local now = os.time()
-		local dateJoined  = p.Name .. " joined: " .. os.date("%m/%d/%y", now - secondsOld)
+		local dateJoined  = p.Name .. " joined: " .. os.date("%d/%m/%y", now - secondsOld)
 
 		table.insert(dates, dateJoined)
 	end
@@ -8935,7 +8873,7 @@ addcmd('chatjoindate',{'cjd'},function(args, speaker)
 
 		local secondsOld = p.AccountAge * 24 * 60 * 60
 		local now = os.time()
-		local dateJoined  = p.Name .. " joined: " .. os.date("%m/%d/%y", now - secondsOld)
+		local dateJoined  = p.Name .. " joined: " .. os.date("%d/%m/%y", now - secondsOld)
 
 		table.insert(dates, dateJoined)
 	end
@@ -10235,7 +10173,7 @@ end)
 
 addcmd("mouseteleport", {"mousetp"}, function(args, speaker)
     local root = getRoot(speaker.Character)
-    local pos = IYMouse.Hit
+    local pos = HZMouse.Hit
     if root and pos then
         root.CFrame = CFrame.new(pos.X, pos.Y + 3, pos.Z, select(4, root.CFrame:components()))
     end
@@ -10252,7 +10190,7 @@ addcmd('tptool', {'teleporttool'}, function(args, speaker)
 		if not Char or not HRP then
 			return warn("Failed to find HumanoidRootPart")
 		end
-		HRP.CFrame = CFrame.new(IYMouse.Hit.X, IYMouse.Hit.Y + 3, IYMouse.Hit.Z, select(4, HRP.CFrame:components()))
+		HRP.CFrame = CFrame.new(HZMouse.Hit.X, HZMouse.Hit.Y + 3, HZMouse.Hit.Z, select(4, HRP.CFrame:components()))
 	end)
 end)
 
@@ -12265,7 +12203,7 @@ addcmd('hovername',{},function(args, speaker)
 	nbSelection.Color3 = Color3.new(1, 1, 1)
 	local function updateNameBox()
 		local t
-		local target = IYMouse.Target
+		local target = HZMouse.Target
 
 		if target then
 			local humanoid = target.Parent:FindFirstChildOfClass("Humanoid") or target.Parent.Parent:FindFirstChildOfClass("Humanoid")
@@ -12275,11 +12213,11 @@ addcmd('hovername',{},function(args, speaker)
 		end
 
 		if t ~= nil then
-			local x = IYMouse.X
-			local y = IYMouse.Y
+			local x = HZMouse.X
+			local y = HZMouse.Y
 			local xP
 			local yP
-			if IYMouse.X > 200 then
+			if HZMouse.X > 200 then
 				xP = x - 205
 				nameBox.TextXAlignment = Enum.TextXAlignment.Right
 			else
@@ -12297,7 +12235,7 @@ addcmd('hovername',{},function(args, speaker)
 			nbSelection.Adornee = nil
 		end
 	end
-	nbUpdateFunc = IYMouse.Move:Connect(updateNameBox)
+	nbUpdateFunc = HZMouse.Move:Connect(updateNameBox)
 end)
 
 addcmd('unhovername',{'nohovername'},function(args, speaker)
@@ -13000,10 +12938,10 @@ addcmd("addallplugins", {"loadallplugins"}, function(args, speaker)
     end
 
     for _, filePath in ipairs(listfiles("")) do
-        local fileName = filePath:match("([^/\\]+%.iy)$")
+        local fileName = filePath:match("([^/\\]+%.hz)$")
 
         if fileName and
-            fileName:lower() ~= "iy_fe.iy" and
+            fileName:lower() ~= "hz_fe.hz" and
             not isfolder(fileName) and
             not table.find(PluginsTable, fileName)
         then
@@ -13024,16 +12962,16 @@ if IsOnMobile then
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1.0
 	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
-	QuickCapture.Size = UDim2.new(0, 32, 0, 33)
+	QuickCapture.Size = UDim2.new(0, 40, 0, 40)
 	QuickCapture.Font = Enum.Font.SourceSansBold
 	QuickCapture.Text = "💠"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 25
+	QuickCapture.TextSize = 30
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
 	UICorner.Name = randomString()
-	UICorner.CornerRadius = UDim.new(0.5, 0)
+	UICorner.CornerRadius = UDim.new(0.75, 0)
 	UICorner.Parent = QuickCapture
 	QuickCapture.MouseButton1Click:Connect(function()
 		Cmdbar:CaptureFocus()
@@ -13193,7 +13131,7 @@ if aliases and #aliases > 0 then
 	refreshaliases()
 end
 
-IYMouse.Move:Connect(checkTT)
+HZMouse.Move:Connect(checkTT)
 
 CaptureService.CaptureBegan:Connect(function()
     PARENT.Enabled = false
@@ -13207,7 +13145,7 @@ end)
 
 task.spawn(function()
 	local success, latestVersionInfo = pcall(function() 
-		local versionJson = game:HttpGet("https://raw.githubusercontent.com/BlackID512/HikarZenithRoblox/master/version")
+		local versionJson = game:HttpGet("https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/version")
 		return HttpService:JSONDecode(versionJson)
 	end)
 
@@ -13286,7 +13224,7 @@ task.spawn(function()
 			ExitImage.BackgroundTransparency = 1
 			ExitImage.Position = UDim2.new(0, 5, 0, 5)
 			ExitImage.Size = UDim2.new(0, 10, 0, 10)
-			ExitImage.Image = getcustomasset("infiniteyield/assets/close.png")
+			ExitImage.Image = getcustomasset("hikaruzenith/assets/close.png")
 			ExitImage.ZIndex = 10
 
 			wait(1)
