@@ -3977,8 +3977,8 @@ function sendChatWebhook(player, message)
 end
 
 ChatLog = function(player)
+	local user = formatUsername(player)
     player.Chatted:Connect(function(message)
-		local user = formatUsername(player)
 		local chat = string.format("%s", message)
         if logsEnabled == true then
             -- CreateLabel(player.Name, message)
