@@ -3992,30 +3992,31 @@ end
 
 JoinLog = function(plr)
 	local user = formatUsername(plr)
-	local currentPlayers = Players:GetPlayers()
-	local notifyTitleText = "🟢 Server Join"
-	local notifyDescText = #currentPlayers.." Player(s)\n"..user
-	local notifyTitle = string.format("%s", notifyTitleText)
-	local notifyDesc = string.format("%s", notifyDescText)
+	-- local currentPlayers = Players:GetPlayers()
+	-- local notifyTitleText = "🟢 Server Join"
+	-- local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	-- local notifyTitle = string.format("%s", notifyTitleText)
+	-- local notifyDesc = string.format("%s", notifyDescText)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
-		local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n"..user
+		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
+		local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		notify(notifyTitle,notifyDesc)
+		-- notify(notifyTitle,notifyDesc)
 	end
 end
 
 LeaveLog = function(plr)
 	local user = formatUsername(plr)
-	local currentPlayers = Players:GetPlayers()
-	local notifyTitleText = "🔴 Server Leave"
-	local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	-- local currentPlayers = Players:GetPlayers()
+	-- local notifyTitleText = "🔴 Server Leave"
+	-- local notifyDescText = #currentPlayers.." Player(s)\n"..user
 	-- Optional: Determine leave reason
+	-- local notifyTitle = string.format("%s", notifyTitleText)
+	-- local notifyDesc = string.format("%s", notifyDescText)
 	local leaveReason = "disconnected"
 	local character = plr.Character
-	local notifyTitle = string.format("%s", notifyTitleText)
-	local notifyDesc = string.format("%s", notifyDescText)
 	if character then
 		local humanoid = character:FindFirstChildOfClass("Humanoid")
 		if humanoid and humanoid.Health <= 0 then
@@ -4023,10 +4024,11 @@ LeaveLog = function(plr)
 		end
 	end
 	if jLogsEnabled == true then
-		local webhookMessageText = "## 🟢 Left the server 🟢 Player(s): "..#currentPlayers.."\n"..user
+		-- local webhookMessageText = "## 🟢 Left the server 🟢 Player(s): "..#currentPlayers.."\n"..user
+		local webhookMessageText = "## 🟢 Left the server 🟢\n`"..user.."`"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		notify(notifyTitle,notifyDesc)
+		-- notify(notifyTitle,notifyDesc)
 	end
 end
 
