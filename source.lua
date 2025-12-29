@@ -3945,9 +3945,10 @@ function sendChatWebhook(player, message)
     local id = player.UserId
     local avatar = avatarcache[id]
 	local hz = "Hikaru Zenith"
-	-- local user = formatUsername(player)
+	local user = formatUsername(player)
 	local webhookName = string.format("%s", hz)
-	local webhookContent = message
+	local webhookContentText = '`'..user..'` `'..message..'`'
+	local webhookContent = string.format("%s", webhookContentText)
 	-- local webhookContent = user..' `'..message..'`'
     if not avatar then
       -- local d = HttpService:JSONDecode(httprequest({
@@ -3984,7 +3985,8 @@ ChatLog = function(player)
             -- CreateLabel(player.Name, message)
             CreateLabel(user, message)
             -- sendChatWebhook(player, message)
-			local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
+			--local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
+			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
             sendChatWebhook(player, webhookMessage)
         end
@@ -4001,7 +4003,8 @@ JoinLog = function(plr)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
-		local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
+		-- local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
+		local webhookMessageText = "🟢 Joined the server 🟢"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
@@ -4026,7 +4029,8 @@ LeaveLog = function(plr)
 	end
 	if jLogsEnabled == true then
 		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..#currentPlayers.."\n"..user
-		local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
+		-- local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
+		local webhookMessageText = "🔴 Left the server 🔴"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
