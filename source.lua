@@ -147,7 +147,7 @@ if makefolder and isfolder and writefile and isfile then
     end)
 end
 
-currentVersion = "0.2.3a"
+currentVersion = "0.2.5b"
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -13262,5 +13262,5 @@ task.spawn(function()
 	IntroBackground:Destroy()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
-	sendChatWebhook(plr,'☣ Webhook initiated ☣')
+	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
 end)
