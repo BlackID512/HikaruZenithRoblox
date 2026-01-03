@@ -189,7 +189,7 @@ end
 
 local function setupPC()
     mainFrame.Visible = false
-    notify("F=Toggle, Hold RMB=Look, WASD/QE=Move, Arrows=FOV")
+    notify("F4=Toggle, Hold RMB=Look, WASD/QE=Move, Arrows=FOV")
     createSpeedUI()
     uis.InputBegan:Connect(function(input,gp)
         if gp then return end
