@@ -142,7 +142,7 @@ local function createSpeedUI()
     speedLabel = Instance.new("TextLabel")
     speedLabel.Size = UDim2.new(1,0,0.5,0)
     speedLabel.Position = UDim2.new(0,0,0,0)
-    speedLabel.BackgroundTransparency = 1
+    speedLabel.BackgroundTransparency = 0.25
     speedLabel.Text = "Camera Speed: "..tostring(speed)
     speedLabel.TextColor3 = Color3.new(1,1,1)
     speedLabel.Font = Enum.Font.SourceSansSemibold
@@ -198,10 +198,10 @@ local function setupPC()
             uis.MouseBehavior = Enum.MouseBehavior.LockCurrentPosition
         elseif input.KeyCode == Enum.KeyCode.F4 then
             toggleFreecam()
-        elseif input.KeyCode == Enum.KeyCode.Up and freecam then
+        elseif input.KeyCode == Enum.KeyCode.Down and freecam then
             fov = math.clamp(fov+5,40,120)
             cam.FieldOfView = fov
-        elseif input.KeyCode == Enum.KeyCode.Down and freecam then
+        elseif input.KeyCode == Enum.KeyCode.Up and freecam then
             fov = math.clamp(fov-5,40,120)
             cam.FieldOfView = fov
         end
