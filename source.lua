@@ -11,11 +11,8 @@ function missing(t, f, fallback)
     return fallback
 end
 
-local function defNotify(time,title,msg)
-	local formatTime = tonumber(time)
-	if formatTime <= 1 then
-		local formatTime = 1
-    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=formatTime})
+local function defNotify(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
 end
 
 cloneref = missing("function", cloneref, function(...) return ... end)
@@ -4003,11 +4000,11 @@ end
 
 JoinLog = function(plr)
 	local user = formatUsername(plr)
-	- local currentPlayers = Players:GetPlayers()
-	- local notifyTitleText = "🟢 Server Join"
-	- local notifyDescText = #currentPlayers.." Player(s)\n"..user
-	- local notifyTitle = string.format("%s", notifyTitleText)
-	- local notifyDesc = string.format("%s", notifyDescText)
+	local currentPlayers = Players:GetPlayers()
+	local notifyTitleText = "🟢 Server Join"
+	local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	local notifyTitle = string.format("%s", notifyTitleText)
+	local notifyDesc = string.format("%s", notifyDescText)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
@@ -4015,19 +4012,19 @@ JoinLog = function(plr)
 		local webhookMessageText = "🟢 Joined the server 🟢"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		defNotify(1,notifyTitle,notifyDesc)
+		defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
 
 LeaveLog = function(plr)
 	local user = formatUsername(plr)
-	-- local currentPlayers = Players:GetPlayers()
-	-- local notifyTitleText = "🔴 Server Leave"
-	-- local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	local currentPlayers = Players:GetPlayers()
+	local notifyTitleText = "🔴 Server Leave"
+	local notifyDescText = #currentPlayers.." Player(s)\n"..user
 	-- Optional: Determine leave reason
-	-- local notifyTitle = string.format("%s", notifyTitleText)
-	-- local notifyDesc = string.format("%s", notifyDescText)
+	local notifyTitle = string.format("%s", notifyTitleText)
+	local notifyDesc = string.format("%s", notifyDescText)
 	local leaveReason = "disconnected"
 	local character = plr.Character
 	if character then
@@ -4042,7 +4039,7 @@ LeaveLog = function(plr)
 		local webhookMessageText = "🔴 Left the server 🔴"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		defNotify(1,notifyTitle,notifyDesc)
+		defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
@@ -13272,5 +13269,5 @@ task.spawn(function()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
 	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
-	defNotify(3,'Hikaru Zenith','Script Initiated')
+	defNotify('Hikaru Zenith','Script Initiated')
 end)
