@@ -12985,7 +12985,8 @@ if IsOnMobile then
 	-- local QuickCapture = Instance.new("TextButton")
 	local QuickCapture = Instance.new("ImageButton")
 	-- local UICorner = Instance.new("UICorner")
-	QuickCapture.Name = randomString()
+	-- QuickCapture.Name = randomString()
+	QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	-- QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1
