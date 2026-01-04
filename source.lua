@@ -13269,5 +13269,5 @@ task.spawn(function()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
 	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
-	defNotify('Hikaru Zenith','Script Initiated')
+	defNotify('Hikaru Zenith','🔰 Code Initialized 🔰')
 end)
