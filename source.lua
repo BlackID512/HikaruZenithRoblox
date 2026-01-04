@@ -12,7 +12,10 @@ function missing(t, f, fallback)
 end
 
 local function defNotify(time,title,msg)
-    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=time})
+	local formatTime = tonumber(time)
+	if formatTime <= 1 then
+		local formatTime = 1
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=formatTime})
 end
 
 cloneref = missing("function", cloneref, function(...) return ... end)
