@@ -11,8 +11,16 @@ function missing(t, f, fallback)
     return fallback
 end
 
-local function defNotify(title,msg)
+local function 5secNotify(title,msg)
     game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=5})
+end
+
+local function 3secNotify(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
+end
+
+local function 1secNotify(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=1})
 end
 
 cloneref = missing("function", cloneref, function(...) return ... end)
@@ -4000,11 +4008,11 @@ end
 
 JoinLog = function(plr)
 	local user = formatUsername(plr)
-	-- local currentPlayers = Players:GetPlayers()
-	-- local notifyTitleText = "🟢 Server Join"
-	-- local notifyDescText = #currentPlayers.." Player(s)\n"..user
-	-- local notifyTitle = string.format("%s", notifyTitleText)
-	-- local notifyDesc = string.format("%s", notifyDescText)
+	- local currentPlayers = Players:GetPlayers()
+	- local notifyTitleText = "🟢 Server Join"
+	- local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	- local notifyTitle = string.format("%s", notifyTitleText)
+	- local notifyDesc = string.format("%s", notifyDescText)
 	if jLogsEnabled == true then
 		CreateJoinLabel(plr,plr.UserId)
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
@@ -4012,6 +4020,7 @@ JoinLog = function(plr)
 		local webhookMessageText = "🟢 Joined the server 🟢"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
+		3secNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
@@ -4038,6 +4047,7 @@ LeaveLog = function(plr)
 		local webhookMessageText = "🔴 Left the server 🔴"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
+		3secNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
@@ -13267,5 +13277,5 @@ task.spawn(function()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
 	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
-	defNotify('Hikaru Zenith','Script Initiated')
+	5secNotify('Hikaru Zenith','Script Initiated')
 end)
