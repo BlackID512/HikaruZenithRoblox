@@ -11,16 +11,16 @@ function missing(t, f, fallback)
     return fallback
 end
 
-local function 5secNotify(title,msg)
-    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=5})
+local function defNotifyOne(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=1})
 end
 
-local function 3secNotify(title,msg)
+local function defNotifyTwo(title,msg)
     game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
 end
 
-local function 1secNotify(title,msg)
-    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=1})
+local function defNotifyThree(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=5})
 end
 
 cloneref = missing("function", cloneref, function(...) return ... end)
@@ -4020,7 +4020,7 @@ JoinLog = function(plr)
 		local webhookMessageText = "🟢 Joined the server 🟢"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		3secNotify(notifyTitle,notifyDesc)
+		defNotifyOne(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
@@ -4047,7 +4047,7 @@ LeaveLog = function(plr)
 		local webhookMessageText = "🔴 Left the server 🔴"
 		local webhookMessage = string.format("%s", webhookMessageText)
 		sendChatWebhook(plr,webhookMessage)
-		3secNotify(notifyTitle,notifyDesc)
+		defNotifyOne(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	end
 end
@@ -13277,5 +13277,5 @@ task.spawn(function()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
 	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
-	5secNotify('Hikaru Zenith','Script Initiated')
+	defNotifyThree('Hikaru Zenith','Script Initiated')
 end)
