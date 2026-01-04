@@ -12986,19 +12986,19 @@ if IsOnMobile then
 	local UICorner = Instance.new("UICorner")
 	QuickCapture.Name = randomString()
 	QuickCapture.Parent = PARENT
-	QuickCapture.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-	QuickCapture.BackgroundTransparency = 0.14
+	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
+	QuickCapture.BackgroundTransparency = 1.0
 	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
-	QuickCapture.Size = UDim2.new(0, 32, 0, 33)
+	QuickCapture.Size = UDim2.new(0, 40, 0, 40)
 	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "HZ"
+	QuickCapture.Text = "💠"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 20
+	QuickCapture.TextSize = 30
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
 	UICorner.Name = randomString()
-	UICorner.CornerRadius = UDim.new(0.5, 0)
+	UICorner.CornerRadius = UDim.new(0.75, 0)
 	UICorner.Parent = QuickCapture
 	QuickCapture.MouseButton1Click:Connect(function()
 		Cmdbar:CaptureFocus()
