@@ -11,6 +11,10 @@ function missing(t, f, fallback)
     return fallback
 end
 
+local function defNotify(title,msg)
+    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=5})
+end
+
 cloneref = missing("function", cloneref, function(...) return ... end)
 sethidden =  missing("function", sethiddenproperty or set_hidden_property or set_hidden_prop)
 gethidden =  missing("function", gethiddenproperty or get_hidden_property or get_hidden_prop)
@@ -13263,4 +13267,5 @@ task.spawn(function()
 	minimizeHolder()
 	local plr = Players.LocalPlayer
 	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
+	defNotify('Hikaru Zenith','Script Initiated')
 end)
