@@ -12982,19 +12982,21 @@ addcmd('removecmd',{'deletecmd'},function(args, speaker)
 end)
 
 if IsOnMobile then
-	local QuickCapture = Instance.new("TextButton")
+	-- local QuickCapture = Instance.new("TextButton")
+	local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
 	QuickCapture.Name = randomString()
 	QuickCapture.Parent = PARENT
-	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
+	-- QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1.0
 	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 40, 0, 40)
-	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "💠"
-	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 30
-	QuickCapture.TextWrapped = true
+	QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
+	-- QuickCapture.Font = Enum.Font.SourceSansBold
+	-- QuickCapture.Text = "💠"
+	-- QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
+	-- QuickCapture.TextSize = 30
+	-- QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
 	UICorner.Name = randomString()
