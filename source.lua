@@ -12988,7 +12988,7 @@ if IsOnMobile then
 	-- QuickCapture.Name = randomString()
 	QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
-	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
+	-- QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1
 	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 40, 0, 40)
@@ -13007,8 +13007,8 @@ if IsOnMobile then
 		Cmdbar:CaptureFocus()
 		maximizeHolder()
 	end)
-	table.insert(shade1, QuickCapture)
-	table.insert(text1, QuickCapture)
+	-- table.insert(shade1, QuickCapture)
+	-- table.insert(text1, QuickCapture)
 end
 
 pcall(function() Scale.Scale = math.max(Holder.AbsoluteSize.X / 1920, guiScale) end)
