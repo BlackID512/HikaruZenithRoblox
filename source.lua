@@ -4009,18 +4009,19 @@ end
 JoinLog = function(plr)
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
+	local playersCount = #currentPlayers
 	local notifyTitleText = "🟢 Server Join"
-	local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	local notifyDescText = playersCount.." Player(s)\n"..user
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	defNotify(notifyTitle,notifyDesc)
 	-- if jLogsEnabled == true then
-	CreateJoinLabel(plr,plr.UserId)
-		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
+		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..playersCount.."\n`"..user.."`"
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
-	local webhookMessageText = "🟢 Joined the server 🟢"
+	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
+	CreateJoinLabel(plr,plr.UserId)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
@@ -4028,8 +4029,9 @@ end
 LeaveLog = function(plr)
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
+	local playersCount = #currentPlayers
 	local notifyTitleText = "🔴 Server Leave"
-	local notifyDescText = #currentPlayers.." Player(s)\n"..user
+	local notifyDescText = playersCount.." Player(s)\n"..user
 	-- Optional: Determine leave reason
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
@@ -4042,9 +4044,9 @@ LeaveLog = function(plr)
 		end
 	end
 	-- if jLogsEnabled == true then
-		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..#currentPlayers.."\n"..user
+		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..playersCount.."\n"..user
 		-- local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
-	local webhookMessageText = "🔴 Left the server 🔴"
+	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
