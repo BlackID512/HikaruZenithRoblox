@@ -7967,7 +7967,8 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 	else
 		local targetLink = args[1]
 		local link = "'"..targetLink.."'"
-		loadstring(game:HttpGet(link))()
+		local final = game:HttpGet(link, true)
+		loadstring(final)()
 	end
 end)
 
