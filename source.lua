@@ -4013,16 +4013,16 @@ JoinLog = function(plr)
 	local notifyDescText = #currentPlayers.." Player(s)\n"..user
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
-	if jLogsEnabled == true then
-		CreateJoinLabel(plr,plr.UserId)
+	-- if jLogsEnabled == true then
+	CreateJoinLabel(plr,plr.UserId)
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..#currentPlayers.."\n`"..user.."`"
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
-		local webhookMessageText = "🟢 Joined the server 🟢"
-		local webhookMessage = string.format("%s", webhookMessageText)
-		sendChatWebhook(plr,webhookMessage)
-		defNotify(notifyTitle,notifyDesc)
+	local webhookMessageText = "🟢 Joined the server 🟢"
+	local webhookMessage = string.format("%s", webhookMessageText)
+	sendChatWebhook(plr,webhookMessage)
+	defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
-	end
+	-- end
 end
 
 LeaveLog = function(plr)
@@ -4041,15 +4041,15 @@ LeaveLog = function(plr)
 			leaveReason = "died"
 		end
 	end
-	if jLogsEnabled == true then
+	-- if jLogsEnabled == true then
 		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..#currentPlayers.."\n"..user
 		-- local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
-		local webhookMessageText = "🔴 Left the server 🔴"
-		local webhookMessage = string.format("%s", webhookMessageText)
-		sendChatWebhook(plr,webhookMessage)
-		defNotify(notifyTitle,notifyDesc)
+	local webhookMessageText = "🔴 Left the server 🔴"
+	local webhookMessage = string.format("%s", webhookMessageText)
+	sendChatWebhook(plr,webhookMessage)
+	defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
-	end
+	-- end
 end
 
 CleanFileName = function(name)
