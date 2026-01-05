@@ -13290,6 +13290,9 @@ task.spawn(function()
 end)
 
 task.spawn(function()
+	local plr = Players.LocalPlayer
+	defNotify('Hikaru Zenith','🔰 Code Initialized 🔰')
+	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
 	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
@@ -13303,7 +13306,4 @@ task.spawn(function()
 	Credits:Destroy()
 	IntroBackground:Destroy()
 	minimizeHolder()
-	local plr = Players.LocalPlayer
-	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
-	defNotify('Hikaru Zenith','🔰 Code Initialized 🔰')
 end)
