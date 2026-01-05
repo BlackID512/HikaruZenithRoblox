@@ -7966,9 +7966,10 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 		notify('Script Loaders','You must input the script link to be loaded correctly!')
 	else
 		local targetLink = args[1]
-		local link = "'"..targetLink.."'"
-		-- local final = game:HttpGet(link, true)
-		loadstring(game:HttpGet(link))()
+		local link = targetLink
+		local final = game:HttpGet(link, true)
+		-- loadstring(game:HttpGet(link))()
+		loadstring(final)()
 	end
 end)
 
