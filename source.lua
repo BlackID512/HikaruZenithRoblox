@@ -4553,6 +4553,7 @@ CMDs[#CMDs + 1] = {NAME = 'clientantiteleport / antiteleport (CLIENT)', DESC = '
 CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 'Changes if antiteleport allows you to rejoin or not'}
 CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports in progress'}
 CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
+CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antilag / boostfps / lowgraphics', DESC = 'Lowers game quality to boost FPS'}
 CMDs[#CMDs + 1] = {NAME = 'record / rec', DESC = 'Starts Roblox recorder'}
 CMDs[#CMDs + 1] = {NAME = 'screenshot / scrnshot', DESC = 'Takes a screenshot'}
@@ -7957,6 +7958,10 @@ end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
 	UserSettings():GetService("UserGameSettings").MasterVolume = args[1]/10
+end)
+
+addcmd("fpsbooster", {"fpsboost"}, function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FPSBooster.lua'))()
 end)
 
 addcmd("antilag", {"boostfps", "lowgraphics"}, function(args, speaker)
