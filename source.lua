@@ -4019,7 +4019,7 @@ JoinLog = function(plr)
 	-- if jLogsEnabled == true then
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..playersCount.."\n`"..user.."`"
 		-- local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
-	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount
+	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
 	CreateJoinLabel(plr,plr.UserId)
@@ -4048,7 +4048,7 @@ LeaveLog = function(plr)
 	-- if jLogsEnabled == true then
 		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..playersCount.."\n"..user
 		-- local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
-	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount
+	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
