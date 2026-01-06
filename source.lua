@@ -4010,8 +4010,9 @@ JoinLog = function(plr)
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
+	local maxPlayers = Players.MaxPlayers
 	local notifyTitleText = "🟢 Server Join"
-	local notifyDescText = playersCount.." Player(s)\n"..user
+	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	defNotify(notifyTitle,notifyDesc)
@@ -4030,8 +4031,9 @@ LeaveLog = function(plr)
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
+	local maxPlayers = Players.MaxPlayers
 	local notifyTitleText = "🔴 Server Leave"
-	local notifyDescText = playersCount.." Player(s)\n"..user
+	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	-- Optional: Determine leave reason
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
@@ -13291,8 +13293,16 @@ end)
 
 task.spawn(function()
 	local plr = Players.LocalPlayer
-	defNotify('Hikaru Zenith','🔰 Code Initialized 🔰')
-	sendChatWebhook(plr,'🔰 Webhook initiated 🔰')
+	local currentPlayers = Players:GetPlayers()
+	local playersCount = #currentPlayers
+	local maxPlayers = Players.MaxPlayers
+	local Asset = MarketplaceService:GetProductInfo(PlaceId)
+	local notifyDescText = "🔰 Program Initialized 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	local notifyDesc = string.format("%s", notifyDescText)
+	defNotify('Hikaru Zenith',notifyDesc)
+	local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	local webhookMessage = string.format("%s", webhookMessageText)
+	sendChatWebhook(plr,webhookMessage)
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
 	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
