@@ -349,7 +349,7 @@ table.insert(shade2,Holder)
 
 local animatedTitleText = "🔰 Hikaru Zenith v"..currentVersion
 local animationDelay = 0.1  -- Adjust speed here (lower = faster)
-local spacer = "    "  -- 4 spaces as separator between repeats
+local animatedSpacer = "    "  -- 4 spaces as separator between repeats
 Title.Name = "Title"
 Title.Parent = Holder
 Title.Active = true
@@ -360,19 +360,10 @@ Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
 Title.TextXAlignment = Enum.TextXAlignment.Left
 -- Title.Text = "🔰 Hikaru Zenith v"..currentVersion
--- Function for unlimited running text animation
-local function runningTextAnimation()
-    -- Create extended text for seamless animation
-    local extendedText = animatedTitleText .. spacer .. animatedTitleText .. spacer
-    
-    while true do
-        -- Animate from right to left
-        for i = 1, #animatedTitleText + #spacer do
-            -- Extract substring starting from position i
-            local animatedText = string.sub(extendedText, i, i + #animatedTitleText - 1)
-            Title.Text = animatedText
-            wait(animationDelay)
-        end
+while true do
+    for i = 1, #animatedTitleText + #animatedSpacer do
+        Title.Text = string.sub(animatedTitleText .. animatedSpacer .. animatedTitleText, i, i + #animatedTitleText - 1)
+        wait(animationDelay)
     end
 end
 
