@@ -347,9 +347,6 @@ Holder.Size = UDim2.new(0, 250, 0, 220)
 Holder.ZIndex = 10
 table.insert(shade2,Holder)
 
-local animatedTitleText = "🔰 Hikaru Zenith v"..currentVersion
-local animationDelay = 0.1  -- Adjust speed here (lower = faster)
-local animatedSpacer = "    "  -- 4 spaces as separator between repeats
 Title.Name = "Title"
 Title.Parent = Holder
 Title.Active = true
@@ -358,17 +355,8 @@ Title.BorderSizePixel = 0
 Title.Size = UDim2.new(0, 250, 0, 20)
 Title.Font = Enum.Font.SourceSans
 Title.TextSize = 18
-Title.TextXAlignment = Enum.TextXAlignment.Left
--- Title.Text = "🔰 Hikaru Zenith v"..currentVersion
-while true do
-    for i = 1, #animatedTitleText + #animatedSpacer do
-        Title.Text = string.sub(animatedTitleText .. animatedSpacer .. animatedTitleText, i, i + #animatedTitleText - 1)
-        wait(animationDelay)
-    end
-end
+Title.Text = "🔰 Hikaru Zenith v" .. currentVersion
 
--- Start the animation
-runningTextAnimation()
 do
 	local emoji = ({
 		["01 01"] = "🎆",
