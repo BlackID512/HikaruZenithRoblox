@@ -3369,7 +3369,8 @@ function CreateJoinLabel(plr,ID)
 	local json = HttpService:JSONDecode(user)
 	local date = json["created"]:sub(1,10)
 	local splitDates = string.split(date,"-")
-	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+	-- info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[3].."/"..splitDates[2].."/"..splitDates[1])
 end
 
 HZMouse.KeyDown:Connect(function(Key)
