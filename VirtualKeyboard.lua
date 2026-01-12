@@ -127,7 +127,7 @@ titleLbl.Size = UDim2.new(1, -420, 1, 0);
 titleLbl.Position = UDim2.new(0, 10, 0, 0);
 titleLbl.BackgroundTransparency = 1;
 titleLbl.TextColor3 = themes.Dark.Txt;
-titleLbl.Text = "Virtual Keyboard";
+titleLbl.Text = "Hikaru Keyboard";
 titleLbl.Font = Enum.Font.SourceSansBold;
 titleLbl.TextScaled = true;
 local tlc = Instance.new("UITextSizeConstraint", titleLbl);
@@ -601,7 +601,10 @@ local function layQWERTY()
 		"F10",
 		"F11",
 		"F12",
-		spacer(6)
+		"PrtSc",
+		"ScrLk",
+		"Pause",
+		spacer(3)
 	});
 	local r2 = newRow(h, 2);
 	addWeighted(r2, {
