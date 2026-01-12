@@ -588,6 +588,7 @@ local function layQWERTY()
 			"Esc",
 			1
 		},
+		spacer(1),
 		"F1",
 		"F2",
 		"F3",
@@ -600,7 +601,7 @@ local function layQWERTY()
 		"F10",
 		"F11",
 		"F12",
-		spacer(7)
+		spacer(6)
 	});
 	local r2 = newRow(h, 2);
 	addWeighted(r2, {
