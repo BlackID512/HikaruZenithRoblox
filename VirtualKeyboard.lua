@@ -599,7 +599,8 @@ local function layQWERTY()
 		"F9",
 		"F10",
 		"F11",
-		"F12"
+		"F12",
+		spacer(7)
 	});
 	local r2 = newRow(h, 2);
 	addWeighted(r2, {
@@ -619,7 +620,14 @@ local function layQWERTY()
 		{
 			"Bksp",
 			2
-		}
+		},
+		"Ins",
+		"Home",
+		"PgUp",
+		"NumLk",
+		"Num/",
+		"Num+",
+		"Num-"
 	});
 	local r3 = newRow(h, 3);
 	addWeighted(r3, {
@@ -639,7 +647,14 @@ local function layQWERTY()
 		"P",
 		"[",
 		"]",
-		"\\"
+		"\\",
+		"Del",
+		"End",
+		"PgDn",
+		"Num7",
+		"Num8",
+		"Num9",
+		"Num+"
 	});
 	local r4 = newRow(h, 4);
 	addWeighted(r4, {
@@ -661,7 +676,12 @@ local function layQWERTY()
 		{
 			"Enter",
 			2.25
-		}
+		},
+		spacer(3),
+		"Num4",
+		"Num5",
+		"Num6",
+		"Num+"
 	});
 	local r5 = newRow(h, 5);
 	addWeighted(r5, {
@@ -682,7 +702,14 @@ local function layQWERTY()
 		{
 			"RShift",
 			2.25
-		}
+		},
+		spacer(1),
+		"Up",
+		spacer(1),
+		"Num1",
+		"Num2",
+		"Num3",
+		"NumEnt"
 	});
 	local r6 = newRow(h, 6);
 	addWeighted(r6, {
@@ -713,7 +740,14 @@ local function layQWERTY()
 		{
 			"RCtrl",
 			1.5
-		}
+		},
+		"Left",
+		"Down",
+		"Right",
+		"Num0",
+		"Num0",
+		"Num.",
+		"NumEnt"
 	});
 end;
 local function layFunction()
