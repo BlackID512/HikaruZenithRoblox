@@ -159,7 +159,7 @@ local themeBtn = newTopBtn("Theme", -170, 74, "Dark", themes.Dark.Btn);
 local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Dark.Acc, 0.2));
 local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Dark.Btn);
 -- local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
-local modeBtn = newTopBtn("Mode", -410, 74, "98", themes.Dark.Btn);
+local modeBtn = newTopBtn("Mode", -410, 74, "Full", themes.Dark.Btn);
 local keysScroll = Instance.new("ScrollingFrame");
 keysScroll.Name = "KeysScroll";
 keysScroll.Size = UDim2.new(1, -12, 1, -44);
@@ -546,7 +546,7 @@ local function addWeighted(r, items)
 		inst.Parent = r;
 	end;
 end;
-local function lay98()
+local function layFull()
 	clearKeys();
 	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
 	local r1 = newRow(h, 1);
@@ -1011,7 +1011,7 @@ local function layAll()
 	end;
 end;
 local sections = {
-	"98",
+	"Full",
 	"QWERTY",
 	"Function",
 	"Navigation",
@@ -1019,7 +1019,7 @@ local sections = {
 	"Console",
 	"All"
 };
-local curSection = "98";
+local curSection = "Full";
 local function applyScheme(s)
 	mainFrm.BackgroundColor3 = s.Bg;
 	titleBar.BackgroundColor3 = s.Btn;
@@ -1058,8 +1058,8 @@ local function refreshTheme()
 	end;
 end;
 local function render()
-	if curSection == "98" then
-		lay98();
+	if curSection == "Full" then
+		layFull();
 	elseif curSection == "QWERTY" then
 		layQWERTY();
 	elseif curSection == "Function" then
