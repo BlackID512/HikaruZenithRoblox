@@ -4557,6 +4557,7 @@ CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 
 CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports in progress'}
 CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
+CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
 CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antilag / boostfps / lowgraphics', DESC = 'Lowers game quality to boost FPS'}
@@ -7976,6 +7977,10 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 		-- loadstring(game:HttpGet(link))()
 		loadstring(final)()
 	end
+end)
+
+addcmd("emotes", {}, function(args, speaker)
+	loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
 end)
 
 addcmd("shiftlock", {"slock"}, function(args, speaker)
