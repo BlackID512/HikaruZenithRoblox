@@ -56,30 +56,30 @@ local themes = {
 		Btn = Color3.fromRGB(50, 52, 60),
 		Acc = Color3.fromRGB(80, 180, 120),
 		Txt = Color3.fromRGB(255, 255, 255)
-	-- },
-	-- Light = {
-		-- Bg = Color3.fromRGB(245, 245, 245),
-		-- Btn = Color3.fromRGB(220, 220, 220),
-		-- Acc = Color3.fromRGB(80, 160, 250),
-		-- Txt = Color3.fromRGB(0, 0, 0)
-	-- },
-	-- Blue = {
-		-- Bg = Color3.fromRGB(18, 24, 48),
-		-- Btn = Color3.fromRGB(36, 48, 96),
-		-- Acc = Color3.fromRGB(90, 130, 255),
-		-- Txt = Color3.fromRGB(255, 255, 255)
-	-- },
-	-- Purple = {
-		-- Bg = Color3.fromRGB(36, 24, 44),
-		-- Btn = Color3.fromRGB(58, 36, 76),
-		-- Acc = Color3.fromRGB(180, 100, 255),
-		-- Txt = Color3.fromRGB(255, 255, 255)
-	-- },
-	-- Green = {
-		-- Bg = Color3.fromRGB(18, 36, 24),
-		-- Btn = Color3.fromRGB(28, 56, 36),
-		-- Acc = Color3.fromRGB(60, 200, 120),
-		-- Txt = Color3.fromRGB(255, 255, 255)
+	},
+	Light = {
+		Bg = Color3.fromRGB(245, 245, 245),
+		Btn = Color3.fromRGB(220, 220, 220),
+		Acc = Color3.fromRGB(80, 160, 250),
+		Txt = Color3.fromRGB(0, 0, 0)
+	},
+	Blue = {
+		Bg = Color3.fromRGB(18, 24, 48),
+		Btn = Color3.fromRGB(36, 48, 96),
+		Acc = Color3.fromRGB(90, 130, 255),
+		Txt = Color3.fromRGB(255, 255, 255)
+	},
+	Purple = {
+		Bg = Color3.fromRGB(36, 24, 44),
+		Btn = Color3.fromRGB(58, 36, 76),
+		Acc = Color3.fromRGB(180, 100, 255),
+		Txt = Color3.fromRGB(255, 255, 255)
+	},
+	Green = {
+		Bg = Color3.fromRGB(18, 36, 24),
+		Btn = Color3.fromRGB(28, 56, 36),
+		Acc = Color3.fromRGB(60, 200, 120),
+		Txt = Color3.fromRGB(255, 255, 255)
 	}
 };
 local function shade(c, p)
@@ -158,8 +158,7 @@ local addBtn = newTopBtn("Add", -88, 40, "+", themes.Dark.Acc);
 local themeBtn = newTopBtn("Theme", -170, 74, "Dark", themes.Dark.Btn);
 local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Dark.Acc, 0.2));
 local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Dark.Btn);
--- local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
-local modeBtn = newTopBtn("Mode", -410, 74, "Full", themes.Dark.Btn);
+local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
 local keysScroll = Instance.new("ScrollingFrame");
 keysScroll.Name = "KeysScroll";
 keysScroll.Size = UDim2.new(1, -12, 1, -44);
@@ -546,160 +545,6 @@ local function addWeighted(r, items)
 		inst.Parent = r;
 	end;
 end;
-local function layFull()
-	clearKeys();
-	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
-	local r1 = newRow(h, 1);
-	addWeighted(r1, {
-		{
-			"Esc",
-			1
-		},
-		"F1",
-		"F2",
-		"F3",
-		"F4",
-		"F5",
-		"F6",
-		"F7",
-		"F8",
-		"F9",
-		"F10",
-		"F11",
-		"F12",
-		"Del",
-		"Ins",
-		"PrtSc",
-		"ScrLk",
-		"Pause"
-	});
-	local r2 = newRow(h, 2);
-	addWeighted(r2, {
-		"`",
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9",
-		"0",
-		"-",
-		"=",
-		{
-			"Bksp",
-			2
-		},
-		"Home",
-		"NumLk",
-		"KeypadDivide",
-		"KeypadMultiply",
-		"KeypadMinus"
-	});
-	local r3 = newRow(h, 3);
-	addWeighted(r3, {
-		{
-			"Tab",
-			1.5
-		},
-		"Q",
-		"W",
-		"E",
-		"R",
-		"T",
-		"Y",
-		"U",
-		"I",
-		"O",
-		"P",
-		"[",
-		"]",
-		"\\",
-		"End",
-		"KeypadSeven",
-		"KeypadEight",
-		"KeypadNine",
-		"KeypadPlus"
-	});
-	local r4 = newRow(h, 4);
-	addWeighted(r4, {
-		{
-			"Caps",
-			1.75
-		},
-		"A",
-		"S",
-		"D",
-		"F",
-		"G",
-		"H",
-		"J",
-		"K",
-		"L",
-		";",
-		"'",
-		{
-			"Enter",
-			2.25
-		},
-		"PgUp",
-		"KeypadFour",
-		"KeypadFive",
-		"KeypadSix",
-		"KeypadPlus"
-	});
-	local r5 = newRow(h, 5);
-	addWeighted(r5, {
-		{
-			"LShift",
-			2.25
-		},
-		"Z",
-		"X",
-		"C",
-		"V",
-		"B",
-		"N",
-		"M",
-		",",
-		".",
-		"/",
-		{
-			"RShift",
-			2
-		}
-		"Up",
-		"PgDn",
-		"KeypadOne",
-		"KeypadTwo",
-		"KeypadThree",
-		"KeypadEntter"
-	});
-	local r6 = newRow(h, 6);
-	addWeighted(r6, {
-		"LCtrl",
-		"LWin",
-		"LAlt",
-		{
-			"Space",
-			6
-		},
-		"RAlt",
-		"RWin",
-		"RCtrl",
-		"Left",
-		"Down",
-		"Right",
-		{
-			"KeypadZero",
-			2
-		},
-		"KeypadPeriod",
-		"KeypadEnter"
-	});
-end;
 local function layQWERTY()
 	clearKeys();
 	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
@@ -1011,7 +856,6 @@ local function layAll()
 	end;
 end;
 local sections = {
-	"Full",
 	"QWERTY",
 	"Function",
 	"Navigation",
@@ -1019,7 +863,7 @@ local sections = {
 	"Console",
 	"All"
 };
-local curSection = "Full";
+local curSection = "QWERTY";
 local function applyScheme(s)
 	mainFrm.BackgroundColor3 = s.Bg;
 	titleBar.BackgroundColor3 = s.Btn;
@@ -1058,9 +902,7 @@ local function refreshTheme()
 	end;
 end;
 local function render()
-	if curSection == "Full" then
-		layFull();
-	elseif curSection == "QWERTY" then
+	if curSection == "QWERTY" then
 		layQWERTY();
 	elseif curSection == "Function" then
 		layFunction();
@@ -1105,12 +947,11 @@ local function stopRainbow()
 end;
 themeBtn.MouseButton1Click:Connect(function()
 	local opts = {
-		-- "Dark",
-		-- "Light",
-		-- "Blue",
-		-- "Purple",
-		-- "Green"
-		"Dark"
+		"Dark",
+		"Light",
+		"Blue",
+		"Purple",
+		"Green"
 	};
 	local i = table.find(opts, themeBtn.Text) or table.find(opts, curTheme) or 1;
 	setTheme(opts[i % (#opts) + 1]);
