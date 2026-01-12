@@ -158,8 +158,7 @@ local addBtn = newTopBtn("Add", -88, 40, "+", themes.Dark.Acc);
 local themeBtn = newTopBtn("Theme", -170, 74, "Dark", themes.Dark.Btn);
 local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Dark.Acc, 0.2));
 local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Dark.Btn);
--- local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
-local modeBtn = newTopBtn("Mode", -410, 74, "Full", themes.Dark.Btn);
+local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
 local keysScroll = Instance.new("ScrollingFrame");
 keysScroll.Name = "KeysScroll";
 keysScroll.Size = UDim2.new(1, -12, 1, -44);
@@ -580,160 +579,6 @@ local function addWeighted(r, items)
 		inst.Parent = r;
 	end;
 end;
-local function layFull()
-	clearKeys();
-	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
-	local r1 = newRow(h, 1);
-	addWeighted(r1, {
-		{
-			"Esc",
-			1
-		},
-		"F1",
-		"F2",
-		"F3",
-		"F4",
-		"F5",
-		"F6",
-		"F7",
-		"F8",
-		"F9",
-		"F10",
-		"F11",
-		"F12",
-		"Del",
-		"Ins",
-		"PrtSc",
-		"ScrLk",
-		"Pause"
-	});
-	local r2 = newRow(h, 2);
-	addWeighted(r2, {
-		"`",
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9",
-		"0",
-		"-",
-		"=",
-		{
-			"Bksp",
-			2
-		},
-		"Home",
-		"NumLk",
-		"Num/",
-		"Num*",
-		"Num-"
-	});
-	local r3 = newRow(h, 3);
-	addWeighted(r3, {
-		{
-			"Tab",
-			1.5
-		},
-		"Q",
-		"W",
-		"E",
-		"R",
-		"T",
-		"Y",
-		"U",
-		"I",
-		"O",
-		"P",
-		"[",
-		"]",
-		"\\",
-		"End",
-		"Num7",
-		"Num8",
-		"Num9",
-		"Num+"
-	});
-	local r4 = newRow(h, 4);
-	addWeighted(r4, {
-		{
-			"Caps",
-			1.75
-		},
-		"A",
-		"S",
-		"D",
-		"F",
-		"G",
-		"H",
-		"J",
-		"K",
-		"L",
-		";",
-		"'",
-		{
-			"Enter",
-			2.25
-		},
-		"PgUp",
-		"Num4",
-		"Num5",
-		"Num6",
-		"Num+"
-	});
-	local r5 = newRow(h, 5);
-	addWeighted(r5, {
-		{
-			"LShift",
-			2.25
-		},
-		"Z",
-		"X",
-		"C",
-		"V",
-		"B",
-		"N",
-		"M",
-		",",
-		".",
-		"/",
-		{
-			"RShift",
-			2
-		}
-		"Up",
-		"PgDn",
-		"Num1",
-		"Num2",
-		"Num3",
-		"NumEnt"
-	});
-	local r6 = newRow(h, 6);
-	addWeighted(r6, {
-		"LCtrl",
-		"LWin",
-		"LAlt",
-		{
-			"Space",
-			6
-		},
-		"RAlt",
-		"RWin",
-		"RCtrl",
-		"Left",
-		"Down",
-		"Right",
-		{
-			"Num0",
-			2
-		},
-		"Num.",
-		"NumEnd"
-	});
-end;
 local function layQWERTY()
 	clearKeys();
 	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
@@ -1045,7 +890,6 @@ local function layAll()
 	end;
 end;
 local sections = {
-	"Full",
 	"QWERTY",
 	"Function",
 	"Navigation",
@@ -1053,7 +897,7 @@ local sections = {
 	"Console",
 	"All"
 };
-local curSection = "Full";
+local curSection = "QWERTY";
 local function applyScheme(s)
 	mainFrm.BackgroundColor3 = s.Bg;
 	titleBar.BackgroundColor3 = s.Btn;
@@ -1092,9 +936,7 @@ local function refreshTheme()
 	end;
 end;
 local function render()
-	if curSection == "Full" then
-		layFull();
-	elseif curSection == "QWERTY" then
+	if curSection == "QWERTY" then
 		layQWERTY();
 	elseif curSection == "Function" then
 		layFunction();
