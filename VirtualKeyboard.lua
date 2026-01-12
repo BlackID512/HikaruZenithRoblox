@@ -709,7 +709,7 @@ local function layFull()
 		"Num1",
 		"Num2",
 		"Num3",
-		"NumEnter"
+		"NumEnt"
 	});
 	local r6 = newRow(h, 6);
 	addWeighted(r6, {
