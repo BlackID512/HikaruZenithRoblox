@@ -4684,6 +4684,7 @@ CMDs[#CMDs + 1] = {NAME = 'spectate / view [player]', DESC = 'View a player'}
 CMDs[#CMDs + 1] = {NAME = 'viewpart / viewp [part name]', DESC = 'View a part'}
 CMDs[#CMDs + 1] = {NAME = 'unspectate / unview', DESC = 'Stops viewing player'}
 CMDs[#CMDs + 1] = {NAME = 'freecam / fc', DESC = 'Allows you to freely move camera around the game'}
+CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'freecampos / fcpos [X Y Z]', DESC = 'Moves / opens freecam in a certain position'}
 CMDs[#CMDs + 1] = {NAME = 'freecamwaypoint / fcwp [name]', DESC = 'Moves / opens freecam to a waypoint'}
 CMDs[#CMDs + 1] = {NAME = 'freecamgoto / fcgoto / fctp [player]', DESC = 'Moves / opens freecam to a player'}
@@ -8538,6 +8539,10 @@ function StopFreecam()
 	workspace.Camera.FieldOfView = 70
 	fcRunning = false
 end
+
+addcmd('freecamx',{'fcx'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FreecamX.lua'))()
+end)
 
 addcmd('freecam',{'fc'},function(args, speaker)
 	StartFreecam()
