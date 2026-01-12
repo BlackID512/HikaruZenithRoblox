@@ -57,36 +57,30 @@ local themes = {
 		Acc = Color3.fromRGB(80, 180, 120),
 		Txt = Color3.fromRGB(255, 255, 255)
 	},
-	Black = {
-		Bg = Color3.fromRGB(0, 0, 0),
-		Btn = Color3.fromRGB(0, 0, 0),
-		Acc = Color3.fromRGB(0, 0, 0),
+	Light = {
+		Bg = Color3.fromRGB(245, 245, 245),
+		Btn = Color3.fromRGB(220, 220, 220),
+		Acc = Color3.fromRGB(80, 160, 250),
+		Txt = Color3.fromRGB(0, 0, 0)
+	},
+	Blue = {
+		Bg = Color3.fromRGB(18, 24, 48),
+		Btn = Color3.fromRGB(36, 48, 96),
+		Acc = Color3.fromRGB(90, 130, 255),
+		Txt = Color3.fromRGB(255, 255, 255)
+	},
+	Purple = {
+		Bg = Color3.fromRGB(36, 24, 44),
+		Btn = Color3.fromRGB(58, 36, 76),
+		Acc = Color3.fromRGB(180, 100, 255),
+		Txt = Color3.fromRGB(255, 255, 255)
+	},
+	Green = {
+		Bg = Color3.fromRGB(18, 36, 24),
+		Btn = Color3.fromRGB(28, 56, 36),
+		Acc = Color3.fromRGB(60, 200, 120),
 		Txt = Color3.fromRGB(255, 255, 255)
 	}
-	-- Light = {
-		-- Bg = Color3.fromRGB(245, 245, 245),
-		-- Btn = Color3.fromRGB(220, 220, 220),
-		-- Acc = Color3.fromRGB(80, 160, 250),
-		-- Txt = Color3.fromRGB(0, 0, 0)
-	-- },
-	-- Blue = {
-		-- Bg = Color3.fromRGB(18, 24, 48),
-		-- Btn = Color3.fromRGB(36, 48, 96),
-		-- Acc = Color3.fromRGB(90, 130, 255),
-		-- Txt = Color3.fromRGB(255, 255, 255)
-	-- },
-	-- Purple = {
-		-- Bg = Color3.fromRGB(36, 24, 44),
-		-- Btn = Color3.fromRGB(58, 36, 76),
-		-- Acc = Color3.fromRGB(180, 100, 255),
-		-- Txt = Color3.fromRGB(255, 255, 255)
-	-- },
-	-- Green = {
-		-- Bg = Color3.fromRGB(18, 36, 24),
-		-- Btn = Color3.fromRGB(28, 56, 36),
-		-- Acc = Color3.fromRGB(60, 200, 120),
-		-- Txt = Color3.fromRGB(255, 255, 255)
-	-- }
 };
 local function shade(c, p)
 	return p < 0 and c:Lerp(Color3.new(0, 0, 0), (-p)) or c:Lerp(Color3.new(1, 1, 1), p);
@@ -164,7 +158,8 @@ local addBtn = newTopBtn("Add", -88, 40, "+", themes.Dark.Acc);
 local themeBtn = newTopBtn("Theme", -170, 74, "Dark", themes.Dark.Btn);
 local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Dark.Acc, 0.2));
 local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Dark.Btn);
-local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
+-- local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
+local modeBtn = newTopBtn("Mode", -410, 74, "Full", themes.Dark.Btn);
 local keysScroll = Instance.new("ScrollingFrame");
 keysScroll.Name = "KeysScroll";
 keysScroll.Size = UDim2.new(1, -12, 1, -44);
@@ -266,7 +261,24 @@ local function labelFromKC(kc)
 		Up = "Up",
 		Down = "Down",
 		Left = "Left",
-		Right = "Right"
+		Right = "Right",
+		-- Keypad Sections
+		KeypadZero = "Num0",
+		KeypadOne = "Num1",
+		KeypadTwo = "Num2",
+		KeypadThree = "Num3",
+		KeypadFour = "Num4",
+		KeypadFive = "Num5",
+		KeypadSix = "Num6",
+		KeypadSeven = "Num7",
+		KeypadEight = "Num8",
+		KeypadNine = "Num9",
+		KeypadPeriod = "Num.",
+		KeypadDivide = "Num/",
+		KeypadMultiply = "Num*",
+		KeypadMinus = "Num-",
+		KeypadPlus = "Num+",
+		KeypadEnter = "NumEnt"
 	};
 	return map[name] or name;
 end;
@@ -336,7 +348,24 @@ local function kcFromLabel(t)
 		["▲"] = Enum.KeyCode.DPadUp,
 		["▼"] = Enum.KeyCode.DPadDown,
 		LS = Enum.KeyCode.Thumbstick1,
-		RS = Enum.KeyCode.Thumbstick2
+		RS = Enum.KeyCode.Thumbstick2,
+		-- Keypad Sections
+		["Num0"] = Enum.KeyCode.KeypadZero,
+		["Num1"] = Enum.KeyCode.KeypadOne,
+		["Num2"] = Enum.KeyCode.KeypadTwo,
+		["Num3"] = Enum.KeyCode.KeypadThree,
+		["Num4"] = Enum.KeyCode.KeypadFour,
+		["Num5"] = Enum.KeyCode.KeypadFive,
+		["Num6"] = Enum.KeyCode.KeypadSix,
+		["Num7"] = Enum.KeyCode.KeypadSeven,
+		["Num8"] = Enum.KeyCode.KeypadEight,
+		["Num9"] = Enum.KeyCode.KeypadNine,
+		["Num."] = Enum.KeyCode.KeypadPeriod,
+		["Num/"] = Enum.KeyCode.KeypadDivide,
+		["Num*"] = Enum.KeyCode.KeypadMultiply,
+		["Num-"] = Enum.KeyCode.KeypadMinus,
+		["Num+"] = Enum.KeyCode.KeypadPlus,
+		["NumEnt"] = Enum.KeyCode.KeypadEnter
 	};
 	if r[t] then
 		return r[t];
@@ -550,6 +579,160 @@ local function addWeighted(r, items)
 		i += 1;
 		inst.Parent = r;
 	end;
+end;
+local function layFull()
+	clearKeys();
+	local rows, h = 6, math.max(28, math.floor((keysScroll.AbsoluteSize.Y - (6 - 1) * 8) / 6));
+	local r1 = newRow(h, 1);
+	addWeighted(r1, {
+		{
+			"Esc",
+			1
+		},
+		"F1",
+		"F2",
+		"F3",
+		"F4",
+		"F5",
+		"F6",
+		"F7",
+		"F8",
+		"F9",
+		"F10",
+		"F11",
+		"F12",
+		"Del",
+		"Ins",
+		"PrtSc",
+		"ScrLk",
+		"Pause"
+	});
+	local r2 = newRow(h, 2);
+	addWeighted(r2, {
+		"`",
+		"1",
+		"2",
+		"3",
+		"4",
+		"5",
+		"6",
+		"7",
+		"8",
+		"9",
+		"0",
+		"-",
+		"=",
+		{
+			"Bksp",
+			2
+		},
+		"Home",
+		"NumLk",
+		"Num/",
+		"Num*",
+		"Num-"
+	});
+	local r3 = newRow(h, 3);
+	addWeighted(r3, {
+		{
+			"Tab",
+			1.5
+		},
+		"Q",
+		"W",
+		"E",
+		"R",
+		"T",
+		"Y",
+		"U",
+		"I",
+		"O",
+		"P",
+		"[",
+		"]",
+		"\\",
+		"End",
+		"Num7",
+		"Num8",
+		"Num9",
+		"Num+"
+	});
+	local r4 = newRow(h, 4);
+	addWeighted(r4, {
+		{
+			"Caps",
+			1.75
+		},
+		"A",
+		"S",
+		"D",
+		"F",
+		"G",
+		"H",
+		"J",
+		"K",
+		"L",
+		";",
+		"'",
+		{
+			"Enter",
+			2.25
+		},
+		"PgUp",
+		"Num4",
+		"Num5",
+		"Num6",
+		"Num+"
+	});
+	local r5 = newRow(h, 5);
+	addWeighted(r5, {
+		{
+			"LShift",
+			2.25
+		},
+		"Z",
+		"X",
+		"C",
+		"V",
+		"B",
+		"N",
+		"M",
+		",",
+		".",
+		"/",
+		{
+			"RShift",
+			2
+		}
+		"Up",
+		"PgDn",
+		"Num1",
+		"Num2",
+		"Num3",
+		"NumEnter"
+	});
+	local r6 = newRow(h, 6);
+	addWeighted(r6, {
+		"LCtrl",
+		"LWin",
+		"LAlt",
+		{
+			"Space",
+			6
+		},
+		"RAlt",
+		"RWin",
+		"RCtrl",
+		"Left",
+		"Down",
+		"Right",
+		{
+			"Num0",
+			2
+		},
+		"Num.",
+		"NumEnd"
+	});
 end;
 local function layQWERTY()
 	clearKeys();
@@ -862,6 +1045,7 @@ local function layAll()
 	end;
 end;
 local sections = {
+	"Full",
 	"QWERTY",
 	"Function",
 	"Navigation",
@@ -869,7 +1053,7 @@ local sections = {
 	"Console",
 	"All"
 };
-local curSection = "QWERTY";
+local curSection = "Full";
 local function applyScheme(s)
 	mainFrm.BackgroundColor3 = s.Bg;
 	titleBar.BackgroundColor3 = s.Btn;
@@ -908,7 +1092,9 @@ local function refreshTheme()
 	end;
 end;
 local function render()
-	if curSection == "QWERTY" then
+	if curSection == "Full" then
+		layFull();
+	elseif curSection == "QWERTY" then
 		layQWERTY();
 	elseif curSection == "Function" then
 		layFunction();
@@ -952,14 +1138,12 @@ local function stopRainbow()
 	refreshTheme();
 end;
 themeBtn.MouseButton1Click:Connect(function()
-themeBtn.MouseButton1Click:Connect(function()
 	local opts = {
 		"Dark",
-		"Black"
-		-- "Light",
-		-- "Blue",
-		-- "Purple",
-		-- "Green"
+		"Light",
+		"Blue",
+		"Purple",
+		"Green"
 	};
 	local i = table.find(opts, themeBtn.Text) or table.find(opts, curTheme) or 1;
 	setTheme(opts[i % (#opts) + 1]);
