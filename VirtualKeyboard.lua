@@ -56,31 +56,31 @@ local themes = {
 		Btn = Color3.fromRGB(50, 52, 60),
 		Acc = Color3.fromRGB(80, 180, 120),
 		Txt = Color3.fromRGB(255, 255, 255)
-	},
-	Light = {
-		Bg = Color3.fromRGB(245, 245, 245),
-		Btn = Color3.fromRGB(220, 220, 220),
-		Acc = Color3.fromRGB(80, 160, 250),
-		Txt = Color3.fromRGB(0, 0, 0)
-	},
-	Blue = {
-		Bg = Color3.fromRGB(18, 24, 48),
-		Btn = Color3.fromRGB(36, 48, 96),
-		Acc = Color3.fromRGB(90, 130, 255),
-		Txt = Color3.fromRGB(255, 255, 255)
-	},
-	Purple = {
-		Bg = Color3.fromRGB(36, 24, 44),
-		Btn = Color3.fromRGB(58, 36, 76),
-		Acc = Color3.fromRGB(180, 100, 255),
-		Txt = Color3.fromRGB(255, 255, 255)
-	},
-	Green = {
-		Bg = Color3.fromRGB(18, 36, 24),
-		Btn = Color3.fromRGB(28, 56, 36),
-		Acc = Color3.fromRGB(60, 200, 120),
-		Txt = Color3.fromRGB(255, 255, 255)
 	}
+	-- Light = {
+		-- Bg = Color3.fromRGB(245, 245, 245),
+		-- Btn = Color3.fromRGB(220, 220, 220),
+		-- Acc = Color3.fromRGB(80, 160, 250),
+		-- Txt = Color3.fromRGB(0, 0, 0)
+	-- },
+	-- Blue = {
+		-- Bg = Color3.fromRGB(18, 24, 48),
+		-- Btn = Color3.fromRGB(36, 48, 96),
+		-- Acc = Color3.fromRGB(90, 130, 255),
+		-- Txt = Color3.fromRGB(255, 255, 255)
+	-- },
+	-- Purple = {
+		-- Bg = Color3.fromRGB(36, 24, 44),
+		-- Btn = Color3.fromRGB(58, 36, 76),
+		-- Acc = Color3.fromRGB(180, 100, 255),
+		-- Txt = Color3.fromRGB(255, 255, 255)
+	-- },
+	-- Green = {
+		-- Bg = Color3.fromRGB(18, 36, 24),
+		-- Btn = Color3.fromRGB(28, 56, 36),
+		-- Acc = Color3.fromRGB(60, 200, 120),
+		-- Txt = Color3.fromRGB(255, 255, 255)
+	-- }
 };
 local function shade(c, p)
 	return p < 0 and c:Lerp(Color3.new(0, 0, 0), (-p)) or c:Lerp(Color3.new(1, 1, 1), p);
@@ -947,11 +947,11 @@ local function stopRainbow()
 end;
 themeBtn.MouseButton1Click:Connect(function()
 	local opts = {
-		"Dark",
-		"Light",
-		"Blue",
-		"Purple",
-		"Green"
+		"Dark"
+		-- "Light",
+		-- "Blue",
+		-- "Purple",
+		-- "Green"
 	};
 	local i = table.find(opts, themeBtn.Text) or table.find(opts, curTheme) or 1;
 	setTheme(opts[i % (#opts) + 1]);
