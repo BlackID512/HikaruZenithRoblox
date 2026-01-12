@@ -51,6 +51,12 @@ local function protectUI(g)
 	end;
 end;
 local themes = {
+	Black = {
+		Bg = Color3.fromRGB(0, 0, 0),
+		Btn = Color3.fromRGB(0, 0, 0),
+		Acc = Color3.fromRGB(0, 0, 0),
+		Txt = Color3.fromRGB(255, 255, 255)
+	},
 	Dark = {
 		Bg = Color3.fromRGB(28, 30, 34),
 		Btn = Color3.fromRGB(50, 52, 60),
@@ -108,7 +114,7 @@ mainFrm.Name = "Main";
 mainFrm.Size = UDim2.new(IsOnMobile and 0.85 or 0.46, 0, IsOnMobile and 0.56 or 0.4, 0);
 mainFrm.Position = UDim2.new(0.5, 0, 1, -8);
 mainFrm.AnchorPoint = Vector2.new(0.5, 1);
-mainFrm.BackgroundColor3 = themes.Dark.Bg;
+mainFrm.BackgroundColor3 = themes.Black.Bg;
 mainFrm.BorderSizePixel = 0;
 mainFrm.Parent = ui;
 local c1 = Instance.new("UICorner");
@@ -116,7 +122,7 @@ c1.CornerRadius = UDim.new(0, 12);
 c1.Parent = mainFrm;
 local titleBar = Instance.new("Frame");
 titleBar.Size = UDim2.new(1, 0, 0, 30);
-titleBar.BackgroundColor3 = themes.Dark.Btn;
+titleBar.BackgroundColor3 = themes.Black.Btn;
 titleBar.BorderSizePixel = 0;
 titleBar.Parent = mainFrm;
 local c2 = Instance.new("UICorner");
@@ -126,7 +132,7 @@ local titleLbl = Instance.new("TextLabel");
 titleLbl.Size = UDim2.new(1, -420, 1, 0);
 titleLbl.Position = UDim2.new(0, 10, 0, 0);
 titleLbl.BackgroundTransparency = 1;
-titleLbl.TextColor3 = themes.Dark.Txt;
+titleLbl.TextColor3 = themes.Black.Txt;
 titleLbl.Text = "Virtual Keyboard";
 titleLbl.Font = Enum.Font.SourceSansBold;
 titleLbl.TextScaled = true;
@@ -140,7 +146,7 @@ local function newTopBtn(name, xoff, w, text, bg)
 	b.Size = UDim2.new(0, w, 0, 24);
 	b.Position = UDim2.new(1, xoff, 0, 3);
 	b.BackgroundColor3 = bg;
-	b.TextColor3 = themes.Dark.Txt;
+	b.TextColor3 = themes.Black.Txt;
 	b.Text = text;
 	b.Font = Enum.Font.SourceSansBold;
 	b.TextScaled = true;
@@ -154,11 +160,11 @@ local function newTopBtn(name, xoff, w, text, bg)
 	return b;
 end;
 local closeBtn = newTopBtn("Close", -42, 36, "×", Color3.fromRGB(200, 60, 60));
-local addBtn = newTopBtn("Add", -88, 40, "+", themes.Dark.Acc);
-local themeBtn = newTopBtn("Theme", -170, 74, "Dark", themes.Dark.Btn);
-local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Dark.Acc, 0.2));
-local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Dark.Btn);
-local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Dark.Btn);
+local addBtn = newTopBtn("Add", -88, 40, "+", themes.Black.Acc);
+local themeBtn = newTopBtn("Theme", -170, 74, "Black", themes.Black.Btn);
+local rgbBtn = newTopBtn("RGB", -246, 74, "Rainbow", shade(themes.Black.Acc, 0.2));
+local colorBtn = newTopBtn("Palette", -328, 74, "Palette", themes.Black.Btn);
+local modeBtn = newTopBtn("Mode", -410, 74, "QWERTY", themes.Black.Btn);
 local keysScroll = Instance.new("ScrollingFrame");
 keysScroll.Name = "KeysScroll";
 keysScroll.Size = UDim2.new(1, -12, 1, -44);
@@ -181,8 +187,8 @@ toggleBtn.Name = "Toggle";
 toggleBtn.Size = UDim2.new(0, 46, 0, 46);
 toggleBtn.Position = UDim2.new(0, 16, 1, -66);
 toggleBtn.AnchorPoint = Vector2.new(0, 1);
-toggleBtn.BackgroundColor3 = themes.Dark.Btn;
-toggleBtn.TextColor3 = themes.Dark.Txt;
+toggleBtn.BackgroundColor3 = themes.Black.Btn;
+toggleBtn.TextColor3 = themes.Black.Txt;
 toggleBtn.Text = "⌨️";
 toggleBtn.Font = Enum.Font.SourceSansBold;
 toggleBtn.TextScaled = true;
@@ -343,7 +349,7 @@ local function kcFromLabel(t)
 	end;
 	return nil;
 end;
-local curTheme, selectMode = "Dark", false;
+local curTheme, selectMode = "Black", false;
 local rainbowOn, rainbowConn, hue = false, nil, 0;
 local activeKeys = {};
 local function setBase(btn, col)
@@ -897,7 +903,7 @@ local function refreshTheme()
 		};
 		applyScheme(s);
 	else
-		local s = themes[curTheme] or themes.Dark;
+		local s = themes[curTheme] or themes.Black;
 		applyScheme(s);
 	end;
 end;
@@ -923,7 +929,7 @@ local function setTheme(name)
 	elseif themes[name] then
 		curTheme = name;
 	else
-		curTheme = "Dark";
+		curTheme = "Black";
 	end;
 	themeBtn.Text = curTheme;
 	refreshTheme();
@@ -946,7 +952,9 @@ local function stopRainbow()
 	refreshTheme();
 end;
 themeBtn.MouseButton1Click:Connect(function()
+themeBtn.MouseButton1Click:Connect(function()
 	local opts = {
+		"Black",
 		"Dark"
 		-- "Light",
 		-- "Blue",
@@ -1006,7 +1014,7 @@ local palette = Instance.new("Frame");
 palette.Name = "Palette";
 palette.Size = UDim2.new(0, 280, 0, 180);
 palette.Position = UDim2.new(1, -330, 0, 34);
-palette.BackgroundColor3 = themes.Dark.Bg;
+palette.BackgroundColor3 = themes.Black.Bg;
 palette.Visible = false;
 palette.Parent = mainFrm;
 local pc = Instance.new("UICorner");
@@ -1142,5 +1150,5 @@ end;
 colorBtn.MouseButton1Click:Connect(function()
 	palette.Visible = not palette.Visible;
 end);
-setTheme("Dark");
+setTheme("Black");
 render();
