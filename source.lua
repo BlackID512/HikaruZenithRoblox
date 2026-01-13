@@ -4558,6 +4558,7 @@ CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports
 CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
+CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
@@ -7978,6 +7979,10 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 		-- loadstring(game:HttpGet(link))()
 		loadstring(final)()
 	end
+end)
+
+addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
 end)
 
 addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
