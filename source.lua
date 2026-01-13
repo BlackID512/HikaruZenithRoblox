@@ -13012,11 +13012,10 @@ end)
 addcmd("about", {}, function(args, speaker)
 	local title = "About Hikaru Zenith"
 	local desc = {
-	
 		"Welcome to Hikaru Zenith\n",
 		"This script is forked from Infinite Yield\n",
 		"Developed by Hikaru Studio Inc. Team\n",
-		"Current script version is: " .. currentVersion
+		"Current script version is: "..currentVersion..""
 	}
 	local descText0 = ""
 	for i = 1, #desc do
