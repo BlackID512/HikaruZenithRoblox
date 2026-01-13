@@ -1,2 +1,2 @@
-getgenv().script = "https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModifier.lua"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModifierLoad.lua"))()
+getgenv().script = "https://github.com/danya2854/Myscripts/raw/refs/heads/main/JumpButtonScaleChanger"
+loadstring(game:HttpGet("https://raw.githubusercontent.com/danya2854/Myscripts/refs/heads/main/loader"))()
