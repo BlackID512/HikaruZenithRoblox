@@ -13022,7 +13022,7 @@ addcmd("about", {}, function(args, speaker)
 	for i = 1, #desc do
 		local descText = descText0 .. "" .. i
 	end
-	notify(title,descText,10)
+	notify(title,descText)
 end)
 
 addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
