@@ -13010,20 +13010,18 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 end)
 
 addcmd("about", {}, function(args, speaker)
-	local abouts = {}
-	local abouts = {
-		["About Hikaru Zenith"],
-		["Welcome to Hikaru Zenith"],
-		["This script is forked from Infinite Yield"],
-		["Developed by Hikaru Studio Inc. Team"],
-		["Current script version is: "..currentVersion..""]
-	}
-	for i = 1, #abouts do
-		print(i)
-		wait(0.5)
-	end
-	-- print('Any Text')
-	-- print()
+    local abouts = {
+        "About Hikaru Zenith",
+        "Welcome to Hikaru Zenith",
+        "This script is forked from Infinite Yield",
+        "Developed by Hikaru Studio Inc. Team",
+        "Current script version is: " .. currentVersion
+    }
+    
+    for i = 1, #abouts do
+        print(abouts[i])
+        wait(0.5)
+    end
 end)
 
 addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
