@@ -13348,6 +13348,7 @@ task.spawn(function()
 	local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
+	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	-- defNotify('Startup','Step 01')
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
