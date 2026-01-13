@@ -4511,6 +4511,7 @@ function autoComplete(str,curText)
 end
 
 CMDs = {}
+CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
@@ -13008,12 +13009,29 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 	end
 end)
 
+addcmd("about", {}, function(args, speaker)
+	local abouts = {}
+	local abouts = {
+		["About Hikaru Zenith"],
+		["Welcome to Hikaru Zenith"],
+		["This script is forked from Infinite Yield"],
+		["Developed by Hikaru Studio Inc. Team"],
+		["Current script version is: "..currentVersion..""]
+	}
+	for i = 1, #abouts do
+		print(i)
+		wait(0.5)
+	end
+	-- print('Any Text')
+	-- print()
+end)
+
 addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
 end)
 
 addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
 end)
 
 addcmd("emotes", {}, function(args, speaker)
