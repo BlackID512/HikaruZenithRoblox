@@ -4519,6 +4519,7 @@ CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual K
 CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay Paused pop up Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13046,6 +13047,10 @@ end)
 
 addcmd('freecamx',{'fcx'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FreecamX.lua'))()
+end)
+
+addcmd('antigameplaypaused',{'agp'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/AntiGameplayPaused.lua'))()
 end)
 
 if IsOnMobile then
