@@ -13010,19 +13010,19 @@ addcmd("scriptload", {"scload"}, function(args, speaker)
 end)
 
 addcmd("about", {}, function(args, speaker)
-    local abouts = {
-        "About Hikaru Zenith",
-        "Welcome to Hikaru Zenith",
-        "This script is forked from Infinite Yield",
-        "Developed by Hikaru Studio Inc. Team",
-        "Current script version is: " .. currentVersion
-    }
-    
-    for i = 1, #abouts do
-        -- print(abouts[i])
-		game:GetService("Chat"):Chat(game:GetService("Workspace"), i, Enum.ChatColor.System)
-        wait(0.5)
-    end
+	local title = "About Hikaru Zenith"
+	local desc = {
+	
+		"Welcome to Hikaru Zenith\n",
+		"This script is forked from Infinite Yield\n",
+		"Developed by Hikaru Studio Inc. Team\n",
+		"Current script version is: " .. currentVersion
+	}
+	local descText0 = ""
+	for i = 1, #desc do
+		local descText = descText0 .. "" .. i
+	end
+	notify(title,descText,10)
 end)
 
 addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
