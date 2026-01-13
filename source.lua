@@ -13019,7 +13019,8 @@ addcmd("about", {}, function(args, speaker)
     }
     
     for i = 1, #abouts do
-        print(abouts[i])
+        -- print(abouts[i])
+		game:GetService("Chat"):Chat(game:GetService("Workspace"), i, Enum.ChatColor.System)
         wait(0.5)
     end
 end)
