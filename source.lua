@@ -2918,7 +2918,7 @@ currentScroll = Color3.fromRGB(78,78,79)
 
 defaultGuiScale = IsOnMobile and 0.9 or 1
 defaultsettings = {
-	prefix = ';';
+	prefix = '\\';
 	StayOpen = false;
 	guiScale = defaultGuiScale;
 	espTransparency = 0.9;
@@ -2941,7 +2941,7 @@ defaultsettings = {
 defaults = HttpService:JSONEncode(defaultsettings)
 nosaves = false
 useFactorySettings = function()
-	prefix = ';'
+	prefix = '\\'
 	StayOpen = false
 	guiScale = defaultGuiScale
 	KeepHiZen = true
@@ -4511,6 +4511,14 @@ function autoComplete(str,curText)
 end
 
 CMDs = {}
+CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
+CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
+CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
 CMDs[#CMDs + 1] = {NAME = 'console', DESC = 'Loads Roblox console'}
@@ -4556,12 +4564,6 @@ CMDs[#CMDs + 1] = {NAME = 'clientantiteleport / antiteleport (CLIENT)', DESC = '
 CMDs[#CMDs + 1] = {NAME = 'allowrejoin / allowrj [true/false] (CLIENT)', DESC = 'Changes if antiteleport allows you to rejoin or not'}
 CMDs[#CMDs + 1] = {NAME = 'cancelteleport / canceltp', DESC = 'Cancels teleports in progress'}
 CMDs[#CMDs + 1] = {NAME = 'volume / vol [0-10]', DESC = 'Adjusts your game volume on a scale of 0 to 10'}
-CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
-CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
-CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antilag / boostfps / lowgraphics', DESC = 'Lowers game quality to boost FPS'}
 CMDs[#CMDs + 1] = {NAME = 'record / rec', DESC = 'Starts Roblox recorder'}
 CMDs[#CMDs + 1] = {NAME = 'screenshot / scrnshot', DESC = 'Takes a screenshot'}
@@ -4687,7 +4689,6 @@ CMDs[#CMDs + 1] = {NAME = 'spectate / view [player]', DESC = 'View a player'}
 CMDs[#CMDs + 1] = {NAME = 'viewpart / viewp [part name]', DESC = 'View a part'}
 CMDs[#CMDs + 1] = {NAME = 'unspectate / unview', DESC = 'Stops viewing player'}
 CMDs[#CMDs + 1] = {NAME = 'freecam / fc', DESC = 'Allows you to freely move camera around the game'}
-CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'freecampos / fcpos [X Y Z]', DESC = 'Moves / opens freecam in a certain position'}
 CMDs[#CMDs + 1] = {NAME = 'freecamwaypoint / fcwp [name]', DESC = 'Moves / opens freecam to a waypoint'}
 CMDs[#CMDs + 1] = {NAME = 'freecamgoto / fcgoto / fctp [player]', DESC = 'Moves / opens freecam to a player'}
@@ -7969,38 +7970,6 @@ addcmd("volume",{ "vol"}, function(args, speaker)
 	UserSettings():GetService("UserGameSettings").MasterVolume = args[1]/10
 end)
 
-addcmd("scriptload", {"scload"}, function(args, speaker)
-	if args[1] == nil then
-		notify('Script Loaders','You must input the script link to be loaded correctly!')
-	else
-		local targetLink = args[1]
-		local link = targetLink
-		local final = game:HttpGet(link)
-		-- loadstring(game:HttpGet(link))()
-		loadstring(final)()
-	end
-end)
-
-addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
-end)
-
-addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
-		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
-end)
-
-addcmd("emotes", {}, function(args, speaker)
-	loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
-end)
-
-addcmd("shiftlock", {"slock"}, function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/shiftlock.lua'))()
-end)
-
-addcmd("fpsbooster", {"fpsboost"}, function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FPSBooster.lua'))()
-end)
-
 addcmd("antilag", {"boostfps", "lowgraphics"}, function(args, speaker)
 	local Terrain = workspace:FindFirstChildWhichIsA("Terrain")
 	Terrain.WaterWaveSize = 0
@@ -8554,10 +8523,6 @@ function StopFreecam()
 	workspace.Camera.FieldOfView = 70
 	fcRunning = false
 end
-
-addcmd('freecamx',{'fcx'},function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FreecamX.lua'))()
-end)
 
 addcmd('freecam',{'fc'},function(args, speaker)
 	StartFreecam()
@@ -13027,6 +12992,44 @@ end)
 
 addcmd('removecmd',{'deletecmd'},function(args, speaker)
 	removecmd(args[1])
+end)
+
+-- External Commands by Hikaru
+
+addcmd("scriptload", {"scload"}, function(args, speaker)
+	if args[1] == nil then
+		notify('Script Loaders','You must input the script link to be loaded correctly!')
+	else
+		local targetLink = args[1]
+		local link = targetLink
+		local final = game:HttpGet(link)
+		-- loadstring(game:HttpGet(link))()
+		loadstring(final)()
+	end
+end)
+
+addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
+end)
+
+addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
+		loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
+end)
+
+addcmd("emotes", {}, function(args, speaker)
+	loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
+end)
+
+addcmd("shiftlock", {"slock"}, function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/shiftlock.lua'))()
+end)
+
+addcmd("fpsbooster", {"fpsboost"}, function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FPSBooster.lua'))()
+end)
+
+addcmd('freecamx',{'fcx'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/FreecamX.lua'))()
 end)
 
 if IsOnMobile then
