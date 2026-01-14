@@ -13059,12 +13059,12 @@ if IsOnMobile then
 	--- QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
-	QuickCapture.BackgroundTransparency = 0
+	QuickCapture.BackgroundTransparency = 1
 	QuickCapture.Position = UDim2.new(0.5, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
 	-- QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
 	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "Ⓜ"
+	QuickCapture.Text = "🛑"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
 	QuickCapture.TextSize = 50
 	QuickCapture.TextWrapped = true
