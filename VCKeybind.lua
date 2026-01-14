@@ -9,7 +9,7 @@ Macro.__index = Macro
 local Settings = {
     ActivationKey = Enum.KeyCode.V, -- Change Enum.KeyCode.V/F/etc. on at your discretion (any key)
     -- TargetPosition = Vector2.new(180, 25),
-    TargetPosition = Vector2.new(180, 5),
+    TargetPosition = Vector2.new(180, -10),
     JiggleOffset = Vector2.new(-1, 1),
     ArrivalTimeout = 0.15
 }
