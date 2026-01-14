@@ -13012,16 +13012,14 @@ end)
 
 addcmd("about", {}, function(args, speaker)
 	local title = "About Hikaru Zenith"
-	local desc = {
-		"Welcome to Hikaru Zenith\n",
-		"This script is forked from Infinite Yield\n",
-		"Developed by Hikaru Studio Inc. Team\n",
-		"Current script version is: "..currentVersion..""
-	}
-	local descText0 = ""
-	for i = 1, #desc do
-		local descText = descText0 .. "" .. i
-	end
+	local line1 = "Welcome to Hikaru Zenith"
+	local line2 = "This script is forked from Infinite Yield"
+	local line3 = "Developed by Hikaru Studio Inc. Team"
+	local line4 = "Current script version is: "..currentVersion
+	local descText = line1.."\n"..line2.."\n"..line3.."\n"..line4
+	-- for i = 1, #desc do
+		-- local descText = descText0 .. "" .. i
+	-- end
 	notify(title,descText)
 end)
 
@@ -13062,13 +13060,13 @@ if IsOnMobile then
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1
-	QuickCapture.Position = UDim2.new(0.489, 0, 0, 0)
-	QuickCapture.Size = UDim2.new(0, 40, 0, 40)
+	QuickCapture.Position = UDim2.new(0.5, 0, 0, 0)
+	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
 	-- QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
 	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "💠"
+	QuickCapture.Text = "Ⓜ"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 30
+	QuickCapture.TextSize = 50
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
