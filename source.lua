@@ -4538,6 +4538,7 @@ CMDs[#CMDs + 1] = {NAME = 'rejoin / rj', DESC = 'Makes you rejoin the game'}
 CMDs[#CMDs + 1] = {NAME = 'autorejoin / autorj', DESC = 'Automatically rejoins the server if you get kicked/disconnected'}
 CMDs[#CMDs + 1] = {NAME = 'serverhop / shop', DESC = 'Teleports you to a different server'}
 CMDs[#CMDs + 1] = {NAME = 'gameteleport / gametp [place ID]', DESC = 'Joins a game by ID'}
+CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Prevents the game from kicking you for being idle/afk (best method)'}
 CMDs[#CMDs + 1] = {NAME = 'antiidle / antiafk', DESC = 'Prevents the game from kicking you for being idle/afk'}
 CMDs[#CMDs + 1] = {NAME = 'datalimit [num]', DESC = 'Set outgoing KBPS limit'}
 CMDs[#CMDs + 1] = {NAME = 'replicationlag / backtrack [num]', DESC = 'Set IncomingReplicationLag'}
@@ -13054,6 +13055,10 @@ end)
 
 addcmd('vckeybind',{'vck'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VCKeybind.lua'))()
+end)
+
+addcmd('antiafk2',{'antiidle2'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
 if IsOnMobile then
