@@ -11,10 +11,6 @@ function missing(t, f, fallback)
 	return fallback
 end
 
-local function defNotify(title,msg)
-    game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
-end
-
 cloneref = missing("function", cloneref, function(...) return ... end)
 sethidden =  missing("function", sethiddenproperty or set_hidden_property or set_hidden_prop)
 gethidden =  missing("function", gethiddenproperty or get_hidden_property or get_hidden_prop)
@@ -63,6 +59,35 @@ Services = setmetatable({}, {
 		end
 	end
 })
+
+local function defNotify(title,msg)
+	game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
+end
+
+local function get_service(service)
+	return cloneref(game:GetService(service))
+end
+
+local properties = {
+	Color = Color3.fromHex(COLOR);
+	TextSize = TEXT_SIZE;
+	Font = Enum.Font.SourceSansBold
+}
+
+local starter_gui = get_service('StarterGui')
+local textchat_service = get_service('TextChatService')
+local legacy_chat = (textchat_service.ChatVersion == Enum.ChatVersion.LegacyChatService)
+
+local function system_message(text)
+	if (legacy_chat) then
+		properties.Text = text
+		starter_gui:SetCore('ChatMakeSystemMessage', properties)
+
+		return
+	end
+
+	textchat_service.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='{COLOR}' size='{math.floor(TEXT_SIZE*1.35)}'>{escape_richtext(text)}</font>`)
+end
 
 Players = Services.Players
 UserInputService = Services.UserInputService
@@ -4521,6 +4546,7 @@ CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by H
 CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay Paused pop up Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'vckeybind / vck', DESC = 'Voice Chat toggle with keybind made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Prevents the game from kicking you for being idle/afk (best method)'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -4538,7 +4564,6 @@ CMDs[#CMDs + 1] = {NAME = 'rejoin / rj', DESC = 'Makes you rejoin the game'}
 CMDs[#CMDs + 1] = {NAME = 'autorejoin / autorj', DESC = 'Automatically rejoins the server if you get kicked/disconnected'}
 CMDs[#CMDs + 1] = {NAME = 'serverhop / shop', DESC = 'Teleports you to a different server'}
 CMDs[#CMDs + 1] = {NAME = 'gameteleport / gametp [place ID]', DESC = 'Joins a game by ID'}
-CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Prevents the game from kicking you for being idle/afk (best method)'}
 CMDs[#CMDs + 1] = {NAME = 'antiidle / antiafk', DESC = 'Prevents the game from kicking you for being idle/afk'}
 CMDs[#CMDs + 1] = {NAME = 'datalimit [num]', DESC = 'Set outgoing KBPS limit'}
 CMDs[#CMDs + 1] = {NAME = 'replicationlag / backtrack [num]', DESC = 'Set IncomingReplicationLag'}
