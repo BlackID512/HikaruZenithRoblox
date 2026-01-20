@@ -64,35 +64,35 @@ local function defNotify(title,msg)
 	game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
 end
 
-local properties = {
-	Color = Color3.fromHex(COLOR),
-	TextSize = TEXT_SIZE,
-	Font = Enum.Font.SourceSansBold
-}
+-- local properties = {
+-- 	Color = Color3.fromHex(COLOR),
+-- 	TextSize = TEXT_SIZE,
+-- 	Font = Enum.Font.SourceSansBold
+-- }
 
-local starter_gui = cloneref(game:GetService('StarterGui'))
-local textchat_service = cloneref(game:GetService('TextChatService')
-local legacy_chat = (textchat_service.ChatVersion == Enum.ChatVersion.LegacyChatService)
+-- local starter_gui = cloneref(game:GetService('StarterGui'))
+-- local textchat_service = cloneref(game:GetService('TextChatService')
+-- local legacy_chat = (textchat_service.ChatVersion == Enum.ChatVersion.LegacyChatService)
 
-local function escape_richtext(text)
-	return text:gsub('[&<>"\']', {
-		['&'] = '&amp;',
-		['<'] = '&lt;',
-		['>'] = '&gt;',
-		['"'] = '&quot;',
-		['\''] = '&apos;',
-	})
-end
+-- local function escape_richtext(text)
+-- 	return text:gsub('[&<>"\']', {
+-- 		['&'] = '&amp;',
+-- 		['<'] = '&lt;',
+-- 		['>'] = '&gt;',
+-- 		['"'] = '&quot;',
+-- 		['\''] = '&apos;',
+-- 	})
+-- end
 
-local function system_message(text)
-	if (legacy_chat) then
-		properties.Text = text
-		starter_gui:SetCore('ChatMakeSystemMessage', properties)
-		return
-	end
-	local formattedMessage = escape_richtext(text)
-	textchat_service.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='{COLOR}' size='{math.floor(TEXT_SIZE*1.35)}'>{formattedMessage}</font>`)
-end
+-- local function system_message(text)
+-- 	if (legacy_chat) then
+-- 		properties.Text = text
+-- 		starter_gui:SetCore('ChatMakeSystemMessage', properties)
+-- 		return
+-- 	end
+-- 	local formattedMessage = escape_richtext(text)
+-- 	textchat_service.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='{COLOR}' size='{math.floor(TEXT_SIZE*1.35)}'>{formattedMessage}</font>`)
+-- end
 
 Players = Services.Players
 UserInputService = Services.UserInputService
@@ -13091,14 +13091,14 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
-addcmd('testchat',{},function(args, speaker)
-	if args[1] == nil then
-		notify('Warning','Message does not contains any text!')
-	else
-		message = args
-		system_message(message)
-	end
-end)
+-- addcmd('testchat',{},function(args, speaker)
+-- 	if args[1] == nil then
+-- 		notify('Warning','Message does not contains any text!')
+-- 	else
+-- 		message = args
+-- 		system_message(message)
+-- 	end
+-- end)
 
 if IsOnMobile then
 	local QuickCapture = Instance.new("TextButton")
