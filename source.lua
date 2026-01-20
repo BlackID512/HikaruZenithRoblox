@@ -64,29 +64,34 @@ local function defNotify(title,msg)
 	game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
 end
 
-local function get_service(service)
-	return cloneref(game:GetService(service))
-end
-
 local properties = {
-	Color = Color3.fromHex(COLOR);
-	TextSize = TEXT_SIZE;
+	Color = Color3.fromHex(COLOR),
+	TextSize = TEXT_SIZE,
 	Font = Enum.Font.SourceSansBold
 }
 
-local starter_gui = get_service('StarterGui')
-local textchat_service = get_service('TextChatService')
+local starter_gui = cloneref(game:GetService('StarterGui'))
+local textchat_service = cloneref(game:GetService('TextChatService')
 local legacy_chat = (textchat_service.ChatVersion == Enum.ChatVersion.LegacyChatService)
+
+local function escape_richtext(text)
+	return text:gsub('[&<>"\']', {
+		['&'] = '&amp;',
+		['<'] = '&lt;',
+		['>'] = '&gt;',
+		['"'] = '&quot;',
+		['\''] = '&apos;',
+	})
+end
 
 local function system_message(text)
 	if (legacy_chat) then
 		properties.Text = text
 		starter_gui:SetCore('ChatMakeSystemMessage', properties)
-
 		return
 	end
-
-	textchat_service.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='{COLOR}' size='{math.floor(TEXT_SIZE*1.35)}'>{escape_richtext(text)}</font>`)
+	local formattedMessage = escape_richtext(text)
+	textchat_service.TextChannels.RBXGeneral:DisplaySystemMessage(`<font color='{COLOR}' size='{math.floor(TEXT_SIZE*1.35)}'>{formattedMessage}</font>`)
 end
 
 Players = Services.Players
