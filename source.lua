@@ -13086,6 +13086,15 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
+addcmd('testchat',{},function(args, speaker)
+	if args[1] == nil then
+		notify('Warning','Message does not contains any text!')
+	else
+		message = args
+		system_message(message)
+	end
+end)
+
 if IsOnMobile then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
