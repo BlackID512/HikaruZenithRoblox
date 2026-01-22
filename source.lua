@@ -13027,7 +13027,7 @@ addcmd("about", {}, function(args, speaker)
 end)
 
 addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify.lua'))()
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify'))()
 end)
 
 addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
