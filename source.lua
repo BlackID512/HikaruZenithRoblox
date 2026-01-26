@@ -4017,7 +4017,7 @@ JoinLog = function(plr)
 	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	-- if jLogsEnabled == true then
 	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
-	if plr:IsFriendsWith(me) then
+	if plr:IsFriendsWith(me.UserId) then
 		local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n☑ "..user.." ☑"
 		local webhookMessageText = "☑[connection]☑ 🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
 	end
@@ -4050,7 +4050,7 @@ LeaveLog = function(plr)
 	-- if jLogsEnabled == true then
 	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
-	if plr:IsFriendsWith(me) then
+	if plr:IsFriendsWith(me.UserId) then
 		local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n☑ "..user.." ☑"
 		local webhookMessageText = "☑[connection]☑ 🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
 	end
