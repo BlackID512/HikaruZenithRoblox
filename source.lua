@@ -4008,36 +4008,37 @@ ChatLog = function(player)
 end
 
 JoinLog = function(plr)
+	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
 	local maxPlayers = Players.MaxPlayers
 	local notifyTitleText = "🟢 Server Join"
 	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
+	-- if jLogsEnabled == true then
+	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+	if plr:IsFriendsWith(me) then
+		local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n☑ "..user.." ☑"
+		local webhookMessageText = "☑[connection]☑ 🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+	end
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
-	defNotify(notifyTitle,notifyDesc)
-	-- if jLogsEnabled == true then
-		-- local webhookMessageText = "## 🟢 Joined the server 🟢 Player(s): "..playersCount.."\n`"..user.."`"
-		-- local webhookMessageText = "## 🟢 Joined the server 🟢\n`"..user.."`"
-	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
+	defNotify(notifyTitle,notifyDesc)
 	CreateJoinLabel(plr,plr.UserId)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
 
 LeaveLog = function(plr)
+	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
 	local maxPlayers = Players.MaxPlayers
 	local notifyTitleText = "🔴 Server Leave"
-	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	-- Optional: Determine leave reason
-	local notifyTitle = string.format("%s", notifyTitleText)
-	local notifyDesc = string.format("%s", notifyDescText)
 	local leaveReason = "disconnected"
 	local character = plr.Character
 	if character then
@@ -4047,9 +4048,14 @@ LeaveLog = function(plr)
 		end
 	end
 	-- if jLogsEnabled == true then
-		-- local webhookMessageText = "## 🔴 Left the server 🔴 Player(s): "..playersCount.."\n"..user
-		-- local webhookMessageText = "## 🔴 Left the server 🔴\n`"..user.."`"
+	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
 	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+	if plr:IsFriendsWith(me) then
+		local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n☑ "..user.." ☑"
+		local webhookMessageText = "☑[connection]☑ 🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+	end
+	local notifyTitle = string.format("%s", notifyTitleText)
+	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
 	sendChatWebhook(plr,webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
