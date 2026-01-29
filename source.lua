@@ -13400,7 +13400,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-	local currentTime = Time(()
+	local currentTime = Time()
 	local currentDate = os.date("%d/%m/%Y")
 	local now = currentDate .. ' ' .. currentTime
 	local plr = Players.LocalPlayer
