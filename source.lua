@@ -4088,7 +4088,7 @@ LeaveLog = function(plr)
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, 'join', webhookMessage)
+	sendChatWebhook(plr, 'leave', webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
