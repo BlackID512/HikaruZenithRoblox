@@ -3978,7 +3978,7 @@ function sendChatWebhook(player, msgtype, message)
 	local myId = me.UserId
 	local activeUser = formatUsername(me)
 	local now = getNow()
-	local players = getPlayers ()
+	local players = getUsers()
 	local playersCount = '('..players..')'
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
