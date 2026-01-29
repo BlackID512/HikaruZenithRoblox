@@ -3331,7 +3331,7 @@ function CreateLabel(Name, Text)
 	end
 end
 
-function CreateJoinLabel(plr,ID)
+function CreateJoinLabel(plr, ID, type)
 	if #scroll_3:GetChildren() >= 2546 then
 		scroll_3:ClearAllChildren()
 	end
@@ -3340,6 +3340,12 @@ function CreateJoinLabel(plr,ID)
 	local info2 = Instance.new("TextLabel")
 	local ImageLabel_3 = Instance.new("ImageLabel")
 	local target = formatUsername(plr)
+	local labelIcon = "🟢"
+	local labelText = "Joined"
+	if type:lower() == "leave" then
+		labelIcon = "🔴"
+		labelText = "Leaving"
+	end
 	infoFrame.Name = randomString()
 	infoFrame.Parent = scroll_3
 	infoFrame.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -3350,13 +3356,14 @@ function CreateJoinLabel(plr,ID)
 	info1.Parent = infoFrame
 	info1.BackgroundTransparency = 1
 	info1.BorderSizePixel = 0
-	info1.Position = UDim2.new(0, 45, 0, 0)
+	info1.Position = UDim2.new(0, 15, 0, 0)
 	info1.Size = UDim2.new(0, 135, 1, 0)
 	info1.ZIndex = 10
 	info1.Font = Enum.Font.SourceSans
 	info1.FontSize = Enum.FontSize.Size14
 	-- info1.Text = "Username: "..plr.Name.."\nJoined Server: "..Time()
-	info1.Text = "User:\n"..target.."\nJoined Server: "..Time()
+	-- info1.Text = "User:\n"..target.."\nJoined Server: "..Time()
+	info1.Text = labelIcon.." User:\n"..plr.DisplayName.."\n"..plr.Name
 	info1.TextColor3 = Color3.new(1, 1, 1)
 	info1.TextWrapped = true
 	info1.TextXAlignment = Enum.TextXAlignment.Left
