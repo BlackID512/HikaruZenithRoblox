@@ -13134,7 +13134,8 @@ if IsOnMobile then
 	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
 	-- QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
 	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "🛑"
+	-- QuickCapture.Text = "🛑"
+	QuickCapture.Text = "⚫"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
 	QuickCapture.TextSize = 50
 	QuickCapture.TextWrapped = true
