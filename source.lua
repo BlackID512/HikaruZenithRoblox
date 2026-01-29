@@ -3180,7 +3180,7 @@ function getNow()
 	return now
 end
 
-function getPlayers()
+function getUsers()
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
 	local maxPlayers = Players.MaxPlayers
@@ -4060,12 +4060,12 @@ JoinLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local now = getNow()
-	local players = getPlayers()
-	local notifyTitleText = "🟢 Server Join"
+	local players = getUsers()
+	local notifyTitleText = "🟢 Server Join ("..players..")"
 	-- if jLogsEnabled == true then
-	local notifyDescText = now.."\nPlayer(s): "..players.."\n"..user
+	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
-		notifyDescText = now.."\nPlayer(s): "..players.."\n🔵 "..user.." 🔵"
+		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
@@ -4082,8 +4082,8 @@ LeaveLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local now = getNow()
-	local players = getPlayers()
-	local notifyTitleText = "🔴 Server Leave"
+	local players = getUsers()
+	local notifyTitleText = "🔴 Server Leave ("..players..")"
 	-- Optional: Determine leave reason
 	local leaveReason = "disconnected"
 	local character = plr.Character
@@ -4094,9 +4094,9 @@ LeaveLog = function(plr)
 		end
 	end
 	-- if jLogsEnabled == true then
-	local notifyDescText = now.."\nPlayer(s): "..players.."\n"..user
+	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= speaker then
-		notifyDescText = now.."\nPlayer(s): "..players.."\n🔵 "..user.." 🔵"
+		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
@@ -13128,7 +13128,7 @@ if IsOnMobile then
 	QuickCapture.Name = randomString()
 	--- QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
-	QuickCapture.BackgroundColor3 = Color3.fromRGB(32, 32, 32)
+	QuickCapture.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
 	QuickCapture.BackgroundTransparency = 0.0001
 	QuickCapture.Position = UDim2.new(0.485, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
@@ -13136,7 +13136,7 @@ if IsOnMobile then
 	QuickCapture.Font = Enum.Font.SourceSansBold
 	-- QuickCapture.Text = "🛑"
 	-- QuickCapture.Text = "⚫"
-	QuickCapture.Text = "⨂"
+	QuickCapture.Text = "⚙"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
 	QuickCapture.TextSize = 50
 	QuickCapture.TextWrapped = true
@@ -13414,7 +13414,7 @@ end)
 task.spawn(function()
 	local plr = Players.LocalPlayer
 	local now = getNow()
-	local players = getPlayers()
+	local players = getUsers()
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local notifyDescText = "🔰 Program Initialized 🔰\n"..now.."\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..players
 	local notifyDesc = string.format("%s", notifyDescText)
