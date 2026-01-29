@@ -4004,13 +4004,8 @@ function sendChatWebhook(player, msgtype, message)
 		if player:IsFriendsWith(me.UserId) and player ~= me then
 			isConnection = "✅"
 		end
-		-- if player == me then
-			-- isConnection = "☑"
-		-- end
 		local finalUser = isConnection.." "..user
 		local webhookName = string.format("%s", hz)
-		-- local webhookContentText = '`'..user..'` `'..message..'`'
-		-- local webhookContentText = typeFormat..'\n```yaml\nDT: '..now..'\nUSER: ' ..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContentText = typeFormat..' | '..now..'\n```yaml\nUSER: '..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = string.format("%s", webhookContentText)
 		if not avatar then
