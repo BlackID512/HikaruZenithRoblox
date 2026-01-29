@@ -13357,15 +13357,12 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-	local currentTime = os.time()
-	local currentDate = os.date("%d/%m/%Y", currentTime)
-	local now = currentDate .. ' ' .. currentTime
 	local plr = Players.LocalPlayer
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
 	local maxPlayers = Players.MaxPlayers
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
-	local notifyDescText = "🔰 Program Initialized 🔰\n"..now.."\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	local notifyDescText = "🔰 Program Initialized 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local notifyDesc = string.format("%s", notifyDescText)
 	defNotify('Hikaru Zenith',notifyDesc)
 	local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
