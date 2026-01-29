@@ -3983,13 +3983,13 @@ function sendChatWebhook(player, msgtype, message)
 		local userFormat = formatUsername(player)
 		local user = userFormat
 		local typeFormat = "❔ -"
-		if typeFormat == 'startup' then
+		if msgType == 'startup' then
 			typeFormat = "🔰 STARTUP"
-		elseif typeFormat == 'chat' then
+		elseif msgType == 'chat' then
 			typeFormat = "⚪ CHAT"
-		elseif typeFormat == 'join' then
+		elseif msgType == 'join' then
 			typeFormat = "🟢 JOINED"
-		elseif typeFormat == 'leave' then
+		elseif msgType == 'leave' then
 			typeFormat = "🔴 LEFT"
 		end
 		local isConnection = "⛔"
@@ -13254,7 +13254,7 @@ if not isLegacyChat then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
-			sendChatWebhook(player, message.Text)
+			sendChatWebhook(player, "chat", message.Text)
 		end
 	end)
 end
