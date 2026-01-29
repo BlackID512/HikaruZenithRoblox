@@ -4063,11 +4063,9 @@ JoinLog = function(plr)
 	local players = getPlayers()
 	local notifyTitleText = "🟢 Server Join"
 	-- if jLogsEnabled == true then
-	local notifyDescText = now.."Player(s): "..players.."\n"..user
-	-- local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+	local notifyDescText = now.."\nPlayer(s): "..players.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
-		notifyDescText = now.."Player(s): "..players.."\n🔵 "..user.." 🔵"
-		-- webhookMessageText = "🔵[CONNECTION]🔵 🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+		notifyDescText = now.."\nPlayer(s): "..players.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
@@ -4096,11 +4094,9 @@ LeaveLog = function(plr)
 		end
 	end
 	-- if jLogsEnabled == true then
-	local notifyDescText = now.."Player(s): "..players.."\n"..user
-	-- local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+	local notifyDescText = now.."\nPlayer(s): "..players.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= speaker then
-		notifyDescText = now.."Player(s): "..players.."\n🔵 "..user.." 🔵"
-		-- webhookMessageText = "🔵[CONNECTION]🔵 🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+		notifyDescText = now.."\nPlayer(s): "..players.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
@@ -13126,31 +13122,28 @@ addcmd('testnow',{},function(args, speaker)
 end)
 
 if IsOnMobile then
-	local QuickCapture = Instance.new("TextButton")
-	-- local QuickCapture = Instance.new("ImageButton")
+	local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
 	QuickCapture.Name = randomString()
-	--- QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(1, 1, 1)
 	QuickCapture.BackgroundTransparency = 1
 	QuickCapture.Position = UDim2.new(0.485, 0, 0, 0)
 	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
-	-- QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
-	QuickCapture.Font = Enum.Font.SourceSansBold
-	QuickCapture.Text = "🛑"
-	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 50
-	QuickCapture.TextWrapped = true
+	QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
+	QuickCapture.ImageColor3 = Color3.fromRGB(255, 255, 255)
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
+	
 	UICorner.Name = randomString()
 	UICorner.CornerRadius = UDim.new(0.75, 0)
 	UICorner.Parent = QuickCapture
+	
 	QuickCapture.MouseButton1Click:Connect(function()
 		Cmdbar:CaptureFocus()
 		maximizeHolder()
 	end)
+	
 	table.insert(shade1, QuickCapture)
 	table.insert(text1, QuickCapture)
 end
@@ -13426,7 +13419,7 @@ task.spawn(function()
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, 'starttup', webhookMessage)
+	sendChatWebhook(plr, 'startup', webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	-- defNotify('Startup','Step 01')
