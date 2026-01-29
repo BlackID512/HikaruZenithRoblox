@@ -4079,25 +4079,16 @@ LeaveLog = function(plr)
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
-	-- Optional: Determine leave reason
-	local leaveReason = "disconnected"
-	local character = plr.Character
-	if character then
-		local humanoid = character:FindFirstChildOfClass("Humanoid")
-		if humanoid and humanoid.Health <= 0 then
-			leaveReason = "died"
-		end
-	end
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr ~= speaker then
+	if plr:IsFriendsWith(me.UserId) and plr ~= me then
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, 'leave', webhookMessage)
+	sendChatWebhook(plr, 'join', webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
