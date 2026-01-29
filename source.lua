@@ -3358,7 +3358,7 @@ function CreateJoinLabel(plr, ID, type)
 	info1.Parent = infoFrame
 	info1.BackgroundTransparency = 1
 	info1.BorderSizePixel = 0
-	info1.Position = UDim2.new(0, 15, 0, 0)
+	info1.Position = UDim2.new(0, 45, 0, 0)
 	info1.Size = UDim2.new(0, 135, 1, 0)
 	info1.ZIndex = 10
 	info1.Font = Enum.Font.SourceSans
@@ -3391,7 +3391,7 @@ function CreateJoinLabel(plr, ID, type)
 	ImageLabel_3.Image = Players:GetUserThumbnailAsync(ID, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
 	scroll_3.CanvasSize = UDim2.new(0, 0, 0, listlayout.AbsoluteContentSize.Y)
 	scroll_3.CanvasPosition = Vector2.new(0,scroll_2.CanvasPosition.Y+infoFrame.AbsoluteSize.Y)
-	-- wait()
+	wait()
 	-- local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
 	-- local json = HttpService:JSONDecode(user)
 	-- local date = json["created"]:sub(1,10)
