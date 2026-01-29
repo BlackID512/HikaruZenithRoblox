@@ -3962,9 +3962,9 @@ function sendChatWebhook(player, msgtype, message)
 	local me = Players.LocalPlayer
 	local myId = me.UserId
 	local activeUser = formatUsername(me)
--- 	local currentTime = os.time()
--- 	local currentDate = os.date("%d/%m/%Y", currentTime)
--- 	local now = currentDate .. ' ' .. currentTime
+	local currentTime = Time()
+	local currentDate = os.date("%d/%m/%Y")
+	local now = currentDate .. ' ' .. currentTime
 	local currentPlayers = #Players:GetPlayers()
 	local maxPlayers = Players.MaxPlayers
 	local playersCount = '('..currentPlayers..'/'..maxPlayers..')'
@@ -13400,8 +13400,8 @@ task.spawn(function()
 end)
 
 task.spawn(function()
-	local currentTime = os.time()
-	local currentDate = os.date("%d/%m/%Y", currentTime)
+	local currentTime = Time(()
+	local currentDate = os.date("%d/%m/%Y")
 	local now = currentDate .. ' ' .. currentTime
 	local plr = Players.LocalPlayer
 	local currentPlayers = Players:GetPlayers()
