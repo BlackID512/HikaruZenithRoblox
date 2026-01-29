@@ -3990,13 +3990,13 @@ function sendChatWebhook(player, msgtype, message)
 		local userFormat = formatUsername(player)
 		local user = userFormat
 		local typeFormat = '❔ -'
-		if msgtype == 'startup' then
+		if msgtype:lower() == 'startup' then
 			typeFormat = '🔰 STARTUP'
-		elseif msgtype == 'chat' then
+		elseif msgtype:lower() == 'chat' then
 			typeFormat = '⚪ CHAT'
-		elseif msgtype == 'join' then
+		elseif msgtype:lower() == 'join' then
 			typeFormat = '🟢 JOINED'
-		elseif msgtype == 'leave' then
+		elseif msgtype:lower() == 'leave' then
 			typeFormat = '🔴 LEFT'
 		end
 		local isConnection = "⛔"
