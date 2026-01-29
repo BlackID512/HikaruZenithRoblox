@@ -3173,6 +3173,13 @@ function Time()
 	return HOUR .. ':' .. MINUTE .. ':' .. SECOND .. ' ' .. AP
 end
 
+function getNow()
+	local currentTime = os.time()
+	local currentDate = os.date("%d/%m/%Y %H:%M:%S", currentTime)
+	local now = currentDate
+	return now
+end
+
 PrefixBox.Text = prefix
 local SettingsOpen = false
 local isHidden = false
@@ -3324,6 +3331,7 @@ function CreateJoinLabel(plr,ID)
 	local info1 = Instance.new("TextLabel")
 	local info2 = Instance.new("TextLabel")
 	local ImageLabel_3 = Instance.new("ImageLabel")
+	local target = formatUsername(plr)
 	infoFrame.Name = randomString()
 	infoFrame.Parent = scroll_3
 	infoFrame.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -3339,7 +3347,8 @@ function CreateJoinLabel(plr,ID)
 	info1.ZIndex = 10
 	info1.Font = Enum.Font.SourceSans
 	info1.FontSize = Enum.FontSize.Size14
-	info1.Text = "Username: "..plr.Name.."\nJoined Server: "..Time()
+	-- info1.Text = "Username: "..plr.Name.."\nJoined Server: "..Time()
+	info1.Text = "User:\n"..target.."\nJoined Server: "..Time()
 	info1.TextColor3 = Color3.new(1, 1, 1)
 	info1.TextWrapped = true
 	info1.TextXAlignment = Enum.TextXAlignment.Left
@@ -3955,16 +3964,44 @@ if not writefileExploit() then
 end
 
 avatarcache = {}
-function sendChatWebhook(player, message)
+-- function sendChatWebhook(player, message)
+function sendChatWebhook(player, msgtype, message)
+	local me = Players.LocalPlayer
+	local myId = me.UserId
+	local activeUser = formatUsername(me)
+	local now = getNow()
+	local currentPlayers = #Players:GetPlayers()
+	local maxPlayers = Players.MaxPlayers
+	local playersCount = '('..currentPlayers..'/'..maxPlayers..')'
+	local Asset = MarketplaceService:GetProductInfo(PlaceId)
+	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
 	if httprequest and vtype(logsWebhook, "string") then
 		local id = player.UserId
 		local avatar = avatarcache[id]
-		local hz = "Hikaru Zenith"
-		local user = formatUsername(player)
+		-- local hz = "Hikaru Zenith"
+		local hz = "Hikaru Zenith ["..activeUser.."]"
+		local userFormat = formatUsername(player)
+		local user = userFormat
+		local typeFormat = "❔ -"
+		if typeFormat == 'startup' then
+			typeFormat = "🔰 STARTUP"
+		elseif typeFormat == 'chat' then
+			typeFormat = "⚪ CHAT"
+		elseif typeFormat == 'join' then
+			typeFormat = "🟢 JOINED"
+		elseif typeFormat == 'leave' then
+			typeFormat = "🔴 LEFT"
+		end
+		local isConnection = "⛔"
+		if player:IsFriendsWith(me.UserId) and player ~= me then
+			isConnection = "✅"
+		end
+		local finalUser = isConnection.." "..user
 		local webhookName = string.format("%s", hz)
-		local webhookContentText = '`'..user..'` `'..message..'`'
+		-- local webhookContentText = '`'..user..'` `'..message..'`'
+		-- local webhookContentText = typeFormat..'\n```yaml\nDT: '..now..'\nUSER: ' ..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = typeFormat..'\n```yaml\nDT: '..now..'USER: ' ..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = string.format("%s", webhookContentText)
-		-- local webhookContent = user..' `'..message..'`'
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
 				-- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
@@ -4002,7 +4039,8 @@ ChatLog = function(player)
 			-- local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
 			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
-			sendChatWebhook(player, webhookMessage)
+			-- sendChatWebhook(player, webhookMessage)
+			sendChatWebhook(player, "chat", webhookMessage)
 		end
 	end)
 end
@@ -4016,15 +4054,16 @@ JoinLog = function(plr)
 	local notifyTitleText = "🟢 Server Join"
 	-- if jLogsEnabled == true then
 	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
-	local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+	-- local webhookMessageText = "🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
 		notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n🔵 "..user.." 🔵"
-		webhookMessageText = "🔵[CONNECTION]🔵 🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
+		-- webhookMessageText = "🔵[CONNECTION]🔵 🟢 Joined the server 🟢 Player(s): "..playersCount.."/"..maxPlayers
 	end
+	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr,webhookMessage)
+	sendChatWebhook(plr, "join", webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
 	CreateJoinLabel(plr,plr.UserId)
 		-- notify(notifyTitle,notifyDesc)
@@ -4049,15 +4088,16 @@ LeaveLog = function(plr)
 	end
 	-- if jLogsEnabled == true then
 	local notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n"..user
-	local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+	-- local webhookMessageText = "🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
 	if plr:IsFriendsWith(me.UserId) and plr ~= speaker then
 		notifyDescText = "Player(s): "..playersCount.."/"..maxPlayers.."\n🔵 "..user.." 🔵"
-		webhookMessageText = "🔵[CONNECTION]🔵 🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
+		-- webhookMessageText = "🔵[CONNECTION]🔵 🔴 Left the server 🔴 Player(s): "..playersCount.."/"..maxPlayers
 	end
+	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr,webhookMessage)
+	sendChatWebhook(plr, "leave", webhookMessage)
 	defNotify(notifyTitle,notifyDesc)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
@@ -13365,17 +13405,19 @@ task.spawn(function()
 end)
 
 task.spawn(function()
+	local now = getNow()
 	local plr = Players.LocalPlayer
 	local currentPlayers = Players:GetPlayers()
 	local playersCount = #currentPlayers
 	local maxPlayers = Players.MaxPlayers
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
-	local notifyDescText = "🔰 Program Initialized 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	local notifyDescText = "🔰 Program Initialized 🔰\n"..now.."\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local notifyDesc = string.format("%s", notifyDescText)
 	defNotify('Hikaru Zenith',notifyDesc)
-	local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
+	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr,webhookMessage)
+	sendChatWebhook(plr, "startup", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	-- defNotify('Startup','Step 01')
