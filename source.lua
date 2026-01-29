@@ -3340,6 +3340,8 @@ function CreateJoinLabel(plr, ID, type)
 	local info2 = Instance.new("TextLabel")
 	local ImageLabel_3 = Instance.new("ImageLabel")
 	local target = formatUsername(plr)
+	local now = getNow()
+	local players = getUsers()
 	local labelIcon = "🟢"
 	local labelText = "Joined"
 	if type:lower() == "leave" then
@@ -3376,7 +3378,8 @@ function CreateJoinLabel(plr, ID, type)
 	info2.ZIndex = 10
 	info2.Font = Enum.Font.SourceSans
 	info2.FontSize = Enum.FontSize.Size14
-	info2.Text = "User ID: "..ID.."\nAccount Age: "..plr.AccountAge.."\nJoined Roblox: Loading..."
+	-- info2.Text = "User ID: "..ID.."\nAccount Age: "..plr.AccountAge.."\nJoined Roblox: Loading..."
+	info2.Text = Time().."\nPlayer(s): "..players.."\nUser ID: "..ID
 	info2.TextColor3 = Color3.new(1, 1, 1)
 	info2.TextWrapped = true
 	info2.TextXAlignment = Enum.TextXAlignment.Left
@@ -3388,13 +3391,12 @@ function CreateJoinLabel(plr, ID, type)
 	ImageLabel_3.Image = Players:GetUserThumbnailAsync(ID, Enum.ThumbnailType.AvatarThumbnail, Enum.ThumbnailSize.Size420x420)
 	scroll_3.CanvasSize = UDim2.new(0, 0, 0, listlayout.AbsoluteContentSize.Y)
 	scroll_3.CanvasPosition = Vector2.new(0,scroll_2.CanvasPosition.Y+infoFrame.AbsoluteSize.Y)
-	wait()
-	local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
-	local json = HttpService:JSONDecode(user)
-	local date = json["created"]:sub(1,10)
-	local splitDates = string.split(date,"-")
+	-- wait()
+	-- local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
+	-- local json = HttpService:JSONDecode(user)
+	-- local date = json["created"]:sub(1,10)
+	-- local splitDates = string.split(date,"-")
 	-- info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
-	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[3].."/"..splitDates[2].."/"..splitDates[1])
 end
 
 HZMouse.KeyDown:Connect(function(Key)
