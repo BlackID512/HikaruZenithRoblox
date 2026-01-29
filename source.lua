@@ -4004,9 +4004,9 @@ function sendChatWebhook(player, msgtype, message)
 		if player:IsFriendsWith(me.UserId) and player ~= me then
 			isConnection = "✅"
 		end
-		if player == me then
-			isConnection = "☑"
-		end
+		-- if player == me then
+			-- isConnection = "☑"
+		-- end
 		local finalUser = isConnection.." "..user
 		local webhookName = string.format("%s", hz)
 		-- local webhookContentText = '`'..user..'` `'..message..'`'
