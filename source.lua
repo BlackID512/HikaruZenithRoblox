@@ -3331,7 +3331,7 @@ function CreateLabel(Name, Text)
 	end
 end
 
-function CreateJoinLabel(plr, ID, type)
+function CreateJoinLabel(plr,ID)
 	if #scroll_3:GetChildren() >= 2546 then
 		scroll_3:ClearAllChildren()
 	end
@@ -3340,14 +3340,6 @@ function CreateJoinLabel(plr, ID, type)
 	local info2 = Instance.new("TextLabel")
 	local ImageLabel_3 = Instance.new("ImageLabel")
 	local target = formatUsername(plr)
-	local now = getNow()
-	local players = getUsers()
-	local labelIcon = "🟢"
-	local labelText = "Joined"
-	if type:lower() == "leave" then
-		labelIcon = "🔴"
-		labelText = "Leaving"
-	end
 	infoFrame.Name = randomString()
 	infoFrame.Parent = scroll_3
 	infoFrame.BackgroundColor3 = Color3.new(1, 1, 1)
@@ -3364,8 +3356,7 @@ function CreateJoinLabel(plr, ID, type)
 	info1.Font = Enum.Font.SourceSans
 	info1.FontSize = Enum.FontSize.Size14
 	-- info1.Text = "Username: "..plr.Name.."\nJoined Server: "..Time()
-	-- info1.Text = "User:\n"..target.."\nJoined Server: "..Time()
-	info1.Text = labelIcon.." User:\n"..plr.DisplayName.."\n"..plr.Name
+	info1.Text = "User:\n"..target.."\nJoined Server: "..Time()
 	info1.TextColor3 = Color3.new(1, 1, 1)
 	info1.TextWrapped = true
 	info1.TextXAlignment = Enum.TextXAlignment.Left
@@ -3378,8 +3369,7 @@ function CreateJoinLabel(plr, ID, type)
 	info2.ZIndex = 10
 	info2.Font = Enum.Font.SourceSans
 	info2.FontSize = Enum.FontSize.Size14
-	-- info2.Text = "User ID: "..ID.."\nAccount Age: "..plr.AccountAge.."\nJoined Roblox: Loading..."
-	info2.Text = Time().."\nPlayer(s): "..players.."\nUser ID: "..ID
+	info2.Text = "User ID: "..ID.."\nAccount Age: "..plr.AccountAge.."\nJoined Roblox: Loading..."
 	info2.TextColor3 = Color3.new(1, 1, 1)
 	info2.TextWrapped = true
 	info2.TextXAlignment = Enum.TextXAlignment.Left
@@ -3392,11 +3382,12 @@ function CreateJoinLabel(plr, ID, type)
 	scroll_3.CanvasSize = UDim2.new(0, 0, 0, listlayout.AbsoluteContentSize.Y)
 	scroll_3.CanvasPosition = Vector2.new(0,scroll_2.CanvasPosition.Y+infoFrame.AbsoluteSize.Y)
 	wait()
-	-- local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
-	-- local json = HttpService:JSONDecode(user)
-	-- local date = json["created"]:sub(1,10)
-	-- local splitDates = string.split(date,"-")
+	local user = game:HttpGet("https://users.roblox.com/v1/users/"..ID)
+	local json = HttpService:JSONDecode(user)
+	local date = json["created"]:sub(1,10)
+	local splitDates = string.split(date,"-")
 	-- info2.Text = string.gsub(info2.Text, "Loading...",splitDates[2].."/"..splitDates[3].."/"..splitDates[1])
+	info2.Text = string.gsub(info2.Text, "Loading...",splitDates[3].."/"..splitDates[2].."/"..splitDates[1])
 end
 
 HZMouse.KeyDown:Connect(function(Key)
