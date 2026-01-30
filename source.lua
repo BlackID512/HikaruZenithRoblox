@@ -3982,7 +3982,7 @@ end
 
 avatarcache = {}
 -- function sendChatWebhook(player, message)
-function sendChatWebhook(player, msgtype, message)
+function sendChatWebhook(player, content, message)
 	local me = Players.LocalPlayer
 	local myId = me.UserId
 	local activeUser = formatUsername(me)
@@ -3999,23 +3999,17 @@ function sendChatWebhook(player, msgtype, message)
 		local hz = "Hikaru Zenith ["..activeUser.."]"
 		local userFormat = formatUsername(player)
 		local user = userFormat
-		local typeFormat = '❔ -'
-		if msgtype:lower() == 'startup' then
-			typeFormat = '🔰 STARTUP'
-		elseif msgtype:lower() == 'chat' then
-			typeFormat = '⚪ CHAT'
-		elseif msgtype:lower() == 'join' then
-			typeFormat = '🟢 JOINED'
-		elseif msgtype:lower() == 'leave' then
-			typeFormat = '🔴 LEFT'
+		if content == nil then
+			content = '❔ -'
 		end
+		local finalContent = tostring(content)
 		local isConnection = "⛔"
 		if target:IsFriendsWith(me.UserId) and target ~= me then
 			isConnection = "✅"
 		end
 		local finalUser = isConnection.." "..user
 		local webhookName = string.format("%s", hz)
-		local webhookContentText = typeFormat..' | '..now..'\n```yaml\nUSER: '..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = string.format("%s", webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
@@ -4055,7 +4049,7 @@ ChatLog = function(player)
 			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
 			-- sendChatWebhook(player, webhookMessage)
-			sendChatWebhook(player, 'chat', webhookMessage)
+			sendChatWebhook(player, "⚪ CHAT", webhookMessage)
 		end
 	end)
 end
@@ -4077,7 +4071,7 @@ JoinLog = function(plr)
 	local webhookMessage = string.format("%s", webhookMessageText)
 	defNotify(notifyTitle,notifyDesc)
 	CreateJoinLabel(plr, plr.UserId, 'join')
-	sendChatWebhook(plr, 'join', webhookMessage)
+	sendChatWebhook(plr, "🟢 JOINED", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
@@ -4114,7 +4108,7 @@ LeaveLog = function(plr)
 	print('[DEBUG] LeaveLog Step 13')
 	CreateJoinLabel(plr, plr.UserId, 'leave')
 	print('[DEBUG] LeaveLog Step 14')
-	sendChatWebhook(plr, 'leave', webhookMessage)
+	sendChatWebhook(plr, "🔴 LEFT", webhookMessage)
 	print('[DEBUG] LeaveLog Step 15')
 		-- notify(notifyTitle,notifyDesc)
 	-- end
@@ -13273,7 +13267,7 @@ if not isLegacyChat then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
-			sendChatWebhook(player, 'chat', message.Text)
+			sendChatWebhook(player, "⚪ CHAT", message.Text)
 		end
 	end)
 end
@@ -13434,7 +13428,7 @@ task.spawn(function()
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, 'startup', webhookMessage)
+	sendChatWebhook(plr, "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
