@@ -4083,23 +4083,39 @@ JoinLog = function(plr)
 end
 
 LeaveLog = function(plr)
+	print('[DEBUG] LeaveLog Step 01')
 	local me = Players.LocalPlayer
+	print('[DEBUG] LeaveLog Step 02')
 	local user = formatUsername(plr)
+	print('[DEBUG] LeaveLog Step 03')
 	local now = getNow()
+	print('[DEBUG] LeaveLog Step 04')
 	local players = getUsers()
+	print('[DEBUG] LeaveLog Step 05')
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
+	print('[DEBUG] LeaveLog Step 06')
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
+	print('[DEBUG] LeaveLog Step 07a')
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+		print('[DEBUG] LeaveLog Step 07b')
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
+	print('[DEBUG] LeaveLog Step 08')
 	local webhookMessageText = '-'
+	print('[DEBUG] LeaveLog Step 09')
 	local notifyTitle = string.format("%s", notifyTitleText)
+	print('[DEBUG] LeaveLog Step 10')
 	local notifyDesc = string.format("%s", notifyDescText)
+	print('[DEBUG] LeaveLog Step 11')
 	local webhookMessage = string.format("%s", webhookMessageText)
+	print('[DEBUG] LeaveLog Step 12')
 	sendChatWebhook(plr, 'leave', webhookMessage)
+	print('[DEBUG] LeaveLog Step 13')
 	defNotify(notifyTitle,notifyDesc)
+	print('[DEBUG] LeaveLog Step 14')
 	CreateJoinLabel(plr, plr.UserId, 'leave')
+	print('[DEBUG] LeaveLog Step 15')
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
