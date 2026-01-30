@@ -3992,6 +3992,7 @@ function sendChatWebhook(player, msgtype, message)
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
 	if httprequest and vtype(logsWebhook, "string") then
+		local target = player
 		local id = player.UserId
 		local avatar = avatarcache[id]
 		-- local hz = "Hikaru Zenith"
@@ -4009,8 +4010,7 @@ function sendChatWebhook(player, msgtype, message)
 			typeFormat = '🔴 LEFT'
 		end
 		local isConnection = "⛔"
-		-- if player:IsFriendsWith(me.UserId) and player ~= me then
-		if player:IsFriendsWith(me.UserId) and player ~= me then
+		if target:IsFriendsWith(me.UserId) and target ~= me then
 			isConnection = "✅"
 		end
 		local finalUser = isConnection.." "..user
