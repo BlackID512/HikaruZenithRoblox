@@ -13092,7 +13092,7 @@ addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
 end)
 
-addcmd("performance", {"perf"}, function(args, speaker)
+addcmd("performance", {"perf","perfmon"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/performance.lua'))()
 end)
 
