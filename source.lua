@@ -4570,6 +4570,7 @@ end
 CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
+CMDs[#CMDs + 1] = {NAME = 'performance / perf', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
@@ -13089,6 +13090,10 @@ end)
 
 addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
+end)
+
+addcmd("performance", {"perf"}, function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/performance.lua'))()
 end)
 
 addcmd("emotes", {}, function(args, speaker)
