@@ -3982,7 +3982,7 @@ end
 
 avatarcache = {}
 -- function sendChatWebhook(player, message)
-function sendChatWebhook(player, content, message)
+function sendChatWebhook(player, playername, content, message)
 	local me = Players.LocalPlayer
 	local myId = me.UserId
 	local activeUser = formatUsername(me)
@@ -4003,13 +4003,8 @@ function sendChatWebhook(player, content, message)
 			content = '❔ -'
 		end
 		local finalContent = tostring(content)
-		local isConnection = "⛔"
-		if target:IsFriendsWith(me.UserId) and target ~= me then
-			isConnection = "✅"
-		end
-		local finalUser = isConnection.." "..user
 		local webhookName = string.format("%s", hz)
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..finalUser..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..playername..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = string.format("%s", webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
@@ -4039,6 +4034,7 @@ end
 
 ChatLog = function(player)
 	local user = formatUsername(player)
+	local connectionUser = formatConnection(player)
 	player.Chatted:Connect(function(message)
 		local chat = string.format("%s", message)
 		if logsEnabled == true then
@@ -4049,7 +4045,7 @@ ChatLog = function(player)
 			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
 			-- sendChatWebhook(player, webhookMessage)
-			sendChatWebhook(player, "⚪ CHAT", webhookMessage)
+			sendChatWebhook(player, connectionUser, "⚪ CHAT", webhookMessage)
 		end
 	end)
 end
@@ -4057,6 +4053,7 @@ end
 JoinLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
+	local connectionUser = formatConnection(plr)
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🟢 Server Join ("..players..")"
@@ -4071,7 +4068,7 @@ JoinLog = function(plr)
 	local webhookMessage = string.format("%s", webhookMessageText)
 	defNotify(notifyTitle,notifyDesc)
 	CreateJoinLabel(plr, plr.UserId, 'join')
-	sendChatWebhook(plr, "🟢 JOINED", webhookMessage)
+	sendChatWebhook(plr, connectionUser, "🟢 JOINED", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
@@ -4081,6 +4078,7 @@ LeaveLog = function(plr)
 	local me = Players.LocalPlayer
 	print('[DEBUG] LeaveLog Step 02')
 	local user = formatUsername(plr)
+	local connectionUser = formatConnection(plr)
 	print('[DEBUG] LeaveLog Step 03')
 	local now = getNow()
 	print('[DEBUG] LeaveLog Step 04')
@@ -4108,7 +4106,7 @@ LeaveLog = function(plr)
 	print('[DEBUG] LeaveLog Step 13')
 	CreateJoinLabel(plr, plr.UserId, 'leave')
 	print('[DEBUG] LeaveLog Step 14')
-	sendChatWebhook(plr, "🔴 LEFT", webhookMessage)
+	sendChatWebhook(plr, connectionUser "🔴 LEFT", webhookMessage)
 	print('[DEBUG] LeaveLog Step 15')
 		-- notify(notifyTitle,notifyDesc)
 	-- end
@@ -4570,7 +4568,7 @@ end
 CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
-CMDs[#CMDs + 1] = {NAME = 'performance / perf', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
@@ -5711,6 +5709,17 @@ function formatUsername(player)
 		return string.format("%s (%s)", player.DisplayName, player.Name)
 	end
 	return player.Name
+end
+
+function formatConnection(player)
+	local me = Players.LocalPlayer
+	local isConnection = "⛔"
+	if player:IsFriendsWith(me.UserId) and player ~= me then
+		isConnection = "✅"
+	end
+	local result = formatUsername(player)
+	local finalResult = isConnection.." "..result
+	return finalResult
 end
 
 getprfx=function(strn)
@@ -13263,6 +13272,7 @@ if not isLegacyChat then
 	TextChatService.MessageReceived:Connect(function(message)
 		if message.TextSource then
 			local player = Players:GetPlayerByUserId(message.TextSource.UserId)
+			local connectionUser = formatConnection(player)
 			if not player then return end
 
 			if logsEnabled == true then
@@ -13272,7 +13282,7 @@ if not isLegacyChat then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
-			sendChatWebhook(player, "⚪ CHAT", message.Text)
+			sendChatWebhook(player, connectionUser, "⚪ CHAT", message.Text)
 		end
 	end)
 end
@@ -13425,6 +13435,7 @@ end)
 task.spawn(function()
 	local plr = Players.LocalPlayer
 	local now = getNow()
+	local connectionUser = formatConnection(plr)
 	local players = getUsers()
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local notifyDescText = "🔰 Program Initialized 🔰\n"..now.."\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..players
@@ -13433,7 +13444,7 @@ task.spawn(function()
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, "🔰 STARTUP", webhookMessage)
+	sendChatWebhook(plr, connectionUser, "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
