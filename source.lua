@@ -13138,7 +13138,7 @@ if IsOnMobile then
 	-- QuickCapture.Text = "⚫"
 	QuickCapture.Text = "⚙"
 	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
-	QuickCapture.TextSize = 35
+	QuickCapture.TextSize = 25
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
