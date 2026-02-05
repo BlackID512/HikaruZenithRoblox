@@ -3999,9 +3999,9 @@ function sendChatWebhook(player, content, message)
 		local hz = "Hikaru Zenith ["..activeUser.."]"
 		local userFormat = formatUsername(player)
 		local user = userFormat
-		if content == nil then
-			content = '❔ -'
-		end
+		-- if content == nil then
+			-- content = '❔ -'
+		-- end
 		local finalContent = tostring(content)
 		local webhookName = string.format("%s", hz)
 		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userFormat..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
@@ -4043,7 +4043,6 @@ ChatLog = function(player)
 			-- local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
 			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
-			-- sendChatWebhook(player, webhookMessage)
 			sendChatWebhook(player, "⚪ CHAT", webhookMessage)
 		end
 	end)
@@ -4081,7 +4080,7 @@ LeaveLog = function(plr)
 	local notifyDescText = now.."\n"..user
 	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
 		-- notifyDescText = now.."\n🔵 "..user.." 🔵"
-	end
+	-- end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
