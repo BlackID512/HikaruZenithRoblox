@@ -13113,6 +13113,11 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
+addcmd("volumecheck",{"volcheck","vcheck"}, function(args, speaker)
+	local vol = UserSettings():GetService("UserGameSettings").MasterVolume
+	notify('Current Volume',tostring(vol))
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
