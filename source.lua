@@ -8019,7 +8019,14 @@ addcmd("cancelteleport", {"canceltp"}, function(args, speaker)
 end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
+	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local currentVolume2 = currentVolume/10
 	UserSettings():GetService("UserGameSettings").MasterVolume = args[1]/10
+	local newVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local newVolume2 = newVolume/10
+	local notifyDescText = 'Current: ' .. currentVolume .. '(' .. currentVolume2 .. ')\nNew: ' .. newVolume .. '(' .. newVolume2 .. ')'
+	local notifyDesc = tostring(notifyDescText)
+	notify('Master Volume',notifyDesc)
 end)
 
 addcmd("antilag", {"boostfps", "lowgraphics"}, function(args, speaker)
