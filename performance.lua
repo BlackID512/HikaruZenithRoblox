@@ -16,7 +16,7 @@ label.Font = Enum.Font.Code
 label.TextSize = 16
 label.TextXAlignment = Enum.TextXAlignment.Right
 label.RichText = true
-label.Text = "FPS: 0 | Latency: 0"
+label.Text = "FPS: 0 | Latency: 0ms"
 
 local lastTick = tick()
 local frameCount = 0
@@ -34,8 +34,10 @@ RunService.RenderStepped:Connect(function()
 		and Stats.Network.ServerStatsItem["Data Ping"]:GetValue()
 	ping = ping and math.floor(ping) or "?"
 
-	local fpsColor = fps >= 60 and Color3.fromRGB(0, 255, 0)
-		or (fps >= 30 and Color3.fromRGB(255, 255, 0) or Color3.fromRGB(255, 0, 0))
+	-- local fpsColor = fps >= 60 and Color3.fromRGB(0, 255, 0)
+	local fpsColor = fps >= 30 and Color3.fromRGB(0, 255, 0)
+		-- or (fps >= 30 and Color3.fromRGB(255, 255, 0) or Color3.fromRGB(255, 0, 0))
+		or (fps >= 15 and Color3.fromRGB(255, 255, 0) or Color3.fromRGB(255, 0, 0))
 	local pingColor = ping ~= "?"
 			and (ping <= 80 and Color3.fromRGB(0, 255, 0) or (ping <= 150 and Color3.fromRGB(255, 255, 0) or Color3.fromRGB(
 				255,
@@ -45,7 +47,7 @@ RunService.RenderStepped:Connect(function()
 		or Color3.fromRGB(200, 200, 200)
 
 	label.Text = string.format(
-		'<font color="rgb(%d,%d,%d)">FPS: %d</font> | <font color="rgb(%d,%d,%d)">Latency: %s</font>',
+		'FPS: <font color="rgb(%d,%d,%d)">%d</font> | Latency: <font color="rgb(%d,%d,%d)">%s</font>ms',
 		fpsColor.R * 255,
 		fpsColor.G * 255,
 		fpsColor.B * 255,
