@@ -13115,7 +13115,8 @@ end)
 
 addcmd("volumecheck",{"volcheck","vcheck"}, function(args, speaker)
 	local vol = UserSettings():GetService("UserGameSettings").MasterVolume
-	notify('Current Volume',tostring(vol))
+	local mastervolume = vol / 10
+	notify('Current Volume',tostring(mastervolume))
 end)
 
 addcmd('testnow',{},function(args, speaker)
