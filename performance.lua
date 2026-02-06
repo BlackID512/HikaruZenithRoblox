@@ -16,7 +16,7 @@ label.Font = Enum.Font.Code
 label.TextSize = 16
 label.TextXAlignment = Enum.TextXAlignment.Right
 label.RichText = true
-label.Text = "FPS: 0 | Latency: 0ms"
+label.Text = "FPS: 0\nLatency: 0ms"
 
 local lastTick = tick()
 local frameCount = 0
@@ -47,7 +47,7 @@ RunService.RenderStepped:Connect(function()
 		or Color3.fromRGB(200, 200, 200)
 
 	label.Text = string.format(
-		'FPS: <font color="rgb(%d,%d,%d)">%d</font> | Latency: <font color="rgb(%d,%d,%d)">%s</font>ms',
+		'FPS: <font color="rgb(%d,%d,%d)">%d</font>\nLatency: <font color="rgb(%d,%d,%d)">%s</font>ms',
 		fpsColor.R * 255,
 		fpsColor.G * 255,
 		fpsColor.B * 255,
