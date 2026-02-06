@@ -8,13 +8,13 @@ screenGui.Parent = game:GetService("CoreGui")
 local label = Instance.new("TextLabel", screenGui)
 label.Size = UDim2.new(0, 300, 0, 20)
 label.AnchorPoint = Vector2.new(1, 0)
-label.Position = UDim2.new(1, -5, 0, 0)
+label.Position = UDim2.new(0, 50, 0, 0)
 label.BackgroundTransparency = 1
 label.TextColor3 = Color3.fromRGB(255, 255, 255)
 label.TextStrokeTransparency = 0.5
 label.Font = Enum.Font.Code
 label.TextSize = 16
-label.TextXAlignment = Enum.TextXAlignment.Right
+label.TextXAlignment = Enum.TextXAlignment.Left
 label.RichText = true
 label.Text = "FPS: 0\nLatency: 0ms"
 
