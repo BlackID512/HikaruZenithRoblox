@@ -8019,16 +8019,28 @@ addcmd("cancelteleport", {"canceltp"}, function(args, speaker)
 end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
-	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-	local currentVolume2 = currentVolume/10
-	UserSettings():GetService("UserGameSettings").MasterVolume = args[1]/10
-	local newVolumeArg = args[1]
-	local newVolumeArg2 = newVolumeArg/10
-	local newVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-	local newVolume2 = newVolume/10
-	local notifyDescText = 'Argument: ' .. newVolumeArg .. '(' .. newVolumeArg2 .. '\nCurrent: ' .. currentVolume .. '(' .. currentVolume2 .. ')\nNew: ' .. newVolume .. '(' .. newVolume2 .. ')'
-	local notifyDesc = tostring(notifyDescText)
-	notify('Master Volume',notifyDesc)
+	if isNumber(args[1]) then
+		local argument = args[1]
+		if argument < 0 then
+			argument = 0
+		elseif argument > 10 then
+			argument = 10
+		else
+			argument = args[1]
+		end
+		local newVolumeArg = argument
+		local newVolumeArg2 = newVolumeArg/10
+		local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+		local currentVolume2 = currentVolume/10
+		UserSettings():GetService("UserGameSettings").MasterVolume = argument/10
+		local newVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+		local newVolume2 = newVolume/10
+		local notifyDescText = 'Argument: ' .. newVolumeArg .. ' (' .. newVolumeArg2 .. ')\nCurrent: ' .. currentVolume .. ' (' .. currentVolume2 .. ')\nNew: ' .. newVolume .. ' (' .. newVolume2 .. ')'
+		local notifyDesc = tostring(notifyDescText)
+		notify('Master Volume',notifyDesc)
+	else
+		notify('Master Volume','Usage: volume (0-10)')
+	end
 end)
 
 addcmd("antilag", {"boostfps", "lowgraphics"}, function(args, speaker)
@@ -13082,10 +13094,6 @@ addcmd("about", {}, function(args, speaker)
 	notify(title,descText)
 end)
 
-addcmd("jumpbutton", {"jbutton","jb"}, function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/JumpButtonModify'))()
-end)
-
 addcmd("virtualkeyboard", {"virtualkb","vkb"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/VirtualKeyboard.lua'))()
 end)
@@ -13122,10 +13130,33 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
+addcmd('jumpbuttonsize',{'jbsize','jbs'},function(args, speaker)
+	local target = args[1]
+	if isNumber(target) == false then
+		notify('Jump Button','Usage: jbsize (integer)')
+	end
+	local newSize = toNumber(target)
+	local jumpButton = game:GetService("Players").LocalPlayer.PlayerGui.TouchGui.TouchControlFrame.JumpButton
+	jumpButton.Size = UDim2.new(0, newSize, 0, newSize)
+end)
+
 addcmd("volumecheck",{"volcheck","vcheck"}, function(args, speaker)
 	local vol = UserSettings():GetService("UserGameSettings").MasterVolume
 	local mastervolume = vol / 10
 	notify('Current Volume',tostring(mastervolume))
+end)
+
+addcmd("volumeup",{"volup","vup"}, function(args, speaker)
+	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local newVolume = 0.1
+	if vol == 1 then
+		newVolume = 0
+	end
+	UserSettings():GetService("UserGameSettings").MasterVolume = currentVolume + newVolume
+	local lastVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local notifyDescText = 'Old volume: ' .. currentVolume*10 .. '\nNew Volume: ' .. lastVolume*10
+	local notifyDesc = tostring(notifyDescText)
+	notify('Volume Up',notifyDesc)
 end)
 
 addcmd('testnow',{},function(args, speaker)
