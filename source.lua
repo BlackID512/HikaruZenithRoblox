@@ -13130,26 +13130,21 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
-addcmd('jumpbuttonsize',{'jbsize','jbs'},function(args, speaker)
-	local target = args[1]
-	if isNumber(target) == false then
-		notify('Jump Button','Usage: jbsize (integer)')
-	end
-	local newSize = toNumber(target)
-	local jumpButton = game:GetService("Players").LocalPlayer.PlayerGui.TouchGui.TouchControlFrame.JumpButton
-	jumpButton.Size = UDim2.new(0, newSize, 0, newSize)
+addcmd('jumpbutton',{'jbbutton','jb'},function(args, speaker)
+	getgenv().script = "https://github.com/danya2854/Myscripts/raw/refs/heads/main/JumpButtonScaleChanger"
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/danya2854/Myscripts/refs/heads/main/loader'))()
 end)
 
 addcmd("volumecheck",{"volcheck","vcheck"}, function(args, speaker)
 	local vol = UserSettings():GetService("UserGameSettings").MasterVolume
-	local mastervolume = vol / 10
+	local mastervolume = vol*10
 	notify('Current Volume',tostring(mastervolume))
 end)
 
-addcmd("volumeup",{"volup","vup"}, function(args, speaker)
+addcmd("volumeup",{"volup"}, function(args, speaker)
 	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
 	local newVolume = 0.1
-	if vol == 1 then
+	if currentVolume > 1 then
 		newVolume = 0
 	end
 	UserSettings():GetService("UserGameSettings").MasterVolume = currentVolume + newVolume
@@ -13157,6 +13152,19 @@ addcmd("volumeup",{"volup","vup"}, function(args, speaker)
 	local notifyDescText = 'Old volume: ' .. currentVolume*10 .. '\nNew Volume: ' .. lastVolume*10
 	local notifyDesc = tostring(notifyDescText)
 	notify('Volume Up',notifyDesc)
+end)
+
+addcmd("volumedown",{"voldown"}, function(args, speaker)
+	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local newVolume = 0.1
+	if currentVolume < 0 then
+		newVolume = 0
+	end
+	UserSettings():GetService("UserGameSettings").MasterVolume = currentVolume - newVolume
+	local lastVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local notifyDescText = 'Old volume: ' .. currentVolume*10 .. '\nNew Volume: ' .. lastVolume*10
+	local notifyDesc = tostring(notifyDescText)
+	notify('Volume Down',notifyDesc)
 end)
 
 addcmd('testnow',{},function(args, speaker)
