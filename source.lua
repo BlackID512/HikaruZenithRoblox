@@ -13179,7 +13179,8 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
-if IsOnMobile then
+-- if IsOnMobile then
+if currentVersion == "0.0.0" then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
