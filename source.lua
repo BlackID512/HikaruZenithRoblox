@@ -8021,15 +8021,23 @@ end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
 	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	print('[DEBUG 1] Current Volume: '..currentVolume)
 	local targetVolume = currentVolume
+	print('[DEBUG 2] Target Volume: '..targetVolume)
+	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
 	if tonumber(args[1]) > -1 then
+		print('[DEBUG 4] If condition passed')
 		targetVolume = tonumber(args[1])
-		if tonumber(args[1]) > 10 then
-			targetVolume = 10
+		print('[DEBUG 5] New Target Volume: '..targetVolume)
 		UserSettings():GetService("UserGameSettings").MasterVolume = targetVolume/10
+		print('[DEBUG 6] New Volume executed')
 		local notifyDescText = 'Old volume: ' .. math.round(currentVolume*10) .. '\nNew Volume: ' .. targetVolume
+		print('[DEBUG 7] Desc Text created')
 		local notifyDesc = tostring(notifyDescText)
+		print('[DEBUG 8] Desc Text converted to string')
 		notify('Master Volume',notifyDesc)
+		print('[DEBUG 9] Notification sent')
+		print('[DEBUG 10] -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
 	else
 		notify('Master Volume','Usage: volume (0-10)')
 	end
@@ -13171,8 +13179,7 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
--- if IsOnMobile then
-if currentVersion == "0.0.0" then
+if IsOnMobile then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
