@@ -13176,7 +13176,7 @@ addcmd('testheal',{},function(args, speaker)
 		end
 		local notifyDescText = 'Current Health: ' .. health
 		local notifyDesc = tostring(notifyDescText)
-		notify('Test Heal',desc)
+		notify('Test Heal',notifyDesc)
 	else
 		notify('Test Heal','Usage: testheal (1 - 100)')
 	end
