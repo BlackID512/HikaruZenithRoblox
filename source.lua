@@ -7045,14 +7045,14 @@ addcmd('gametp',{'gameteleport'},function(args, speaker)
 end)
 
 addcmd("rejoin", {"rj"}, function(args, speaker)
-	if #Players:GetPlayers() <= 1 then
-		Players.LocalPlayer:Kick("\nRejoining...")
-		wait()
-		TeleportService:Teleport(PlaceId, Players.LocalPlayer)
-	else
-		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
-	end
-	-- TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+	-- if #Players:GetPlayers() <= 1 then
+		-- Players.LocalPlayer:Kick("\nRejoining...")
+		-- wait()
+		-- TeleportService:Teleport(PlaceId, Players.LocalPlayer)
+	-- else
+		-- TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+	-- end
+	TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 end)
 
 addcmd("autorejoin", {"autorj"}, function(args, speaker)
@@ -8025,7 +8025,7 @@ addcmd("volume",{ "vol"}, function(args, speaker)
 	local targetVolume = currentVolume
 	print('[DEBUG 2] Target Volume: '..targetVolume)
 	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
-	if tonumber(args[1]) > -1 then
+	if tonumber(args[1]) > -1 or tonumber(args[1]) < 11 then
 		print('[DEBUG 4] If condition passed')
 		targetVolume = tonumber(args[1])
 		print('[DEBUG 5] New Target Volume: '..targetVolume)
