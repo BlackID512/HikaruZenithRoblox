@@ -8037,6 +8037,7 @@ addcmd("volume",{ "vol"}, function(args, speaker)
 		print('[DEBUG 8] Desc Text converted to string')
 		notify('Master Volume',notifyDesc)
 		print('[DEBUG 9] Notification sent')
+		print('[DEBUG 10] -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
 	else
 		notify('Master Volume','Usage: volume (0-10)')
 	end
