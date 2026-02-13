@@ -7045,14 +7045,14 @@ addcmd('gametp',{'gameteleport'},function(args, speaker)
 end)
 
 addcmd("rejoin", {"rj"}, function(args, speaker)
-	-- if #Players:GetPlayers() <= 1 then
-		-- Players.LocalPlayer:Kick("\nRejoining...")
-		-- wait()
-		-- TeleportService:Teleport(PlaceId, Players.LocalPlayer)
-	-- else
-		-- TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
-	-- end
-	TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+	if #Players:GetPlayers() <= 1 then
+		Players.LocalPlayer:Kick("\nRejoining...")
+		wait()
+		TeleportService:Teleport(PlaceId, Players.LocalPlayer)
+	else
+		TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
+	end
+	-- TeleportService:TeleportToPlaceInstance(PlaceId, JobId, Players.LocalPlayer)
 end)
 
 addcmd("autorejoin", {"autorj"}, function(args, speaker)
@@ -8021,23 +8021,15 @@ end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
 	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-	print('[DEBUG 1] Current Volume: '..currentVolume)
 	local targetVolume = currentVolume
-	print('[DEBUG 2] Target Volume: '..targetVolume)
-	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
-	if tonumber(args[1]) > -1 or tonumber(args[1]) < 11 then
-		print('[DEBUG 4] If condition passed')
+	if tonumber(args[1]) > -1 then
 		targetVolume = tonumber(args[1])
-		print('[DEBUG 5] New Target Volume: '..targetVolume)
+		if tonumber(args[1]) > 10 then
+			targetVolume = 10
 		UserSettings():GetService("UserGameSettings").MasterVolume = targetVolume/10
-		print('[DEBUG 6] New Volume executed')
 		local notifyDescText = 'Old volume: ' .. math.round(currentVolume*10) .. '\nNew Volume: ' .. targetVolume
-		print('[DEBUG 7] Desc Text created')
 		local notifyDesc = tostring(notifyDescText)
-		print('[DEBUG 8] Desc Text converted to string')
 		notify('Master Volume',notifyDesc)
-		print('[DEBUG 9] Notification sent')
-		print('[DEBUG 10] -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
 	else
 		notify('Master Volume','Usage: volume (0-10)')
 	end
