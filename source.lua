@@ -8022,7 +8022,7 @@ end)
 addcmd("volume",{ "vol"}, function(args, speaker)
 	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
 	print('[DEBUG 1] Current Volume: '..currentVolume)
-	local targetVolume = cuurrentVolume
+	local targetVolume = currentVolume
 	print('[DEBUG 2] Target Volume: '..targetVolume)
 	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
 	if tonumber(args[1]) == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
