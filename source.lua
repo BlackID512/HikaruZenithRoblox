@@ -8025,7 +8025,7 @@ addcmd("volume",{ "vol"}, function(args, speaker)
 	local targetVolume = currentVolume
 	print('[DEBUG 2] Target Volume: '..targetVolume)
 	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
-	if tonumber(args[1]) == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
+	if tonumber(args[1]) > -1 or tonumber(args[1]) < 11 then
 		print('[DEBUG 4] If condition passed')
 		targetVolume = tonumber(args[1])
 		print('[DEBUG 5] New Target Volume: '..targetVolume)
