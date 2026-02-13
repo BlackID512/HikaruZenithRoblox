@@ -4557,7 +4557,8 @@ CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by H
 CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay Paused pop up Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'vckeybind / vck', DESC = 'Voice Chat toggle with keybind made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Prevents the game from kicking you for being idle/afk (best method)'}
+CMDs[#CMDs + 1] = {NAME = 'volumeup / volup', DESC = 'Volume up by 1'}
+CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -8019,23 +8020,12 @@ addcmd("cancelteleport", {"canceltp"}, function(args, speaker)
 end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
-	if isNumber(args[1]) then
-		local argument = args[1]
-		if argument < 0 then
-			argument = 0
-		elseif argument > 10 then
-			argument = 10
-		else
-			argument = args[1]
-		end
-		local newVolumeArg = argument
-		local newVolumeArg2 = newVolumeArg/10
-		local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-		local currentVolume2 = currentVolume/10
-		UserSettings():GetService("UserGameSettings").MasterVolume = argument/10
-		local newVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-		local newVolume2 = newVolume/10
-		local notifyDescText = 'Argument: ' .. newVolumeArg .. ' (' .. newVolumeArg2 .. ')\nCurrent: ' .. currentVolume .. ' (' .. currentVolume2 .. ')\nNew: ' .. newVolume .. ' (' .. newVolume2 .. ')'
+	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	local targetVolume = cuurrentVolume
+	if tonumber(args) == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
+		targetVolume = tonumber(args)
+		UserSettings():GetService("UserGameSettings").MasterVolume = targetVolume/10
+		local notifyDescText = 'Old volume: ' .. math.round(currentVolume*10) .. '\nNew Volume: ' .. targetVolume
 		local notifyDesc = tostring(notifyDescText)
 		notify('Master Volume',notifyDesc)
 	else
@@ -13149,7 +13139,9 @@ addcmd("volumeup",{"volup"}, function(args, speaker)
 	end
 	UserSettings():GetService("UserGameSettings").MasterVolume = currentVolume + newVolume
 	local lastVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-	local notifyDescText = 'Old volume: ' .. currentVolume*10 .. '\nNew Volume: ' .. lastVolume*10
+	local currentVolumeFinal = math.round(currentVolume*10)
+	local lastVolumeFinal = math.round(lastVolume*10)
+	local notifyDescText = 'Old volume: ' .. currentVolumeFinal .. '\nNew Volume: ' .. lastVolumeFinal
 	local notifyDesc = tostring(notifyDescText)
 	notify('Volume Up',notifyDesc)
 end)
@@ -13162,7 +13154,9 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 	end
 	UserSettings():GetService("UserGameSettings").MasterVolume = currentVolume - newVolume
 	local lastVolume = UserSettings():GetService("UserGameSettings").MasterVolume
-	local notifyDescText = 'Old volume: ' .. currentVolume*10 .. '\nNew Volume: ' .. lastVolume*10
+	local currentVolumeFinal = math.round(currentVolume*10)
+	local lastVolumeFinal = math.round(lastVolume*10)
+	local notifyDescText = 'Old volume: ' .. currentVolumeFinal .. '\nNew Volume: ' .. lastVolumeFinal
 	local notifyDesc = tostring(notifyDescText)
 	notify('Volume Down',notifyDesc)
 end)
