@@ -13163,6 +13163,25 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 	notify('Volume Down',notifyDesc)
 end)
 
+addcmd('testheal',{},function(args, speaker)
+	local plr = Players.LocalPlayer
+	local health = plr.Character:FindFirstChildOfClass("Humanoid").Health
+	local newHeal = 100
+	if tonumber(args[1]) > 0 then
+		newHeal = tonumber(args[1])
+		if tonumber(args[1]) > 100 then
+			newHeal = 100
+		elseif tonumber(args[1]) < 1 then
+			newHeal = 1
+		end
+		local notifyDescText = 'Current Health: ' .. health
+		local notifyDesc = tostring(notifyDescText)
+		notify('Test Heal',desc)
+	else
+		notify('Test Heal','Usage: testheal (1 - 100)')
+	end
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
