@@ -8021,13 +8021,22 @@ end)
 
 addcmd("volume",{ "vol"}, function(args, speaker)
 	local currentVolume = UserSettings():GetService("UserGameSettings").MasterVolume
+	print('[DEBUG 1] Current Volume: '..currentVolume)
 	local targetVolume = cuurrentVolume
-	if tonumber(args) == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
-		targetVolume = tonumber(args)
+	print('[DEBUG 2] Target Volume: '..targetVolume)
+	print('[DEBUG 3] Arg Volume: ' .. tonumber(args[1]))
+	if tonumber(args[1]) == 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7 or 8 or 9 or 10 then
+		print('[DEBUG 4] If condition passed')
+		targetVolume = tonumber(args[1])
+		print('[DEBUG 5] New Target Volume: '..targetVolume)
 		UserSettings():GetService("UserGameSettings").MasterVolume = targetVolume/10
+		print('[DEBUG 6] New Volume executed')
 		local notifyDescText = 'Old volume: ' .. math.round(currentVolume*10) .. '\nNew Volume: ' .. targetVolume
+		print('[DEBUG 7] Desc Text created')
 		local notifyDesc = tostring(notifyDescText)
+		print('[DEBUG 8] Desc Text converted to string')
 		notify('Master Volume',notifyDesc)
+		print('[DEBUG 9] Notification sent')
 	else
 		notify('Master Volume','Usage: volume (0-10)')
 	end
