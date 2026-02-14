@@ -99,9 +99,10 @@ COREGUI = Services.CoreGui or PlayerGui
 HZMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlaceId, JobId = game.PlaceId, game.JobId
 xpcall(function()
-	IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
-end, function()
-	IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+	-- IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
+-- end, function()
+	-- IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
+	IsOnMobile = not UserInputService.KeyboardEnabled
 end)
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
