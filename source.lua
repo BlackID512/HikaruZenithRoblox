@@ -102,7 +102,7 @@ xpcall(function()
 	-- IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
 -- end, function()
 	-- IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
-	IsOnMobile = not UserInputService.KeyboardEnabled
+	IsOnMobile = UserInputService.KeyboardEnabled == false
 end)
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
