@@ -99,11 +99,11 @@ COREGUI = Services.CoreGui or PlayerGui
 HZMouse = cloneref(Players.LocalPlayer:GetMouse())
 PlaceId, JobId = game.PlaceId, game.JobId
 xpcall(function()
-	-- IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
--- end, function()
-	-- IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
-	IsOnMobile = UserInputService.KeyboardEnabled == false
+	IsOnMobile = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
+end, function()
+	IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
+-- IsOnMobile = UserInputService.KeyboardEnabled == false
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 -- xylex & europa
@@ -13180,8 +13180,8 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
--- if currentVersion == "0.0.0" then
-if IsOnMobile then
+-- if IsOnMobile then
+if currentVersion == "0.0.0" then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
