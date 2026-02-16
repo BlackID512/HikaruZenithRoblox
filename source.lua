@@ -104,8 +104,6 @@ end, function()
 	IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
 xpcall(function()
-	IsOnMobile2 = table.find({Enum.Platform.Android, Enum.Platform.IOS}, UserInputService:GetPlatform())
-end, function()
 	IsOnMobile2 = UserInputService.KeyboardEnabled == false
 end)
 -- IsOnMobile = UserInputService.KeyboardEnabled == false
