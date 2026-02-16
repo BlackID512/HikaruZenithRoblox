@@ -103,10 +103,7 @@ xpcall(function()
 end, function()
 	IsOnMobile = UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled
 end)
-xpcall(function()
-	IsOnMobile2 = UserInputService.KeyboardEnabled == false
-end)
--- IsOnMobile = UserInputService.KeyboardEnabled == false
+-- IsOnMobile2 = UserInputService.KeyboardEnabled == false
 isLegacyChat = TextChatService.ChatVersion == Enum.ChatVersion.LegacyChatService
 
 -- xylex & europa
@@ -13184,7 +13181,8 @@ addcmd('testnow',{},function(args, speaker)
 end)
 
 -- if currentVersion == "0.0.0" then
-if IsOnMobile2 then
+-- if IsOnMobile2 then
+if UserInputService.KeyboardEnabled == false then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
