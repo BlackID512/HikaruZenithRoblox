@@ -286,6 +286,8 @@ scroll_3 = Instance.new("ScrollingFrame")
 listlayout = Instance.new("UIListLayout",scroll_3)
 selectChat = Instance.new("TextButton")
 selectJoin = Instance.new("TextButton")
+QuickCapture = Instance.new("TextButton")
+UICorner = Instance.new("UICorner")
 
 function randomString()
 	local length = math.random(10,20)
@@ -13175,11 +13177,9 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 end)
 
 addcmd('mobile',{},function(args, speaker)
-	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
-	local UICorner = Instance.new("UICorner")
-	QuickCapture.Name = randomString()
-	--- QuickCapture.Name = "QuickCaptureButton"
+	-- QuickCapture.Name = randomString()
+	QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
 	QuickCapture.BackgroundTransparency = 0.0001
@@ -13195,7 +13195,8 @@ addcmd('mobile',{},function(args, speaker)
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
-	UICorner.Name = randomString()
+	-- UICorner.Name = randomString()
+	UICorner.Name = "QCUICorner"
 	UICorner.CornerRadius = UDim.new(0.75, 0)
 	UICorner.Parent = QuickCapture
 	QuickCapture.MouseButton1Click:Connect(function()
@@ -13207,8 +13208,8 @@ addcmd('mobile',{},function(args, speaker)
 end)
 
 addcmd('nomobile',{'unmobile'},function(args, speaker)
-	QuickCapture:Destroy()
 	UICorner:Destroy()
+	QuickCapture:Destroy()
 end)
 
 addcmd('testnow',{},function(args, speaker)
@@ -13225,8 +13226,8 @@ if currentVersion == "-" then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
-	QuickCapture.Name = randomString()
-	--- QuickCapture.Name = "QuickCaptureButton"
+	-- QuickCapture.Name = randomString()
+	QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
 	QuickCapture.BackgroundTransparency = 0.0001
@@ -13242,7 +13243,8 @@ if currentVersion == "-" then
 	QuickCapture.TextWrapped = true
 	QuickCapture.ZIndex = 10
 	QuickCapture.Draggable = true
-	UICorner.Name = randomString()
+	-- UICorner.Name = randomString()
+	UICorner.Name = "QCUICorner"
 	UICorner.CornerRadius = UDim.new(0.75, 0)
 	UICorner.Parent = QuickCapture
 	QuickCapture.MouseButton1Click:Connect(function()
