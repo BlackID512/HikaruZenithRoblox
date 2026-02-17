@@ -13182,7 +13182,7 @@ end)
 
 -- if currentVersion == "0.0.0" then
 -- if IsOnMobile2 then
-if UserInputService.KeyboardEnabled == false then
+if not UserInputService.KeyboardEnabled then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
