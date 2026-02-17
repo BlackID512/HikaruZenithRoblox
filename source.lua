@@ -13209,6 +13209,7 @@ end)
 addcmd('nomobile',{'unmobile'},function(args, speaker)
 	QuickCapture:Destroy()
 	UICorner:Destroy()
+end)
 
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
