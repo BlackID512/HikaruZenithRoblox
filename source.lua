@@ -13172,6 +13172,38 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 	notify('Volume Down',notifyDesc)
 end)
 
+addcmd('mobile',{},function(args, speaker)
+	local QuickCapture = Instance.new("TextButton")
+	-- local QuickCapture = Instance.new("ImageButton")
+	local UICorner = Instance.new("UICorner")
+	QuickCapture.Name = randomString()
+	--- QuickCapture.Name = "QuickCaptureButton"
+	QuickCapture.Parent = PARENT
+	QuickCapture.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
+	QuickCapture.BackgroundTransparency = 0.0001
+	QuickCapture.Position = UDim2.new(0.485, 0, 0, 0)
+	QuickCapture.Size = UDim2.new(0, 50, 0, 50)
+	-- QuickCapture.Image = getcustomasset("hikaruzenith/assets/logo.png")
+	QuickCapture.Font = Enum.Font.SourceSansBold
+	-- QuickCapture.Text = "🛑"
+	-- QuickCapture.Text = "⚫"
+	QuickCapture.Text = "⚙"
+	QuickCapture.TextColor3 = Color3.fromRGB(255, 255, 255)
+	QuickCapture.TextSize = 25
+	QuickCapture.TextWrapped = true
+	QuickCapture.ZIndex = 10
+	QuickCapture.Draggable = true
+	UICorner.Name = randomString()
+	UICorner.CornerRadius = UDim.new(0.75, 0)
+	UICorner.Parent = QuickCapture
+	QuickCapture.MouseButton1Click:Connect(function()
+		Cmdbar:CaptureFocus()
+		maximizeHolder()
+	end)
+	table.insert(shade1, QuickCapture)
+	table.insert(text1, QuickCapture)
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
@@ -13180,9 +13212,9 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
--- if currentVersion == "0.0.0" then
+-- if not UserInputService.KeyboardEnabled then
 -- if IsOnMobile2 then
-if not UserInputService.KeyboardEnabled then
+if currentVersion == "0.0.0" then
 	local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	local UICorner = Instance.new("UICorner")
