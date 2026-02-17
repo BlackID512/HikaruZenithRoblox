@@ -4560,6 +4560,8 @@ CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay P
 CMDs[#CMDs + 1] = {NAME = 'vckeybind / vck', DESC = 'Voice Chat toggle with keybind made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'volumeup / volup', DESC = 'Volume up by 1'}
 CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
+CMDs[#CMDs + 1] = {NAME = 'mobile', DESC = 'Load the mobile button by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13203,6 +13205,10 @@ addcmd('mobile',{},function(args, speaker)
 	table.insert(shade1, QuickCapture)
 	table.insert(text1, QuickCapture)
 end)
+
+addcmd('nomobile',{'unmobile'},function(args, speaker)
+	QuickCapture:Destroy()
+	UICorner:Destroy()
 
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
