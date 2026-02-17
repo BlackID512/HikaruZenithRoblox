@@ -13177,13 +13177,15 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 end)
 
 addcmd('mobile',{},function(args, speaker)
-	QuickCapture.BackgroundTransparency = 0.0001
-	QuickCapture.Text = "⚙"
+	QuickCapture.Position = UDim2.new(0.485, 0, 0, 0)
+	-- QuickCapture.BackgroundTransparency = 0.0001
+	-- QuickCapture.Text = "⚙"
 end)
 
 addcmd('mobilestop',{'unmobile','nomobile'},function(args, speaker)
-	QuickCapture.BackgroundTransparency = 1
-	QuickCapture.Text = " "
+	QuickCapture.Position = UDim2.new(5, 5, 5, 0)
+	-- QuickCapture.BackgroundTransparency = 1
+	-- QuickCapture.Text = " "
 end)
 
 addcmd('testnow',{},function(args, speaker)
