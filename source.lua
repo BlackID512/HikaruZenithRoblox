@@ -13181,7 +13181,7 @@ addcmd('mobile',{},function(args, speaker)
 	QuickCapture.Text = "⚙"
 end)
 
-addcmd('nomobile',{'unmobile'},function(args, speaker)
+addcmd('mobilestop',{'unmobile','nomobile'},function(args, speaker)
 	QuickCapture.BackgroundTransparency = 1
 	QuickCapture.Text = " "
 end)
