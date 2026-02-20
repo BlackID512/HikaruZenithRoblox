@@ -152,6 +152,7 @@ if makefolder and isfolder and writefile and isfile then
 end
 
 currentVersion = "0.2.9a"
+jLogsNotifier = true
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -2928,6 +2929,7 @@ defaultsettings = {
 	keepHZ = true;
 	logsEnabled = false;
 	jLogsEnabled = false;
+	jLogsNotifier = true;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2951,6 +2953,7 @@ useFactorySettings = function()
 	espTransparency = 0.9
 	logsEnabled = false
 	jLogsEnabled = false
+	jLogsNotifier = true
 	logsWebhook = nil
 	aliases = {}
 	binds = {}
@@ -4564,6 +4567,7 @@ CMDs[#CMDs + 1] = {NAME = 'volumeup / volup', DESC = 'Volume up by 1'}
 CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
 CMDs[#CMDs + 1] = {NAME = 'mobile', DESC = 'Load the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the mobile button by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'jlogsnotifier', DESC = 'Toggle the Join & Leave notifications'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13186,6 +13190,16 @@ addcmd('mobilestop',{'unmobile','nomobile'},function(args, speaker)
 	QuickCapture.Position = UDim2.new(5, 5, 5, 0)
 	-- QuickCapture.BackgroundTransparency = 1
 	-- QuickCapture.Text = " "
+end)
+
+addcmd('jlogsnotifier',{},function(args, speaker)
+	if jLogsNotifier then
+		jLogsNotifier = false
+		notify('⏯ JL Notifier','🟥 Notification Stopped')
+	else
+		jLogsNotifier = true
+		notify('⏯ JL Notifier','🟩 Notification Running')
+	end
 end)
 
 addcmd('testnow',{},function(args, speaker)
