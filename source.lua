@@ -4062,7 +4062,7 @@ JoinLog = function(plr)
 	local notifyTitleText = "🟢 Server Join ("..players..")"
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr = not me then
+	if plr:IsFriendsWith(me.UserId) and plr ~= me then
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
@@ -4086,7 +4086,7 @@ LeaveLog = function(plr)
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr = not me then
+	if plr:IsFriendsWith(me.UserId) and plr ~= me then
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
