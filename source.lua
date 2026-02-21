@@ -3988,7 +3988,7 @@ end
 
 avatarcache = {}
 -- function sendChatWebhook(player, message)
-function sendChatWebhook(player, content, message)
+function sendChatWebhook(player, userdisplay, content, message)
 	local me = Players.LocalPlayer
 	local myId = me.UserId
 	local activeUser = formatUsername(me)
@@ -4039,7 +4039,12 @@ function sendChatWebhook(player, content, message)
 end
 
 ChatLog = function(player)
+	local me = Players.LocalPlayer
 	local user = formatUsername(player)
+	local discordUser = user
+	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+		discordUser = "🔵 "..user.." 🔵"
+	end
 	player.Chatted:Connect(function(message)
 		local chat = string.format("%s", message)
 		if logsEnabled == true then
@@ -4049,7 +4054,7 @@ ChatLog = function(player)
 			-- local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
 			local webhookMessageText = message
 			local webhookMessage = string.format("%s", webhookMessageText)
-			sendChatWebhook(player, "⚪ CHAT", webhookMessage)
+			sendChatWebhook(player, discordUser, "⚪ CHAT", webhookMessage)
 		end
 	end)
 end
@@ -4061,8 +4066,10 @@ JoinLog = function(plr)
 	local players = getUsers()
 	local notifyTitleText = "🟢 Server Join ("..players..")"
 	-- if jLogsEnabled == true then
+	local discordUser = user
 	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+		discordUser = "🔵 "..user.." 🔵"
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
@@ -4073,7 +4080,7 @@ JoinLog = function(plr)
 		defNotify(notifyTitle,notifyDesc)
 	end
 	CreateJoinLabel(plr, plr.UserId, 'join')
-	sendChatWebhook(plr, "🟢 JOINED", webhookMessage)
+	sendChatWebhook(plr, discordUser, "🟢 JOINED", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
@@ -4085,8 +4092,10 @@ LeaveLog = function(plr)
 	local players = getUsers()
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
 	-- if jLogsEnabled == true then
+	local discordUser = user
 	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+		discordUser = "🔵 "..user.." 🔵"
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
@@ -4097,7 +4106,7 @@ LeaveLog = function(plr)
 		defNotify(notifyTitle,notifyDesc)
 	end
 	CreateJoinLabel(plr, plr.UserId, 'leave')
-	sendChatWebhook(plr, "🔴 LEFT", webhookMessage)
+	sendChatWebhook(plr, discordUser, "🔴 LEFT", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
 	-- end
 end
@@ -13348,6 +13357,7 @@ if not isLegacyChat then
 	TextChatService.MessageReceived:Connect(function(message)
 		if message.TextSource then
 			local player = Players:GetPlayerByUserId(message.TextSource.UserId)
+			local me = Players.LocalPlayer
 			if not player then return end
 
 			if logsEnabled == true then
@@ -13356,8 +13366,12 @@ if not isLegacyChat then
 			if player.UserId == Players.LocalPlayer.UserId then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
+			local discordUser = formatUsername(player)
+			if plr:IsFriendsWith(me.UserId) and plr ~= me then
+				discordUser = "🔵 "..formatUsername(player).." 🔵"
+			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
-			sendChatWebhook(player, "⚪ CHAT", message.Text)
+			sendChatWebhook(player, discordUser, "⚪ CHAT", message.Text)
 		end
 	end)
 end
@@ -13518,7 +13532,7 @@ task.spawn(function()
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = string.format("%s", webhookMessageText)
-	sendChatWebhook(plr, "🔰 STARTUP", webhookMessage)
+	sendChatWebhook(plr, tostring(plr), "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
