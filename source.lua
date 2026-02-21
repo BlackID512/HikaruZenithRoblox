@@ -4062,19 +4062,16 @@ JoinLog = function(plr)
 	local notifyTitleText = "🟢 Server Join ("..players..")"
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+	if plr:IsFriendsWith(me.UserId) and plr = not me then
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	print('Join Log Notifier')
 	if jLogsNotifier then
-		print('Join Log Notified')
 		defNotify(notifyTitle,notifyDesc)
 	end
-	print('Join Log Ended')
 	CreateJoinLabel(plr, plr.UserId, 'join')
 	sendChatWebhook(plr, "🟢 JOINED", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
@@ -4089,19 +4086,16 @@ LeaveLog = function(plr)
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
 	-- if jLogsEnabled == true then
 	local notifyDescText = now.."\n"..user
-	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
-		-- notifyDescText = now.."\n🔵 "..user.." 🔵"
-	-- end
+	if plr:IsFriendsWith(me.UserId) and plr = not me then
+		notifyDescText = now.."\n🔵 "..user.." 🔵"
+	end
 	local webhookMessageText = '-'
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	print('Join Log Notifier')
 	if jLogsNotifier then
-		print('Join Log Notified')
 		defNotify(notifyTitle,notifyDesc)
 	end
-	print('Join Log Ended')
 	CreateJoinLabel(plr, plr.UserId, 'leave')
 	sendChatWebhook(plr, "🔴 LEFT", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
