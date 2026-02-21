@@ -4009,9 +4009,9 @@ function sendChatWebhook(player, userdisplay, content, message)
 			-- content = '❔ -'
 		-- end
 		local finalContent = tostring(content)
-		local webhookName = string.format("%s", hz)
+		local webhookName = tostring(hz)
 		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userFormat..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
-		local webhookContent = string.format("%s", webhookContentText)
+		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
 				-- Url = "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds=" .. id .. "&size=420x420&format=Png&isCircular=false",
@@ -4046,14 +4046,14 @@ ChatLog = function(player)
 		discordUser = "🔵 "..user.." 🔵"
 	end
 	player.Chatted:Connect(function(message)
-		local chat = string.format("%s", message)
+		local chat = tostring(message)
 		if logsEnabled == true then
 			-- CreateLabel(player.Name, message)
 			CreateLabel(user, message)
 			-- sendChatWebhook(player, message)
 			-- local webhookMessageText = "[CHAT] `"..user.."`: `"..chat.."`"
 			local webhookMessageText = message
-			local webhookMessage = string.format("%s", webhookMessageText)
+			local webhookMessage = tostring(webhookMessageText)
 			sendChatWebhook(player, discordUser, "⚪ CHAT", webhookMessage)
 		end
 	end)
@@ -4073,9 +4073,9 @@ JoinLog = function(plr)
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
-	local notifyTitle = string.format("%s", notifyTitleText)
-	local notifyDesc = string.format("%s", notifyDescText)
-	local webhookMessage = string.format("%s", webhookMessageText)
+	local notifyTitle = tostring(notifyTitleText)
+	local notifyDesc = tostring(notifyDescText)
+	local webhookMessage = tostring(webhookMessageText)
 	if jLogsNotifier then
 		defNotify(notifyTitle,notifyDesc)
 	end
@@ -4099,9 +4099,9 @@ LeaveLog = function(plr)
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
-	local notifyTitle = string.format("%s", notifyTitleText)
-	local notifyDesc = string.format("%s", notifyDescText)
-	local webhookMessage = string.format("%s", webhookMessageText)
+	local notifyTitle = tostring(notifyTitleText)
+	local notifyDesc = tostring(notifyDescText)
+	local webhookMessage = tostring(webhookMessageText)
 	if jLogsNotifier then
 		defNotify(notifyTitle,notifyDesc)
 	end
@@ -13527,11 +13527,11 @@ task.spawn(function()
 	local players = getUsers()
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local notifyDescText = "🔰 Program Initialized 🔰\n"..now.."\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..players
-	local notifyDesc = string.format("%s", notifyDescText)
+	local notifyDesc = tostring(notifyDescText)
 	defNotify('Hikaru Zenith',notifyDesc)
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
-	local webhookMessage = string.format("%s", webhookMessageText)
+	local webhookMessage = tostring(webhookMessageText)
 	sendChatWebhook(plr, tostring(plr), "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
