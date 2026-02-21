@@ -4069,7 +4069,9 @@ JoinLog = function(plr)
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	defNotify(notifyTitle,notifyDesc)
+	if jLogsNotifier then
+		defNotify(notifyTitle,notifyDesc)
+	end
 	CreateJoinLabel(plr, plr.UserId, 'join')
 	sendChatWebhook(plr, "🟢 JOINED", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
@@ -4091,7 +4093,9 @@ LeaveLog = function(plr)
 	local notifyTitle = string.format("%s", notifyTitleText)
 	local notifyDesc = string.format("%s", notifyDescText)
 	local webhookMessage = string.format("%s", webhookMessageText)
-	defNotify(notifyTitle,notifyDesc)
+	if jLogsNotifier then
+		defNotify(notifyTitle,notifyDesc)
+	end
 	CreateJoinLabel(plr, plr.UserId, 'leave')
 	sendChatWebhook(plr, "🔴 LEFT", webhookMessage)
 		-- notify(notifyTitle,notifyDesc)
@@ -13195,10 +13199,10 @@ end)
 addcmd('jlogsnotifier',{},function(args, speaker)
 	if jLogsNotifier then
 		jLogsNotifier = false
-		notify('⏯ JL Notifier','🟥 Notification Stopped')
+		notify('⏯ Join Leave Notifier','🟥 Notification Stopped')
 	else
 		jLogsNotifier = true
-		notify('⏯ JL Notifier','🟩 Notification Running')
+		notify('⏯ Join Leave Notifier','🟩 Notification Running')
 	end
 end)
 
