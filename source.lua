@@ -13217,6 +13217,15 @@ addcmd('jlogsnotifier',{},function(args, speaker)
 	end
 end)
 
+addcmd('heal',{},function(args, speaker)
+	local me = Players.LocalPlayer
+	local health = me.Character:FindFirstChildOfClass('Humanoid').Health
+	-- me.Character:FindFirstChildOfClass('Humanoid').Health = 100
+	local notifyDescText = 'Current Health: ' .. health
+	local notifyDesc = tostring(notifyDescText)
+	notify('Heal',notifyDesc)
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
