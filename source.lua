@@ -4095,7 +4095,8 @@ LeaveLog = function(plr)
 	-- if jLogsEnabled == true then
 	local discordUser = user
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
+	if plr:IsFriendsWith(me.UserId) then
 		discordUser = "🔵 "..user.." 🔵"
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
