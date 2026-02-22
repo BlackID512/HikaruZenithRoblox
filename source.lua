@@ -3997,6 +3997,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 	local playersCount = '('..players..')'
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
+	local usercheck = formatConnection(player)
 	if httprequest and vtype(logsWebhook, "string") then
 		local target = player
 		local id = player.UserId
@@ -4011,7 +4012,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 		local finalContent = tostring(content)
 		local webhookName = tostring(hz)
 		-- local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userFormat..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..usercheck..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
