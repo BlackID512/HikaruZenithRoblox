@@ -4043,7 +4043,7 @@ ChatLog = function(player)
 	local me = Players.LocalPlayer
 	local user = formatUsername(player)
 	local discordUser = user
-	if player:IsFriendsWith(me.UserId) and player ~= me then
+	if player:IsFriendsWith(me.UserId) then
 		discordUser = "🔵 "..user.." 🔵"
 	end
 	player.Chatted:Connect(function(message)
@@ -4069,7 +4069,7 @@ JoinLog = function(plr)
 	-- if jLogsEnabled == true then
 	local discordUser = user
 	local notifyDescText = now.."\n"..user
-	if plr:IsFriendsWith(me.UserId) and plr ~= me then
+	if plr:IsFriendsWith(me.UserId) then
 		discordUser = "🔵 "..user.." 🔵"
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
@@ -5719,7 +5719,7 @@ end
 function formatConnection(player)
 	local me = Players.LocalPlayer
 	local isConnection = "⛔"
-	if player:IsFriendsWith(me.UserId) and player ~= me then
+	if player:IsFriendsWith(me.UserId) then
 		isConnection = "✅"
 	end
 	local result = formatUsername(player)
@@ -13369,7 +13369,7 @@ if not isLegacyChat then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
 			local discordUser = formatUsername(player)
-			if player:IsFriendsWith(me.UserId) and player ~= me then
+			if player:IsFriendsWith(me.UserId) then
 				discordUser = "🔵 "..formatUsername(player).." 🔵"
 			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
