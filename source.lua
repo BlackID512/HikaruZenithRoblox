@@ -13226,7 +13226,7 @@ addcmd('heal',{},function(args, speaker)
 	local newHealth = me.Character:FindFirstChildOfClass('Humanoid').Health
 	local notifyDescText = 'Last Health: ' .. health .. '\nNew Health: ' .. newHealth
 	local notifyDesc = tostring(notifyDescText)
-	notify('Heal',notifyDesc)
+	-- notify('Heal',notifyDesc)
 end)
 
 addcmd('testnow',{},function(args, speaker)
