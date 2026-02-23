@@ -4584,6 +4584,7 @@ CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
 CMDs[#CMDs + 1] = {NAME = 'mobile', DESC = 'Load the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'jlogsnotifier', DESC = 'Toggle the Join & Leave notifications'}
+CMDs[#CMDs + 1] = {NAME = 'heal', DESC = 'Heal player module by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13221,8 +13222,9 @@ end)
 addcmd('heal',{},function(args, speaker)
 	local me = Players.LocalPlayer
 	local health = me.Character:FindFirstChildOfClass('Humanoid').Health
-	-- me.Character:FindFirstChildOfClass('Humanoid').Health = 100
-	local notifyDescText = 'Current Health: ' .. health
+	me.Character:FindFirstChildOfClass('Humanoid').Health = 100
+	local newHealth = me.Character:FindFirstChildOfClass('Humanoid').Health
+	local notifyDescText = 'Last Health: ' .. health .. '\nNew Health: ' .. newHealth
 	local notifyDesc = tostring(notifyDescText)
 	notify('Heal',notifyDesc)
 end)
