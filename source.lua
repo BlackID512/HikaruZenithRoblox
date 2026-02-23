@@ -13229,6 +13229,10 @@ addcmd('heal',{},function(args, speaker)
 	-- notify('Heal',notifyDesc)
 end)
 
+addcmd('heal2',{},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/RealBatu20/AI-Scripts-2025/refs/heads/main/HealthSlider.lua'))()
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
