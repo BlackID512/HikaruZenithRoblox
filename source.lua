@@ -3997,7 +3997,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 	local playersCount = '('..players..')'
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
-	local usercheck = formatConnection(player)
+	-- local usercheck = formatConnection(player)
 	if httprequest and vtype(logsWebhook, "string") then
 		local target = player
 		local id = player.UserId
@@ -4012,7 +4012,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 		local finalContent = tostring(content)
 		local webhookName = tostring(hz)
 		-- local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userFormat..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..usercheck..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
 		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
@@ -4154,6 +4154,7 @@ if isLegacyChat then
 end
 
 Players.PlayerRemoving:Connect(function(player)
+	LeaveLog(player)
 	if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(player.Name..'_LC') then
 		for i,v in pairs(COREGUI:GetChildren()) do
 			if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
@@ -4171,7 +4172,6 @@ Players.PlayerRemoving:Connect(function(player)
 		notify('Spectate','View turned off (player left)')
 	end
 	eventEditor.FireEvent("OnLeave", player.Name)
-	LeaveLog(player)
 end)
 
 Exit.MouseButton1Down:Connect(function()
@@ -13226,7 +13226,7 @@ addcmd('heal',{},function(args, speaker)
 	local newHealth = me.Character:FindFirstChildOfClass('Humanoid').Health
 	local notifyDescText = 'Last Health: ' .. health .. '\nNew Health: ' .. newHealth
 	local notifyDesc = tostring(notifyDescText)
-	-- notify('Heal',notifyDesc)
+	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Heal',notifyDesc) end
 end)
 
 addcmd('heal2',{},function(args, speaker)
