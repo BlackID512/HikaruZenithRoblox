@@ -151,8 +151,8 @@ if makefolder and isfolder and writefile and isfile then
 	end)
 end
 
-currentVersion = "0.2.9a"
-jLogsNotifier = true
+currentVersion = "0.3.1H"
+jLogsNotifier = false
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -2929,7 +2929,7 @@ defaultsettings = {
 	keepHZ = true;
 	logsEnabled = false;
 	jLogsEnabled = false;
-	jLogsNotifier = true;
+	jLogsNotifier = false;
 	aliases = {};
 	binds = {};
 	WayPoints = {};
@@ -2953,7 +2953,7 @@ useFactorySettings = function()
 	espTransparency = 0.9
 	logsEnabled = false
 	jLogsEnabled = false
-	jLogsNotifier = true
+	jLogsNotifier = false
 	logsWebhook = nil
 	aliases = {}
 	binds = {}
@@ -13240,9 +13240,8 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
--- if not UserInputService.KeyboardEnabled then
--- if currentVersion == "-" then
 if IsOnMobile then
+	-- Some deactivated code moved to the top as an global variable
 	-- local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	-- local UICorner = Instance.new("UICorner")
@@ -13551,6 +13550,7 @@ task.spawn(function()
 	local webhookMessage = tostring(webhookMessageText)
 	sendChatWebhook(plr, "-", "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
+	jLogsNotifier = true
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
 	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
