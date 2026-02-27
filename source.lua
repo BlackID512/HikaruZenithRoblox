@@ -4059,6 +4059,7 @@ end
 JoinLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
+	local userId = plr.UserId
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🟢 Server Join ("..players..")"
@@ -4066,6 +4067,7 @@ JoinLog = function(plr)
 	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) then
+		local userConnection = "FRIEND_" .. UserId
 		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
