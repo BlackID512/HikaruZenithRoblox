@@ -3997,22 +3997,17 @@ function sendChatWebhook(player, userdisplay, content, message)
 	local playersCount = '('..players..')'
 	local Asset = MarketplaceService:GetProductInfo(PlaceId)
 	local placeName = Asset.Name.. '「' .. PlaceId .. '」'
-	-- local usercheck = formatConnection(player)
 	if httprequest and vtype(logsWebhook, "string") then
 		local target = player
 		local id = player.UserId
 		local avatar = avatarcache[id]
-		-- local hz = "Hikaru Zenith"
 		local hz = "Hikaru Zenith ["..activeUser.."]"
 		local userFormat = formatUsername(player)
 		local user = userFormat
-		-- if content == nil then
-			-- content = '❔ -'
-		-- end
+		local profileLink = "https://www.roblox.com/users/" .. id .. "/profile"
 		local finalContent = tostring(content)
 		local webhookName = tostring(hz)
-		-- local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userFormat..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```-# Profile: ||' .. profileLink .. '||'
 		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
@@ -4043,9 +4038,9 @@ end
 ChatLog = function(player)
 	local me = Players.LocalPlayer
 	local user = formatUsername(player)
-	local discordUser = user
+	local discordUser = "⛔ " .. user
 	if player:IsFriendsWith(me.UserId) then
-		discordUser = "🔵 "..user.." 🔵"
+		discordUser = "✅ " .. user
 	end
 	player.Chatted:Connect(function(message)
 		local chat = tostring(message)
@@ -4068,10 +4063,10 @@ JoinLog = function(plr)
 	local players = getUsers()
 	local notifyTitleText = "🟢 Server Join ("..players..")"
 	-- if jLogsEnabled == true then
-	local discordUser = user
+	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) then
-		discordUser = "🔵 "..user.." 🔵"
+		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
@@ -4094,11 +4089,11 @@ LeaveLog = function(plr)
 	local players = getUsers()
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
 	-- if jLogsEnabled == true then
-	local discordUser = user
+	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
-	if plr:IsFriendsWith(me.UserId) then
-		discordUser = "🔵 "..user.." 🔵"
+	if me:IsFriendsWith(plr.UserId) then
+		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
 	local webhookMessageText = '-'
@@ -4154,7 +4149,6 @@ if isLegacyChat then
 end
 
 Players.PlayerRemoving:Connect(function(player)
-	LeaveLog(player)
 	if ESPenabled or CHMSenabled or COREGUI:FindFirstChild(player.Name..'_LC') then
 		for i,v in pairs(COREGUI:GetChildren()) do
 			if v.Name == player.Name..'_ESP' or v.Name == player.Name..'_LC' or v.Name == player.Name..'_CHMS' then
@@ -4172,6 +4166,7 @@ Players.PlayerRemoving:Connect(function(player)
 		notify('Spectate','View turned off (player left)')
 	end
 	eventEditor.FireEvent("OnLeave", player.Name)
+	LeaveLog(player)
 end)
 
 Exit.MouseButton1Down:Connect(function()
@@ -13388,9 +13383,9 @@ if not isLegacyChat then
 			if player.UserId == Players.LocalPlayer.UserId then
 				do_exec(message.Text, Players.LocalPlayer)
 			end
-			local discordUser = formatUsername(player)
+			local discordUser = "⛔ " .. formatUsername(player)
 			if player:IsFriendsWith(me.UserId) then
-				discordUser = "🔵 "..formatUsername(player).." 🔵"
+				discordUser = "✅ " .. formatUsername(player)
 			end
 			eventEditor.FireEvent("OnChatted", player.Name, message.Text)
 			sendChatWebhook(player, discordUser, "⚪ CHAT", message.Text)
@@ -13554,7 +13549,7 @@ task.spawn(function()
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
 	local webhookMessage = tostring(webhookMessageText)
-	sendChatWebhook(plr, tostring(plr), "🔰 STARTUP", webhookMessage)
+	sendChatWebhook(plr, "-", "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
 	wait()
 	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
