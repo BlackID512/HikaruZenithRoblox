@@ -13175,7 +13175,7 @@ addcmd("volumeup",{"volup"}, function(args, speaker)
 	local lastVolumeFinal = math.round(lastVolume*10)
 	local notifyDescText = 'Old volume: ' .. currentVolumeFinal .. '\nNew Volume: ' .. lastVolumeFinal
 	local notifyDesc = tostring(notifyDescText)
-	notify('Volume Up',notifyDesc)
+	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Volume Up',notifyDesc) end
 end)
 
 addcmd("volumedown",{"voldown"}, function(args, speaker)
@@ -13190,7 +13190,7 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 	local lastVolumeFinal = math.round(lastVolume*10)
 	local notifyDescText = 'Old volume: ' .. currentVolumeFinal .. '\nNew Volume: ' .. lastVolumeFinal
 	local notifyDesc = tostring(notifyDescText)
-	notify('Volume Down',notifyDesc)
+	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Volume Down',notifyDesc) end
 end)
 
 addcmd('mobile',{},function(args, speaker)
