@@ -4007,7 +4007,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 		local profileLink = "https://www.roblox.com/users/" .. id .. "/profile"
 		local finalContent = tostring(content)
 		local webhookName = tostring(hz)
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```-# Profile: ||' .. profileLink .. '||'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```\n-# Profile: ||' .. profileLink .. '||'
 		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
