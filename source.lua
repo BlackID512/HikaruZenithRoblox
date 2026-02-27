@@ -4085,6 +4085,7 @@ end
 LeaveLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
+	local userId = plr.UserId
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
@@ -4092,7 +4093,7 @@ LeaveLog = function(plr)
 	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
-	if me:IsFriendsWith(plr.UserId) then
+	if me:IsFriendsWith(userId) then
 		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
@@ -13222,14 +13223,6 @@ addcmd('heal',{},function(args, speaker)
 	local notifyDescText = 'Last Health: ' .. health .. '\nNew Health: ' .. newHealth
 	local notifyDesc = tostring(notifyDescText)
 	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Heal',notifyDesc) end
-end)
-
-addcmd('heal2',{},function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/RealBatu20/AI-Scripts-2025/refs/heads/main/HealthSlider.lua'))()
-end)
-
-addcmd('heal3',{},function(args, speaker)
-	loadstring(game:HttpGet('https://raw.githubusercontent.com/zephyr10101/ignore-touchinterests/refs/heads/main/main'))()
 end)
 
 addcmd('testnow',{},function(args, speaker)
