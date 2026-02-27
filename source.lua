@@ -64,6 +64,8 @@ local function defNotify(title,msg)
     game.StarterGui:SetCore("SendNotification",{Title=title,Text=msg,Duration=3})
 end
 
+friends = {}
+
 Players = Services.Players
 UserInputService = Services.UserInputService
 TweenService = Services.TweenService
@@ -4060,6 +4062,7 @@ JoinLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local userId = plr.UserId
+	local userConnection = "FRIEND_" .. userId
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🟢 Server Join ("..players..")"
@@ -4067,7 +4070,7 @@ JoinLog = function(plr)
 	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	if plr:IsFriendsWith(me.UserId) then
-		local userConnection = "FRIEND_" .. UserId
+		friends[userConnection] = true
 		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 	end
@@ -4088,6 +4091,7 @@ LeaveLog = function(plr)
 	local me = Players.LocalPlayer
 	local user = formatUsername(plr)
 	local userId = plr.UserId
+	local userConnection = "FRIEND_" .. userId
 	local now = getNow()
 	local players = getUsers()
 	local notifyTitleText = "🔴 Server Leave ("..players..")"
@@ -4095,9 +4099,11 @@ LeaveLog = function(plr)
 	local discordUser = "⛔ " .. user
 	local notifyDescText = now.."\n"..user
 	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
-	if me:IsFriendsWith(userId) then
+	-- if me:IsFriendsWith(userId) then
+	if friends[userConnection] == true then
 		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
+		friends[userConnection] = nil
 	end
 	local webhookMessageText = '-'
 	local notifyTitle = tostring(notifyTitleText)
@@ -13559,4 +13565,9 @@ task.spawn(function()
 	Credits:Destroy()
 	IntroBackground:Destroy()
 	minimizeHolder()
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= plr and player:IsFriendsWith(plr.UserId) then
+			friends["FRIEND_" .. player.UserId] = true
+		end
+	end
 end)
