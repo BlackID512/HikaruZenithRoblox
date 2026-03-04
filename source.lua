@@ -66,6 +66,16 @@ end
 
 friends = {}
 
+function refreshFriends()
+	friends = {}
+	local plr = Players.LocalPlayer
+	for _, player in ipairs(Players:GetPlayers()) do
+		if player ~= plr and player:IsFriendsWith(plr.UserId) then
+			friends["FRIEND_" .. player.UserId] = true
+		end
+	end
+end
+
 Players = Services.Players
 UserInputService = Services.UserInputService
 TweenService = Services.TweenService
@@ -4589,6 +4599,7 @@ CMDs[#CMDs + 1] = {NAME = 'mobile', DESC = 'Load the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'jlogsnotifier', DESC = 'Toggle the Join & Leave notifications'}
 CMDs[#CMDs + 1] = {NAME = 'heal', DESC = 'Heal player module by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'friendsrefresh / fref', DESC = 'Refresh friends scan by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13233,6 +13244,10 @@ addcmd('heal',{},function(args, speaker)
 	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Heal',notifyDesc) end
 end)
 
+addcmd('friendsrefresh',{'fref'},function(args, speaker)
+	refreshFriends()
+end)
+
 addcmd('testnow',{},function(args, speaker)
 	local now = Time()
 	local now2 = os.time()
@@ -13551,22 +13566,21 @@ task.spawn(function()
 	jLogsNotifier = true
 	wait()
 	-- Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
+	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.1)
 	-- Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
-	-- wait(1)
+	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.1)
+	wait(0.5)
 	local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-	-- TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
-	-- TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
+	TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
+	TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
 	-- Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
-	wait(0.2)
-	-- Logo:Destroy()
-	-- Credits:Destroy()
-	-- IntroBackground:Destroy()
+	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.1)
+	wait(0.1)
+	Logo:Destroy()
+	Credits:Destroy()
+	IntroBackground:Destroy()
 	minimizeHolder()
-	for _, player in ipairs(Players:GetPlayers()) do
-		if player ~= plr and player:IsFriendsWith(plr.UserId) then
-			friends["FRIEND_" .. player.UserId] = true
-		end
-	end
+	refreshFriends()
 	local webhookMessage = tostring(webhookMessageText)
 	sendChatWebhook(plr, "-", "🔰 STARTUP", webhookMessage)
 	print('🔰 Hikaru Zenith Initialized 🔰')
