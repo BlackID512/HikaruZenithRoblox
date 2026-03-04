@@ -13548,26 +13548,26 @@ task.spawn(function()
 	defNotify('Hikaru Zenith',notifyDesc)
 	-- local webhookMessageText = "\n🔰 Webhook initiated 🔰\nPlace Name: "..Asset.Name.."\nPlace ID: "..PlaceId.."\nPlayer(s): "..playersCount.."/"..maxPlayers
 	local webhookMessageText = "🔰 Script initialized..."
-	local webhookMessage = tostring(webhookMessageText)
-	sendChatWebhook(plr, "-", "🔰 STARTUP", webhookMessage)
-	print('🔰 Hikaru Zenith Initialized 🔰')
 	jLogsNotifier = true
 	wait()
-	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
-	Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
-	wait(1)
+	-- Credits:TweenPosition(UDim2.new(0, 0, 0.9, 0), "Out", "Quart", 0.2)
+	-- Logo:TweenSizeAndPosition(UDim2.new(0, 175, 0, 175), UDim2.new(0, 37, 0, 45), "Out", "Quart", 0.3)
+	-- wait(1)
 	local OutInfo = TweenInfo.new(1.6809, Enum.EasingStyle.Sine, Enum.EasingDirection.Out, 0, false, 0)
-	TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
-	TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
-	Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
+	-- TweenService:Create(Logo, OutInfo, {ImageTransparency = 1}):Play()
+	-- TweenService:Create(IntroBackground, OutInfo, {BackgroundTransparency = 1}):Play()
+	-- Credits:TweenPosition(UDim2.new(0, 0, 0.9, 30), "Out", "Quart", 0.2)
 	wait(0.2)
-	Logo:Destroy()
-	Credits:Destroy()
-	IntroBackground:Destroy()
+	-- Logo:Destroy()
+	-- Credits:Destroy()
+	-- IntroBackground:Destroy()
 	minimizeHolder()
 	for _, player in ipairs(Players:GetPlayers()) do
 		if player ~= plr and player:IsFriendsWith(plr.UserId) then
 			friends["FRIEND_" .. player.UserId] = true
 		end
 	end
+	local webhookMessage = tostring(webhookMessageText)
+	sendChatWebhook(plr, "-", "🔰 STARTUP", webhookMessage)
+	print('🔰 Hikaru Zenith Initialized 🔰')
 end)
