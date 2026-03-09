@@ -4115,7 +4115,7 @@ LeaveLog = function(plr)
 	local notifyDescText = now.."\n"..user
 	-- if plr:IsFriendsWith(me.UserId) and plr ~= me then
 	-- if me:IsFriendsWith(userId) then
-	if friends[userConnection] == true then
+	if friends[userConnection] then
 		discordUser = "✅ "..user
 		notifyDescText = now.."\n🔵 "..user.." 🔵"
 		friends[userConnection] = nil
@@ -7063,11 +7063,11 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 			local seconds = seconds - (minutes * 60)
 			local minutes = minutes - (hours * 60)
 			if hours < 1 then if minutes < 1 then
-					SINFOGUI.Time.Text = seconds .. " Second(s)" else
-					SINFOGUI.Time.Text = minutes .. " Minute(s), " .. seconds .. " Second(s)"
+					SINFOGUI.Time.Text = seconds .. " s" else
+					SINFOGUI.Time.Text = minutes .. " m, " .. seconds .. " s"
 				end
 			else
-				SINFOGUI.Time.Text = hours .. " Hour(s), " .. minutes .. " Minute(s), " .. seconds .. " Second(s)"
+				SINFOGUI.Time.Text = hours .. " h, " .. minutes .. " m, " .. seconds .. " s"
 			end
 			wait(1)
 		until SINFOGUI.Parent == nil
