@@ -7063,11 +7063,14 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 			local seconds = seconds - (minutes * 60)
 			local minutes = minutes - (hours * 60)
 			if hours < 1 then if minutes < 1 then
-					SINFOGUI.Time.Text = seconds .. " s" else
-					SINFOGUI.Time.Text = minutes .. " m, " .. seconds .. " s"
+					-- SINFOGUI.Time.Text = seconds .. "s" else
+					-- SINFOGUI.Time.Text = minutes .. "m, " .. seconds .. "s"
+					SINFOGUI.Time.Text = "00:00:" .. seconds else
+					SINFOGUI.Time.Text = "00:" .. minutes .. ":" .. seconds
 				end
 			else
-				SINFOGUI.Time.Text = hours .. " h, " .. minutes .. " m, " .. seconds .. " s"
+				-- SINFOGUI.Time.Text = hours .. "h, " .. minutes .. "m, " .. seconds .. "s"
+				SINFOGUI.Time.Text = hours .. ":" .. minutes .. ":" .. seconds
 			end
 			wait(1)
 		until SINFOGUI.Parent == nil
