@@ -76,6 +76,19 @@ function refreshFriends()
 	end
 end
 
+local TextChatService = game:GetService("TextChatService")
+local function sendMessage(msg)
+    if TextChatService.ChatVersion == Enum.ChatVersion.TextChatService then
+        local channel = TextChatService.TextChannels:FindFirstChild("RBXGeneral")
+        if channel then
+            channel:SendAsync(msg)
+        end
+    else
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg,"All")
+    end
+end
+
+
 Players = Services.Players
 UserInputService = Services.UserInputService
 TweenService = Services.TweenService
@@ -13254,6 +13267,10 @@ end)
 
 addcmd('friendsrefresh',{'fref'},function(args, speaker)
 	refreshFriends()
+end)
+
+addcmd('testmsg',{},function(args, speaker)
+	sendMessage(args)
 end)
 
 addcmd('testnow',{},function(args, speaker)
