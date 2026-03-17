@@ -13270,7 +13270,7 @@ addcmd('friendsrefresh',{'fref'},function(args, speaker)
 end)
 
 addcmd('testmsg',{},function(args, speaker)
-	sendMessage(args)
+	sendMessage(args[1])
 end)
 
 addcmd('testnow',{},function(args, speaker)
