@@ -4603,7 +4603,7 @@ CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes'}
+CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
@@ -13166,6 +13166,12 @@ end)
 
 addcmd("emotes", {}, function(args, speaker)
 	loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
+	if everyClipboard then
+		toClipboard('https://key.droply.lol/?verified=true')
+		notify('Get Emotes Key', 'Copied to clipboard!\nhttps://key.droply.lol/?verified=true')
+	else
+		notify('Get Emotes Key', 'https://key.droply.lol/?verified=true')
+	end
 end)
 
 addcmd("shiftlock", {"slock"}, function(args, speaker)
