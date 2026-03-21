@@ -7075,15 +7075,27 @@ addcmd('serverinfo',{'info','sinfo'},function(args, speaker)
 			local hours = math.floor(workspace.DistributedGameTime / 60 / 60)
 			local seconds = seconds - (minutes * 60)
 			local minutes = minutes - (hours * 60)
+			local hoursFormatted = hours
+			local minutesFormatted = minutes
+			local secondsFormatted = seconds
+			if seconds < 10 then
+				secondsFormatted = '0' .. seconds
+			end
+			if minutes < 10 then
+				minutesFormatted = '0' .. minutes
+			end
 			if hours < 1 then if minutes < 1 then
 					-- SINFOGUI.Time.Text = seconds .. "s" else
 					-- SINFOGUI.Time.Text = minutes .. "m, " .. seconds .. "s"
-					SINFOGUI.Time.Text = "00:00:" .. seconds else
-					SINFOGUI.Time.Text = "00:" .. minutes .. ":" .. seconds
+					SINFOGUI.Time.Text = "00:00:" .. secondsFormatted else
+					SINFOGUI.Time.Text = "00:" .. minutesFormatted .. ":" .. secondsFormatted
 				end
 			else
+				if hours < 10 then
+					hoursFormatted = '0' .. hours
+				end
 				-- SINFOGUI.Time.Text = hours .. "h, " .. minutes .. "m, " .. seconds .. "s"
-				SINFOGUI.Time.Text = hours .. ":" .. minutes .. ":" .. seconds
+				SINFOGUI.Time.Text = hoursFormatted .. ":" .. minutesFormatted .. ":" .. secondsFormatted
 			end
 			wait(1)
 		until SINFOGUI.Parent == nil
