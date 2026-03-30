@@ -5760,6 +5760,17 @@ function formatConnection(player)
 	return finalResult
 end
 
+function formatConnectionTag(player)
+	local me = Players.LocalPlayer
+	local isConnection = "⛔"
+	if player:IsFriendsWith(me.UserId) then
+		isConnection = "✅"
+	end
+	-- local result = formatUsername(player)
+	local finalResult = isConnection
+	return finalResult
+end
+
 getprfx=function(strn)
 	if strn:sub(1,string.len(prefix))==prefix then return{'cmd',string.len(prefix)+1}
 	end return
@@ -5958,7 +5969,7 @@ function ESP(plr, logic)
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
 							-- TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
-							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnection(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
+							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnectionTag(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
@@ -6112,7 +6123,7 @@ function Locate(plr)
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
-							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnection(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
+							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnectionTag(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
