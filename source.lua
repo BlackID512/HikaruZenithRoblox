@@ -312,8 +312,6 @@ scroll_3 = Instance.new("ScrollingFrame")
 listlayout = Instance.new("UIListLayout",scroll_3)
 selectChat = Instance.new("TextButton")
 selectJoin = Instance.new("TextButton")
-QuickCapture = Instance.new("TextButton")
-UICorner = Instance.new("UICorner")
 
 function randomString()
 	local length = math.random(10,20)
@@ -5959,7 +5957,8 @@ function ESP(plr, logic)
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
-							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
+							-- TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
+							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnection(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
@@ -6113,7 +6112,7 @@ function Locate(plr)
 						if plr.Character and getRoot(plr.Character) and plr.Character:FindFirstChildOfClass("Humanoid") and Players.LocalPlayer.Character and getRoot(Players.LocalPlayer.Character) and Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") then
 							local pos = math.floor((getRoot(Players.LocalPlayer.Character).Position - getRoot(plr.Character).Position).magnitude)
 							-- TextLabel.Text = 'Name: '..plr.Name..' | Health: '..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..' | Studs: '..pos
-							TextLabel.Text = '👤'..plr.DisplayName..' ('..plr.Name..')\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
+							TextLabel.Text = '👤'..formatUsername(plr)..' '..formatConnection(plr)..'\n❤'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'/'..round(plr.Character:FindFirstChildOfClass('Humanoid').Health, 1)..'\n🔷'..pos
 						end
 					else
 						teamChange:Disconnect()
@@ -13299,12 +13298,15 @@ addcmd('testnow',{},function(args, speaker)
 	notify('Test Time',desc)
 end)
 
-if IsOnMobile then
+-- if IsOnMobile then
+function QCStartup()
 	-- Some deactivated code moved to the top as an global variable
 	-- local QuickCapture = Instance.new("TextButton")
 	-- local QuickCapture = Instance.new("ImageButton")
 	-- local UICorner = Instance.new("UICorner")
 	-- QuickCapture.Name = randomString()
+	QuickCapture = Instance.new("TextButton")
+	UICorner = Instance.new("UICorner")
 	QuickCapture.Name = "QuickCaptureButton"
 	QuickCapture.Parent = PARENT
 	QuickCapture.BackgroundColor3 = Color3.fromRGB(16, 16, 16)
@@ -13597,6 +13599,7 @@ task.spawn(function()
 end)
 
 task.spawn(function()
+	QCStartup()
 	local plr = Players.LocalPlayer
 	local now = getNow()
 	local players = getUsers()
