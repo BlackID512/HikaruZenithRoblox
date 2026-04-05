@@ -176,7 +176,7 @@ if makefolder and isfolder and writefile and isfile then
 	end)
 end
 
-currentVersion = "0.3.1H"
+currentVersion = "0.3.2I"
 jLogsNotifier = false
 
 ScaledHolder = Instance.new("Frame")
@@ -4609,8 +4609,10 @@ CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by H
 CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay Paused pop up Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'vckeybind / vck', DESC = 'Voice Chat toggle with keybind made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Desktop Anti-AFK module by hassanxzayn'}
 CMDs[#CMDs + 1] = {NAME = 'volumeup / volup', DESC = 'Volume up by 1'}
 CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
+CMDs[#CMDs + 1] = {NAME = 'classiccam / ccam', DESC = 'Force lock CameraMode to classic'}
 CMDs[#CMDs + 1] = {NAME = 'mobile', DESC = 'Load the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the mobile button by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'jlogsnotifier', DESC = 'Toggle the Join & Leave notifications'}
@@ -13259,6 +13261,14 @@ addcmd("volumedown",{"voldown"}, function(args, speaker)
 	local notifyDescText = 'Old volume: ' .. currentVolumeFinal .. '\nNew Volume: ' .. lastVolumeFinal
 	local notifyDesc = tostring(notifyDescText)
 	if not (args[1] and tostring(args[1]) == 'nonotify') then notify('Volume Down',notifyDesc) end
+end)
+
+addcmd("classiccamera",{"ccam"}, function(args, speaker)
+	-- local player = Players.LocalPlayer
+	speaker.CameraMode = "Classic"
+	-- Enum.CameraMode.Classic = camera stays fixed relative to the character
+	-- Enum.CameraMode.LockFirstPerson = locks camera in first person
+	speaker.CameraMode = Enum.CameraMode.Classic
 end)
 
 addcmd('mobile',{},function(args, speaker)
