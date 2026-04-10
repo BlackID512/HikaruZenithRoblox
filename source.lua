@@ -13318,62 +13318,64 @@ addcmd("webhookslot", {}, function(args, speaker)
 	print('Start #2')
 	local target = 'default'
 	print('Start #3')
-	if args:lower() == '1a' then
+	local selected = args:lower()
+	print('Start #4')
+	if selected == '1a' then
 		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
 		target = args:lower()
-	elseif args:lower() == '1b' then
+	elseif selected == '1b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492177878635249665/LMgXbC2hlUpadXjZBjQA4gs5uV2hsLNtvw0hzYFIPWHRYfdCR1ZKm1jlDUsAtWrpVtMh'
 		target = args:lower()
-	elseif args:lower() == '1c' then
+	elseif selected == '1c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178634566537226/wHTHjHF4NpDsX2Nzr6cnWbLw6IPhIQTOCfL5GDhS2oLfQT9enZogNXMzrxZj76mSLdyw'
 		target = args:lower()
-	elseif args:lower() == '1d' then
+	elseif selected == '1d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178674982719612/aQVZLtSm1yy_Eh8rdonyb_T_OQbj_S8_WoF9DUKqOVBAAI4-Yksp9CR7dko4ajLsRfLh'
 		target = args:lower()
-	elseif args:lower() == '1e' then
+	elseif selected == '1e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178720763416863/yryka_naRf39PpvwPJQ2ZJBRu5_O1WnJuYxae96n9o6Vd9NBEQerH6a_-76PL-Ex5RYK'
 		target = args:lower()
 
-	elseif args:lower() == '2a' then
+	elseif selected == '2a' then
 		webhookLink = 'https://discord.com/api/webhooks/1445275553841283153/ZKDtGfK9e0T-xEH31dLck7v_dvQIR5vCWuvWNV4rlfsB-FzNjgTy9Tr2cUyG1RWaPpFv'
 		target = args:lower()
-	elseif args:lower() == '2b' then
+	elseif selected == '2b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179530859675688/zDx1h49ekYjwqc5h7HiV8Cyq36cq_t9wNokepZdxNYiz8H3xVfoi0hiqN-f1arn_wvkA'
 		target = args:lower()
-	elseif args:lower() == '2c' then
+	elseif selected == '2c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179561188692109/0SDT-CWXCK-r0Qpm_PWifLfWJQF5VaYSj1PL-Cp_DSXOcRdY5ngDO_4zi4kdp-wB96bN'
 		target = args:lower()
-	elseif args:lower() == '2d' then
+	elseif selected == '2d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179599361310762/uSh4DAJaC3GJ_zL0GhQu14dOhOLIjReQkc5JoH0MS9GDWVP3vfKs5SG5lGgz2LaBH1v2'
 		target = args:lower()
-	elseif args:lower() == '2e' then
+	elseif selected == '2e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179629409046609/adYoYYh7VnLbvfXIpRrHUh7bZZUU1J6shVOq-DenZTqm64yzTsFi9WpO9HGJyt9rAyVZ'
 		target = args:lower()
 
-	elseif args:lower() == '3a' then
+	elseif selected == '3a' then
 		webhookLink = 'https://discord.com/api/webhooks/1445275956578353273/uG9tZWNbjYaECc0xOrvOzZ-mU9VvAAxRfPZDzIHA5NEhow6YcKQ8TTc7hcC2uKZLzaHK'
 		target = args:lower()
-	elseif args:lower() == '3b' then
+	elseif selected == '3b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193130999582901/_KhgC2Uez-O3a0m4YUcL3ex1NMPRRFMf0h5EIBYs5txEQvtj9ozvGSSkh-E-FRt8HrE0'
 		target = args:lower()
-	elseif args:lower() == '3c' then
+	elseif selected == '3c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193228814815323/ra9QTNF3gCs4QPm0INTQrTPh6gh8ckYU8L0Dpb40CyYjRigdCQkg0ufjyh3s5W29loQU'
 		target = args:lower()
-	elseif args:lower() == '3d' then
+	elseif selected == '3d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193372327252118/xQMudYQrc40XodntwNLi1x_nfBtl_f6f6Z3y4jPwqXo0sNqDS8ayUYLC4NSqhXhR9gHj'
 		target = args:lower()
-	elseif args:lower() == '3e' then
+	elseif selected == '3e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193500911894700/bF2dvQXaTsyvozrBbgoXlvvkyJR7NZNTqY2z8qKHriNoCuAFqvgKtQ5H52MnT5hFsYy2'
 		target = args:lower()
 	end
-	print('Start #4')
+	print('Start #5')
 	if everyClipboard then
 		toClipboard(webhookLink)
 		notify('Webhook Link', 'Copied ' .. target)
-		print('Start #5 (Clipboard)')
+		print('Start #6 (Clipboard)')
 	else
 		notify('Webhook Link', 'Copy not supported, link it manually!')
-		print('Start #5 (Non-Clipboard)')
+		print('Start #6 (Non-Clipboard)')
 	end
 end)
 
