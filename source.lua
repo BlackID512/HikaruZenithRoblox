@@ -13350,7 +13350,7 @@ addcmd("webhookslot", {}, function(args, speaker)
 end)
 
 addcmd('testmsg',{},function(args, speaker)
-	sendMessage(args[1])
+	sendMessage(args)
 end)
 
 addcmd('testnow',{},function(args, speaker)
