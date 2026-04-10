@@ -13364,7 +13364,7 @@ addcmd("webhookslot", {}, function(args, speaker)
 	end
 	if everyClipboard then
 		toClipboard(webhookLink)
-		notify('Webhook Link', 'Copied ' .. args:lower())
+		notify('Webhook Link', 'Copied ' .. target)
 	else
 		notify('Webhook Link', 'Copy not supported, link it manually!')
 	end
