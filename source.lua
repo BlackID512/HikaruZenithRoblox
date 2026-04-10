@@ -1,4 +1,4 @@
-updateTime = "04:17:00 GMT+7"
+updateTime = "04:20:00 UTC+7"
 updateDate = "11/04/2026"
 
 if HZ_LOADED and not _G.HZ_DEBUG then
@@ -4601,6 +4601,8 @@ function autoComplete(str,curText)
 end
 
 CMDs = {}
+CMDs[#CMDs + 1] = {NAME = updateDate .. ' ' .. updateTime, DESC = ''}
+CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'update', DESC = 'Hikaru Zenith Last Update Time'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
