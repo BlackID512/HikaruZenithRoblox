@@ -4035,7 +4035,7 @@ function sendChatWebhook(player, userdisplay, content, message)
 		local profileLink = "https://www.roblox.com/users/" .. id .. "/profile"
 		local finalContent = tostring(content)
 		local webhookName = tostring(hz)
-		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```\n-# Profile: ||' .. profileLink .. '||'
+		local webhookContentText = finalContent..' | `'..now..'`\n```yaml\nUSER: '..userdisplay..'\nPLACE: '..placeName..''..playersCount..'\nMESSAGE: '..message..'\n```\n-# Active User: ||' ..activeUser.. '||\n-# Profile: ||' .. profileLink .. '||'
 		local webhookContent = tostring(webhookContentText)
 		if not avatar then
 			-- local d = HttpService:JSONDecode(httprequest({
@@ -4618,6 +4618,7 @@ CMDs[#CMDs + 1] = {NAME = 'mobilestop / nomobile / unmobile', DESC = 'Unload the
 CMDs[#CMDs + 1] = {NAME = 'jlogsnotifier', DESC = 'Toggle the Join & Leave notifications'}
 CMDs[#CMDs + 1] = {NAME = 'heal', DESC = 'Heal player module by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'friendsrefresh / fref', DESC = 'Refresh friends scan by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'webhookslot [1a - 10e]', DESC = 'Set the Webhook slot instantly'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
 CMDs[#CMDs + 1] = {NAME = 'discord / support / help', DESC = 'Invite to the Hikaru Zenith support server.'}
 CMDs[#CMDs + 1] = {NAME = 'guiscale [number]', DESC = 'Changes the size of the gui. [number] accepts both decimals and whole numbers. Min is 0.4 and Max is 2'}
@@ -13305,6 +13306,47 @@ end)
 
 addcmd('friendsrefresh',{'fref'},function(args, speaker)
 	refreshFriends()
+end)
+
+addcmd("webhookslot", {}, function(args, speaker)
+	-- if everyClipboard then
+		-- toClipboard('https://key.droply.lol/?verified=true')
+		-- notify('Webhook Link', 'Copied [webhook link]')
+	-- else
+		-- notify('Webhook Link', 'webhook link')
+	-- end
+	if not httprequest then
+		return notify("Incompatible Exploit", "Your exploit does not support this command (missing request)")
+	end
+	local webhookLink = logsWebhook
+	local updateLink = false
+	if args == '1a' then
+		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
+		updateLink = true
+	elseif args == '1b' then
+		webhookLink = 'https://discord.com/api/webhooks/1492177878635249665/LMgXbC2hlUpadXjZBjQA4gs5uV2hsLNtvw0hzYFIPWHRYfdCR1ZKm1jlDUsAtWrpVtMh'
+	elseif args == '1c' then
+		webhookLink = 'https://discord.com/api/webhooks/1492178634566537226/wHTHjHF4NpDsX2Nzr6cnWbLw6IPhIQTOCfL5GDhS2oLfQT9enZogNXMzrxZj76mSLdyw'
+	elseif args == '1d' then
+		webhookLink = 'https://discord.com/api/webhooks/1492178674982719612/aQVZLtSm1yy_Eh8rdonyb_T_OQbj_S8_WoF9DUKqOVBAAI4-Yksp9CR7dko4ajLsRfLh'
+	elseif args == '1e' then
+		webhookLink = 'https://discord.com/api/webhooks/1492178720763416863/yryka_naRf39PpvwPJQ2ZJBRu5_O1WnJuYxae96n9o6Vd9NBEQerH6a_-76PL-Ex5RYK'
+
+	elseif args == '2a' then
+		webhookLink = 'https://discord.com/api/webhooks/1445275553841283153/ZKDtGfK9e0T-xEH31dLck7v_dvQIR5vCWuvWNV4rlfsB-FzNjgTy9Tr2cUyG1RWaPpFv'
+	elseif args == '2b' then
+		webhookLink = 'https://discord.com/api/webhooks/1492179530859675688/zDx1h49ekYjwqc5h7HiV8Cyq36cq_t9wNokepZdxNYiz8H3xVfoi0hiqN-f1arn_wvkA'
+	elseif args == '2c' then
+		webhookLink = 'https://discord.com/api/webhooks/1492179561188692109/0SDT-CWXCK-r0Qpm_PWifLfWJQF5VaYSj1PL-Cp_DSXOcRdY5ngDO_4zi4kdp-wB96bN'
+	elseif args == '2d' then
+		webhookLink = 'https://discord.com/api/webhooks/1492179599361310762/uSh4DAJaC3GJ_zL0GhQu14dOhOLIjReQkc5JoH0MS9GDWVP3vfKs5SG5lGgz2LaBH1v2'
+	elseif args == '2e' then
+		webhookLink = 'https://discord.com/api/webhooks/1492179629409046609/adYoYYh7VnLbvfXIpRrHUh7bZZUU1J6shVOq-DenZTqm64yzTsFi9WpO9HGJyt9rAyVZ'
+	end
+	if updateLink then
+		logsWebhook = webhookLink
+		updatesaves()
+	end
 end)
 
 addcmd('testmsg',{},function(args, speaker)
