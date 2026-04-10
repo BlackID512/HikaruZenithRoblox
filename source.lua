@@ -13318,7 +13318,7 @@ addcmd("webhookslot", {}, function(args, speaker)
 	print('Start #2')
 	local target = 'default'
 	print('Start #3')
-	local selected = args:lower()
+	local selected = args
 	print('Start #4')
 	if selected == '1a' then
 		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
