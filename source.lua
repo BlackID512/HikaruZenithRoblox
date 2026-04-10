@@ -13320,57 +13320,54 @@ addcmd("webhookslot", {}, function(args, speaker)
 	end
 	local webhookLink = logsWebhook
 	local updateLink = false
-	if args == '1a' then
+	if args[1]== '1a' then
 		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
 		updateLink = true
-	elseif args == '1b' then
+		notify('
+	elseif args[1]== '1b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492177878635249665/LMgXbC2hlUpadXjZBjQA4gs5uV2hsLNtvw0hzYFIPWHRYfdCR1ZKm1jlDUsAtWrpVtMh'
 		updateLink = true
-	elseif args == '1c' then
+	elseif args[1]== '1c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178634566537226/wHTHjHF4NpDsX2Nzr6cnWbLw6IPhIQTOCfL5GDhS2oLfQT9enZogNXMzrxZj76mSLdyw'
 		updateLink = true
-	elseif args == '1d' then
+	elseif args[1]== '1d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178674982719612/aQVZLtSm1yy_Eh8rdonyb_T_OQbj_S8_WoF9DUKqOVBAAI4-Yksp9CR7dko4ajLsRfLh'
 		updateLink = true
-	elseif args == '1e' then
+	elseif args[1]== '1e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492178720763416863/yryka_naRf39PpvwPJQ2ZJBRu5_O1WnJuYxae96n9o6Vd9NBEQerH6a_-76PL-Ex5RYK'
 		updateLink = true
 
-	elseif args == '2a' then
+	elseif args[1]== '2a' then
 		webhookLink = 'https://discord.com/api/webhooks/1445275553841283153/ZKDtGfK9e0T-xEH31dLck7v_dvQIR5vCWuvWNV4rlfsB-FzNjgTy9Tr2cUyG1RWaPpFv'
 		updateLink = true
-	elseif args == '2b' then
+	elseif args[1]== '2b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179530859675688/zDx1h49ekYjwqc5h7HiV8Cyq36cq_t9wNokepZdxNYiz8H3xVfoi0hiqN-f1arn_wvkA'
 		updateLink = true
-	elseif args == '2c' then
+	elseif args[1]== '2c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179561188692109/0SDT-CWXCK-r0Qpm_PWifLfWJQF5VaYSj1PL-Cp_DSXOcRdY5ngDO_4zi4kdp-wB96bN'
 		updateLink = true
-	elseif args == '2d' then
+	elseif args[1]== '2d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179599361310762/uSh4DAJaC3GJ_zL0GhQu14dOhOLIjReQkc5JoH0MS9GDWVP3vfKs5SG5lGgz2LaBH1v2'
 		updateLink = true
-	elseif args == '2e' then
+	elseif args[1]== '2e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492179629409046609/adYoYYh7VnLbvfXIpRrHUh7bZZUU1J6shVOq-DenZTqm64yzTsFi9WpO9HGJyt9rAyVZ'
 		updateLink = true
 
-	elseif args == '3a' then
+	elseif args[1]== '3a' then
 		webhookLink = 'https://discord.com/api/webhooks/1445275956578353273/uG9tZWNbjYaECc0xOrvOzZ-mU9VvAAxRfPZDzIHA5NEhow6YcKQ8TTc7hcC2uKZLzaHK'
 		updateLink = true
-	elseif args == '3b' then
+	elseif args[1]== '3b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193130999582901/_KhgC2Uez-O3a0m4YUcL3ex1NMPRRFMf0h5EIBYs5txEQvtj9ozvGSSkh-E-FRt8HrE0'
 		updateLink = true
-	elseif args == '3c' then
+	elseif args[1]== '3c' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193228814815323/ra9QTNF3gCs4QPm0INTQrTPh6gh8ckYU8L0Dpb40CyYjRigdCQkg0ufjyh3s5W29loQU'
 		updateLink = true
-	elseif args == '3d' then
+	elseif args[1]== '3d' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193372327252118/xQMudYQrc40XodntwNLi1x_nfBtl_f6f6Z3y4jPwqXo0sNqDS8ayUYLC4NSqhXhR9gHj'
 		updateLink = true
-	elseif args == '3e' then
+	elseif args[1]== '3e' then
 		webhookLink = 'https://discord.com/api/webhooks/1492193500911894700/bF2dvQXaTsyvozrBbgoXlvvkyJR7NZNTqY2z8qKHriNoCuAFqvgKtQ5H52MnT5hFsYy2'
 		updateLink = true
-
-	else
-		notify('Instant Webhook Link', 'Wrong input / not updated yet!')
-		updateLink = false
 	end
 	if updateLink then
 		logsWebhook = webhookLink
