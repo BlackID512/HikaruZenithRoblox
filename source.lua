@@ -1,3 +1,6 @@
+updateTime = "04:17:00 GMT+7"
+updateDate = "11/04/2026"
+
 if HZ_LOADED and not _G.HZ_DEBUG then
 	-- error("Hikaru Zenith is already running!", 0)
 	return
@@ -4599,6 +4602,7 @@ end
 
 CMDs = {}
 CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
+CMDs[#CMDs + 1] = {NAME = 'update', DESC = 'Hikaru Zenith Last Update Time'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
@@ -13175,6 +13179,18 @@ addcmd("about", {}, function(args, speaker)
 	local line3 = "Developed by Hikaru Studio Inc. Team"
 	local line4 = "Current script version is: "..currentVersion
 	local descText = line1.."\n"..line2.."\n"..line3.."\n"..line4
+	-- for i = 1, #desc do
+		-- local descText = descText0 .. "" .. i
+	-- end
+	notify(title,descText)
+end)
+
+addcmd("update", {}, function(args, speaker)
+	local title = "Hikaru Zenith Last Updates"
+	local line1 = "Version: " .. currentVersion
+	local line2 = "Update Time: " .. updateTime
+	local line3 = "Update Date: " .. updateDate
+	local descText = line1.."\n"..line2.."\n"..line3
 	-- for i = 1, #desc do
 		-- local descText = descText0 .. "" .. i
 	-- end
