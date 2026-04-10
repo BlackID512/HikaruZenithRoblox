@@ -13323,7 +13323,6 @@ addcmd("webhookslot", {}, function(args, speaker)
 	if args:lower() == '1a' then
 		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
 		updateLink = true
-		notify('
 	elseif args:lower() == '1b' then
 		webhookLink = 'https://discord.com/api/webhooks/1492177878635249665/LMgXbC2hlUpadXjZBjQA4gs5uV2hsLNtvw0hzYFIPWHRYfdCR1ZKm1jlDUsAtWrpVtMh'
 		updateLink = true
@@ -13369,7 +13368,7 @@ addcmd("webhookslot", {}, function(args, speaker)
 		webhookLink = 'https://discord.com/api/webhooks/1492193500911894700/bF2dvQXaTsyvozrBbgoXlvvkyJR7NZNTqY2z8qKHriNoCuAFqvgKtQ5H52MnT5hFsYy2'
 		updateLink = true
 	end
-	if updateLink then
+	if updateLink == true then
 		logsWebhook = webhookLink
 		updatesaves()
 	end
