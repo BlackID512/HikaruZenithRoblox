@@ -13310,10 +13310,14 @@ end)
 
 addcmd("webhookslot", {}, function(args, speaker)
 	if not httprequest then
+		print('Fail #1')
 		return notify("Incompatible Exploit", "Your exploit does not support this command (missing request)")
 	end
+	print('Start #1')
 	local webhookLink = logsWebhook
+	print('Start #2')
 	local target = 'default'
+	print('Start #3')
 	if args:lower() == '1a' then
 		webhookLink = 'https://discord.com/api/webhooks/1441058547994722426/oMeKpk4uowVyGaopqhPR81OUg6bD8KUI0J2AVUr4XpDNLlzXMFRrf9peEAbGutQDjUY7'
 		local target = args:lower()
@@ -13362,11 +13366,14 @@ addcmd("webhookslot", {}, function(args, speaker)
 		webhookLink = 'https://discord.com/api/webhooks/1492193500911894700/bF2dvQXaTsyvozrBbgoXlvvkyJR7NZNTqY2z8qKHriNoCuAFqvgKtQ5H52MnT5hFsYy2'
 		local target = args:lower()
 	end
+	print('Start #4')
 	if everyClipboard then
 		toClipboard(webhookLink)
 		notify('Webhook Link', 'Copied ' .. target)
+		print('Start #5 (Clipboard)')
 	else
 		notify('Webhook Link', 'Copy not supported, link it manually!')
+		print('Start #5 (Non-Clipboard)')
 	end
 end)
 
