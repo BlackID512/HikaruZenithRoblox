@@ -1,4 +1,4 @@
-updateTime = "04:25:00 UTC+7"
+updateTime = "07:23:25 UTC+7"
 updateDate = "11/04/2026"
 
 if HZ_LOADED and not _G.HZ_DEBUG then
@@ -4609,6 +4609,7 @@ CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another scr
 CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
+CMDs[#CMDs + 1] = {NAME = 'superfly / sfly', DESC = 'Super Fly made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'shiftlock / slock', DESC = 'Maxus Shiftlock made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'fpsbooster / fpsboost', DESC = 'FPS booster made by Hikaru'}
@@ -13244,6 +13245,10 @@ end)
 addcmd('jumpbutton',{'jbbutton','jb'},function(args, speaker)
 	getgenv().script = "https://github.com/danya2854/Myscripts/raw/refs/heads/main/JumpButtonScaleChanger"
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/danya2854/Myscripts/refs/heads/main/loader'))()
+end)
+
+addcmd('superfly',{'sfly'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/Ext-Scripts/main/Single/superfly.lua'))()
 end)
 
 addcmd("volumecheck",{"volcheck","vcheck"}, function(args, speaker)
