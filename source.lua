@@ -1,5 +1,7 @@
-updateTime = "07:23:25 UTC+7"
-updateDate = "11/04/2026"
+updateTime = "14:31:25 UTC+7"
+updateDate = "19/04/2026"
+currentVersion = "0.3.2I"
+jLogsNotifier = false
 
 if HZ_LOADED and not _G.HZ_DEBUG then
 	-- error("Hikaru Zenith is already running!", 0)
@@ -178,9 +180,6 @@ if makefolder and isfolder and writefile and isfile then
 		if IsOnMobile then writefile("hikaruzenith/assets/.nomedia", "") end
 	end)
 end
-
-currentVersion = "0.3.2I"
-jLogsNotifier = false
 
 ScaledHolder = Instance.new("Frame")
 Scale = Instance.new("UIScale")
@@ -4608,6 +4607,7 @@ CMDs[#CMDs + 1] = {NAME = 'update', DESC = 'Hikaru Zenith Last Update Time'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
+CMDs[#CMDs + 1] = {NAME = 'emotes2', DESC = 'More emotes (override default emotes)'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'superfly / sfly', DESC = 'Super Fly made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
@@ -13218,6 +13218,10 @@ addcmd("emotes", {}, function(args, speaker)
 	end
 end)
 
+addcmd("emotes2", {}, function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua'))()
+end)
+
 addcmd("shiftlock", {"slock"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/shiftlock.lua'))()
 end)
@@ -13320,7 +13324,8 @@ end)
 addcmd('heal',{},function(args, speaker)
 	local me = Players.LocalPlayer
 	local health = me.Character:FindFirstChildOfClass('Humanoid').Health
-	me.Character:FindFirstChildOfClass('Humanoid').Health = 100
+	local maxHealth = me.Character:FindFirstChildOfClass('Humanoid').MaxHealth
+	me.Character:FindFirstChildOfClass('Humanoid').Health = maxHealth
 	local newHealth = me.Character:FindFirstChildOfClass('Humanoid').Health
 	local notifyDescText = 'Last Health: ' .. health .. '\nNew Health: ' .. newHealth
 	local notifyDesc = tostring(notifyDescText)
