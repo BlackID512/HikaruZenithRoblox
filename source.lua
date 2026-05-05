@@ -1,5 +1,5 @@
-updateTime = "14:31:25 UTC+7"
-updateDate = "19/04/2026"
+updateTime = "21:25:25 UTC+7"
+updateDate = "05/05/2026"
 currentVersion = "0.3.2I"
 jLogsNotifier = false
 
@@ -4793,7 +4793,7 @@ CMDs[#CMDs + 1] = {NAME = 'loopxray', DESC = 'Makes all parts in workspace trans
 CMDs[#CMDs + 1] = {NAME = 'unloopxray', DESC = 'Unloops xray'}
 CMDs[#CMDs + 1] = {NAME = 'togglexray', DESC = 'Toggles xray'}
 CMDs[#CMDs + 1] = {NAME = '', DESC = ''}
-CMDs[#CMDs + 1] = {NAME = 'spectate / view [player]', DESC = 'View a player'}
+CMDs[#CMDs + 1] = {NAME = 'spectate / view / v [player]', DESC = 'View a player'}
 CMDs[#CMDs + 1] = {NAME = 'viewpart / viewp [part name]', DESC = 'View a part'}
 CMDs[#CMDs + 1] = {NAME = 'unspectate / unview', DESC = 'Stops viewing player'}
 CMDs[#CMDs + 1] = {NAME = 'freecam / fc', DESC = 'Allows you to freely move camera around the game'}
@@ -4887,7 +4887,7 @@ CMDs[#CMDs + 1] = {NAME = 'carpet [player]', DESC = 'Be someones carpet'}
 CMDs[#CMDs + 1] = {NAME = 'uncarpet', DESC = 'Undoes carpet'}
 CMDs[#CMDs + 1] = {NAME = 'friend [player]', DESC = 'Sends a friend request to certain players'}
 CMDs[#CMDs + 1] = {NAME = 'unfriend [player]', DESC = 'Unfriends certain players'}
-CMDs[#CMDs + 1] = {NAME = 'headsit [player]', DESC = 'Sit on a players head'}
+CMDs[#CMDs + 1] = {NAME = 'headsit / hs [player]', DESC = 'Sit on a players head'}
 CMDs[#CMDs + 1] = {NAME = 'walkto / follow [player]', DESC = 'Follow a player'}
 CMDs[#CMDs + 1] = {NAME = 'pathfindwalkto / pathfindfollow [player]', DESC = 'Follow a player using pathfinding'}
 CMDs[#CMDs + 1] = {NAME = 'pathfindwalktowaypoint / pathfindwalktowp [waypoint]', DESC = 'Walk to a waypoint using pathfinding'}
@@ -8382,7 +8382,7 @@ addcmd('nolocate',{'unlocate'},function(args, speaker)
 end)
 
 viewing = nil
-addcmd('view',{'spectate'},function(args, speaker)
+addcmd('view',{'spectate','v'},function(args, speaker)
 	StopFreecam()
 	local players = getPlayer(args[1], speaker)
 	for i,v in pairs(players) do
@@ -8392,7 +8392,10 @@ addcmd('view',{'spectate'},function(args, speaker)
 		end
 		viewing = Players[v]
 		workspace.CurrentCamera.CameraSubject = viewing.Character
-		notify('Spectate','Viewing ' .. Players[v].Name)
+		-- notify('Spectate','Viewing ' .. Players[v].Name)
+		local targetName = Players[v].Name
+		local finalTarget = formatConnection(targetName)
+		notify('Spectate','Viewing\n' .. finalTarget)
 		local function viewDiedFunc()
 			repeat wait() until Players[v].Character ~= nil and getRoot(Players[v].Character)
 			workspace.CurrentCamera.CameraSubject = viewing.Character
@@ -10783,7 +10786,7 @@ addcmd('unloopgoto',{'noloopgoto'},function(args, speaker)
 	loopgoto = nil
 end)
 
-addcmd('headsit',{},function(args, speaker)
+addcmd('headsit',{'hs'},function(args, speaker)
 	local players = getPlayer(args[1], speaker)
 	if headSit then headSit:Disconnect() end
 	for i,v in pairs(players)do
@@ -13246,7 +13249,7 @@ addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
 end)
 
-addcmd('jumpbutton',{'jbbutton','jb'},function(args, speaker)
+addcmd('jumpbutton',{'jbutton','jb'},function(args, speaker)
 	getgenv().script = "https://github.com/danya2854/Myscripts/raw/refs/heads/main/JumpButtonScaleChanger"
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/danya2854/Myscripts/refs/heads/main/loader'))()
 end)
