@@ -1,5 +1,5 @@
-updateTime = "21:25:25 UTC+7"
-updateDate = "05/05/2026"
+updateTime = "00:43:30 UTC+7"
+updateDate = "08/05/2026"
 currentVersion = "0.3.2I"
 jLogsNotifier = false
 
@@ -8392,10 +8392,10 @@ addcmd('view',{'spectate','v'},function(args, speaker)
 		end
 		viewing = Players[v]
 		workspace.CurrentCamera.CameraSubject = viewing.Character
+		local viewTarget = Players[v]
 		-- notify('Spectate','Viewing ' .. Players[v].Name)
-		local targetName = Players[v].Name
-		local finalTarget = formatConnection(targetName)
-		notify('Spectate','Viewing\n' .. finalTarget)
+		local targetName = formatConnection(viewTarget)
+		notify('Spectate','Viewing\n' .. targetName)
 		local function viewDiedFunc()
 			repeat wait() until Players[v].Character ~= nil and getRoot(Players[v].Character)
 			workspace.CurrentCamera.CameraSubject = viewing.Character
