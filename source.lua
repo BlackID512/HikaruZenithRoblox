@@ -1,6 +1,6 @@
-updateTime = "00:43:30 UTC+7"
-updateDate = "08/05/2026"
-currentVersion = "0.3.2I"
+updateTime = "17:32:30 UTC+7"
+updateDate = "16/06/2026"
+currentVersion = "0.3.3J"
 jLogsNotifier = false
 
 if HZ_LOADED and not _G.HZ_DEBUG then
@@ -4606,8 +4606,8 @@ CMDs[#CMDs + 1] = {NAME = 'about', DESC = 'About Hikaru Zenith'}
 CMDs[#CMDs + 1] = {NAME = 'update', DESC = 'Hikaru Zenith Last Update Time'}
 CMDs[#CMDs + 1] = {NAME = 'scriptload / scload [link]', DESC = 'Load another script'}
 CMDs[#CMDs + 1] = {NAME = 'performance / perf / perfmon', DESC = 'Monitor your FPS & latency performance made by Hikaru'}
-CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
-CMDs[#CMDs + 1] = {NAME = 'emotes2', DESC = 'More emotes (override default emotes)'}
+-- CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'Droply Emotes, instant get key = https://key.droply.lol/?verified=true'}
+CMDs[#CMDs + 1] = {NAME = 'emotes', DESC = 'More emotes (override default emotes)'}
 CMDs[#CMDs + 1] = {NAME = 'jumpbutton / jbuttton / jb', DESC = 'Jump Buttton Modifier made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'superfly / sfly', DESC = 'Super Fly made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'virtualkeyboard / virtualkb / vkb', DESC = 'Virtual Keyboard made by Hikaru'}
@@ -4617,6 +4617,7 @@ CMDs[#CMDs + 1] = {NAME = 'freecamx / fcx', DESC = 'External Freecam Module made
 CMDs[#CMDs + 1] = {NAME = 'antigameplaypaused / agp', DESC = 'Disable Gameplay Paused pop up Module made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'vckeybind / vck', DESC = 'Voice Chat toggle with keybind made by Hikaru'}
 CMDs[#CMDs + 1] = {NAME = 'antiidle2 / antiafk2', DESC = 'Desktop Anti-AFK module by hassanxzayn'}
+CMDs[#CMDs + 1] = {NAME = 'antiidlex / antiafkx', DESC = 'Universal Anti AFK-X module by FathurBlackID'}
 CMDs[#CMDs + 1] = {NAME = 'volumeup / volup', DESC = 'Volume up by 1'}
 CMDs[#CMDs + 1] = {NAME = 'volumedown / voldown', DESC = 'Volume down by 1'}
 CMDs[#CMDs + 1] = {NAME = 'classiccam / ccam', DESC = 'Force lock CameraMode to classic'}
@@ -13211,17 +13212,17 @@ addcmd("performance", {"perf","perfmon"}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/HikaruZenithRoblox/master/performance.lua'))()
 end)
 
-addcmd("emotes", {}, function(args, speaker)
-	loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
-	if everyClipboard then
-		toClipboard('https://key.droply.lol/?verified=true')
-		notify('Get Emotes Key', 'Copied to clipboard!\nhttps://key.droply.lol/?verified=true')
-	else
-		notify('Get Emotes Key', 'https://key.droply.lol/?verified=true')
-	end
-end)
+-- addcmd("emotes", {}, function(args, speaker)
+	-- loadstring(game:HttpGet('https://api.droply.lol/raw/Emotes.lua'))()
+	-- if everyClipboard then
+		-- toClipboard('https://key.droply.lol/?verified=true')
+		-- notify('Get Emotes Key', 'Copied to clipboard!\nhttps://key.droply.lol/?verified=true')
+	-- else
+		-- notify('Get Emotes Key', 'https://key.droply.lol/?verified=true')
+	-- end
+-- end)
 
-addcmd("emotes2", {}, function(args, speaker)
+addcmd("emotes", {}, function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/7yd7/Hub/refs/heads/Branch/GUIS/Emotes.lua'))()
 end)
 
@@ -13247,6 +13248,10 @@ end)
 
 addcmd('antiafk2',{'antiidle2'},function(args, speaker)
 	loadstring(game:HttpGet('https://raw.githubusercontent.com/hassanxzayn-lua/Anti-afk/main/antiafkbyhassanxzyn'))()
+end)
+
+addcmd('antiafkx',{'antiidlex'},function(args, speaker)
+	loadstring(game:HttpGet('https://raw.githubusercontent.com/BlackID512/Ext-Scripts/main/Single/AntiAFK-X.lua'))()
 end)
 
 addcmd('jumpbutton',{'jbutton','jb'},function(args, speaker)
