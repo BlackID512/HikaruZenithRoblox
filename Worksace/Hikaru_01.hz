@@ -1,0 +1,36 @@
+local Plugin = {
+	["PluginName"] = "Hikaru Zenith AIO",
+	["PluginDescription"] = "Addon made by Hikaru",
+	["Commands"] = {
+		["scsingle"] = {
+			["ListName"] = "scsingle [file name]",
+			["Description"] = "Load Single script",
+			["Aliases"] = {},
+			["Function"] = function(args,speaker)
+				if args == nil then
+					notify('Hikaru Ext-Script Single Script Loader','You must input the file name to be loaded correctly!\nYou can exclude the .lua')
+				else
+					local filename = args[1]
+					local targetLink = "https://raw.githubusercontent.com/BlackID512/Ext-Scripts/refs/heads/main/Single/" .. filename .. ".lua"
+					local link = targetLink
+					local final = game:HttpGet(link)
+					-- loadstring(game:HttpGet(link))()
+					loadstring(final)()
+				end
+			end
+		},
+		["flinger"] = {
+			["ListName"] = "flinger",
+			["Description"] = "Op Fling by Hikaru",
+			["Aliases"] = {},
+			["Function"] = function(args,speaker)
+				local filename = "OpFling"
+				local targetLink = "https://raw.githubusercontent.com/BlackID512/Ext-Scripts/refs/heads/main/Single/" .. filename .. ".lua"
+				local link = targetLink
+				local final = game:HttpGet(link)
+				-- loadstring(game:HttpGet(link))()
+				loadstring(final)()
+			end
+		}
+	}
+}
