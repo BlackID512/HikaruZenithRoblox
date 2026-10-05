@@ -3,6 +3,8 @@ updateDate = "05/10/2026"
 currentVersion = "0.3.4K"
 jLogsNotifier = false
 
+Title.Text = "🔰 Hikaru Zenith v" .. currentVersion
+
 friends = {}
 
 function refreshFriends()
