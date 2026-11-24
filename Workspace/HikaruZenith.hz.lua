@@ -39,6 +39,33 @@ function formatConnectionTag(player)
 	return finalResult
 end
 
+function Time()
+	local HOUR = math.floor((tick() % 86400) / 3600)
+	local MINUTE = math.floor((tick() % 3600) / 60)
+	local SECOND = math.floor(tick() % 60)
+	local AP = HOUR > 11 and 'PM' or 'AM'
+	HOUR = (HOUR % 12 == 0 and 12 or HOUR % 12)
+	HOUR = HOUR < 10 and '0' .. HOUR or HOUR
+	MINUTE = MINUTE < 10 and '0' .. MINUTE or MINUTE
+	SECOND = SECOND < 10 and '0' .. SECOND or SECOND
+	return HOUR .. ':' .. MINUTE .. ':' .. SECOND .. ' ' .. AP
+end
+
+function getNow()
+	local currentTime = os.time()
+	local currentDate = os.date("%d/%m/%Y %H:%M:%S", currentTime)
+	local now = currentDate
+	return now
+end
+
+function getUsers()
+	local currentPlayers = Players:GetPlayers()
+	local playersCount = #currentPlayers
+	local maxPlayers = Players.MaxPlayers
+	local result = playersCount.."/"..maxPlayers
+	return result
+end
+
 local Plugin = {
 	["PluginName"] = "Hikaru Zenith AIO",
 	["PluginDescription"] = "Addon made by Hikaru",
